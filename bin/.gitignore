@@ -1,14 +1,12 @@
-/restaurant/
-/directoire/
-/spa/
-/reception/
-/direction/
-/maintenance/
-/salle/
-/main.class
-/main2.class
 /main/
+<<<<<<< Updated upstream
 /cuisine/
 /etages/
 /stock/
 /maintenance_etages/
+=======
+>>>>>>> Stashed changes
+/direction/
+/reception/
+/salle/
+/spa/
