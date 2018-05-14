@@ -43,4 +43,14 @@ public final class Connection {
 		
 		return rs;
 	}
+	
+	public static void execSQL(String req) {
+		Statement st = null;
+		try {
+			st = connection.createStatement();
+			st.executeQuery(req);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
