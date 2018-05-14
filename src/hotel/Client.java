@@ -7,7 +7,6 @@ public class Client {
 	private String adresse;
 	private String CP;
 	private String tel;
-	private int age;
 	private Boolean isExternal;
 	
 	public Client(int id, String nom, String prenom, String adresse, String cP, String tel) { //Client interne
@@ -48,9 +47,6 @@ public class Client {
 	public String getTel() {
 		return tel;
 	}
-	public int getAge() {
-		return age;
-	}
 	public Boolean getIsExternal() {
 		return isExternal;
 	}
@@ -71,9 +67,6 @@ public class Client {
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
-	}
-	public void setAge(int age) {
-		this.age = age;
 	}
 	public void setIsExternal(Boolean isExternal) {
 		this.isExternal = isExternal;

@@ -8,14 +8,14 @@ public class Job {
 	private int id;
 	private String libelle;
 	private Service service;
-	private List<Permission> permission;
+	private List<Permission> permissions;
 	
 	public Job(int id, String libelle, Service service, List<Permission> permission) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
 		this.service = service;
-		this.permission = permission;
+		this.permissions = permission;
 	}
 	
 	public int getId() {
@@ -28,7 +28,7 @@ public class Job {
 		return service;
 	}
 	public List<Permission> getPermission() {
-		return permission;
+		return permissions;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -40,7 +40,7 @@ public class Job {
 		this.service = service;
 	}
 	public void setPermission(List<Permission> permission) {
-		this.permission = permission;
+		this.permissions = permission;
 	}
 	
 	
