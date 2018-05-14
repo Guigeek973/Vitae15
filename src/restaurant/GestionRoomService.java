@@ -1,4 +1,4 @@
-package cuisine;
+package restaurant;
 
 public class GestionRoomService {
 

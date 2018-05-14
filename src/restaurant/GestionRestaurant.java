@@ -1,4 +1,4 @@
-package salle;
+package restaurant;
 
 public class GestionRestaurant {
 

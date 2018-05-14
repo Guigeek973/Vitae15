@@ -1,4 +1,4 @@
-package reception;
+package direction;
 
 public class GestionReservation {
 
