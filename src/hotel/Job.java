@@ -1,8 +1,8 @@
-package items;
+package hotel;
 
 import java.util.List;
 
-import items.Job;
+import hotel.Job;
 
 public class Job {
 	private int id;

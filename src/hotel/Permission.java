@@ -1,4 +1,4 @@
-package items;
+package hotel;
 
 import java.util.List;
 

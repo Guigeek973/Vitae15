@@ -2,8 +2,8 @@ package direction;
 
 import java.util.List;
 
-import items.Reservation;
-import items.TicketRoomService;
+import hotel.Reservation;
+import hotel.TicketRoomService;
 
 public class Facture {
 	 private int id;

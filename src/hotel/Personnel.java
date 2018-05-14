@@ -1,8 +1,8 @@
-package items;
+package hotel;
 
 import java.util.Hashtable;
 
-import items.Job;
+import hotel.Job;
 
 public class Personnel {
 	private int id;

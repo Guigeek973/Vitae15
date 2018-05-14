@@ -1,4 +1,4 @@
-package items;
+package hotel;
 
 public class Client {
 	private int id;
