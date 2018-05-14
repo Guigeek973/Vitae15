@@ -49,11 +49,11 @@ public class Menu {
 	// ----- SETTERS ------
 	
 	public void setLibelle(String libelle) {
-		// On vérifie si la valeur passée en paramètre est différente de la valeur actuelle
+		// On vï¿½rifie si la valeur passï¿½e en paramï¿½tre est diffï¿½rente de la valeur actuelle
 		if (this.libelle != libelle) {
-			// Si elle est différente on change la valeur de l'objet et on update dans la BDD avec la nouvelle valeur
+			// Si elle est diffï¿½rente on change la valeur de l'objet et on update dans la BDD avec la nouvelle valeur
 			this.libelle = libelle;
-			// On appelle la méthode statique execSQL pour éxecuter une requête SQL
+			// On appelle la mï¿½thode statique execSQL pour ï¿½xecuter une requï¿½te SQL
 			Connection.execSQL("UPDATE Menu SET label = '" + this.libelle + "'");
 		}
 	}
@@ -68,7 +68,7 @@ public class Menu {
 	public void setDescription(String description) {
 		if (this.description != description) {
 			this.description = description;
-			Connection.execSQL("UPDATE Menu SET description = " + this.description);
+			Connection.execSQL("UPDATE Menu SET description = '" + this.description + "'");
 		}
 	}
 	
@@ -77,14 +77,14 @@ public class Menu {
 	// ----- GESTION DE LA LISTE ------
 	// AJOUT
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
-		// Pour chaque article dans la liste on va faire une requête SQL pour l'insérer
+		// Pour chaque article dans la liste on va faire une requï¿½te SQL pour l'insï¿½rer
 		this.lesArticles = lesArticles;
 		for(ArticleRestaurant article : lesArticles) {
 			Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
 		}
 	}
 	
-	// SURCHARGE de ajoutArticle qui prend une liste d'articles en paramètre, ici on ne prend qu'un article
+	// SURCHARGE de ajoutArticle qui prend une liste d'articles en paramï¿½tre, ici on ne prend qu'un article
 	public void ajoutArticle(Article article) {
 		Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
 	}
