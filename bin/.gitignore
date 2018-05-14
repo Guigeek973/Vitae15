@@ -1,10 +1,8 @@
-/cuisine/
-/reception/
-/restaurant/
+/application/
 /direction/
-/maintenance_etages/
-/items/
 /hotel/
-/stock/
-/spa/
 /main/
+/maintenance_etages/
+/restaurant/
+/spa/
+/stock/

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="768.0" prefWidth="233.0" style="-fx-background-color: #292f36;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="28.0" layoutX="14.0" layoutY="402.0" stroke="WHITE" strokeType="INSIDE" width="202.0" />
+            <Line endX="100.0" fill="WHITE" layoutX="117.0" layoutY="175.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
+            <Text fill="WHITE" layoutX="24.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hébergement">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#292f36" layoutX="23.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réception">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <ImageView layoutX="72.0" layoutY="15.0">
+               <image>
+                  <Image url="@Logo-Tom-Kha-Kai-White.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="24.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="270.0" layoutY="167.0" stroke="WHITE" strokeType="INSIDE" width="346.0">
+         <effect>
+            <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="218.0" layoutX="641.0" layoutY="167.0" stroke="#292f36" strokeType="INSIDE" width="346.0">
+         <effect>
+            <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
+         </effect>
+      </Rectangle>
+      <Text fill="#292f36" layoutX="424.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stocks">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="758.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion stock" textAlignment="CENTER">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="455.0" layoutY="408.0" stroke="WHITE" strokeType="INSIDE" width="346.0">
+         <effect>
+            <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
+         </effect>
+      </Rectangle>
+      <Text fill="#292f36" layoutX="607.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="132.0" fitWidth="129.0" layoutX="391.0" layoutY="226.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/stock_black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="155.0" fitWidth="129.0" layoutX="759.0" layoutY="211.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/StockManagement.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="132.0" fitWidth="132.0" layoutX="575.0" layoutY="469.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/Tickets.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

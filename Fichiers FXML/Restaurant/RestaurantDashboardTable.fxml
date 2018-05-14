@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="222.0" layoutY="45.0" stroke="WHITE" strokeType="INSIDE" width="279.0">
+         <effect>
+            <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
+         </effect>
+      </Rectangle>
+      <Text fill="#292f36" layoutX="249.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des tables">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="352.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des stocks">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="28.0" fitWidth="54.0" layoutX="444.0" layoutY="57.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/tables.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="103.0" fitWidth="107.0" layoutX="394.0" layoutY="492.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/stock.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="308.0" layoutY="178.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="446.0" layoutY="178.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="581.0" layoutY="178.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="713.0" layoutY="178.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="845.0" layoutY="178.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="308.0" layoutY="328.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="446.0" layoutY="328.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="581.0" layoutY="328.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="713.0" layoutY="328.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="845.0" layoutY="328.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="308.0" layoutY="478.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="446.0" layoutY="478.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="581.0" layoutY="478.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="713.0" layoutY="478.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" layoutX="845.0" layoutY="478.0" stroke="#292f36" strokeType="INSIDE" width="101.0" />
+      <Button layoutX="881.0" layoutY="685.0" mnemonicParsing="false" style="-fx-background-color: #292f36;" text="Valider" textFill="WHITE" />
+      <Text layoutX="335.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 1">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font></Text>
+      <Text layoutX="475.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 2">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="608.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 3">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="740.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 4">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="872.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 5">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="335.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 6">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="475.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 7">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="608.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 8">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="740.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 9">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="872.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 10">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="335.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 11">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="475.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 12">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="608.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 13">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="740.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 14">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="872.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table 15">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="333.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réservée">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="478.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="618.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="748.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="882.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="618.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="748.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="880.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="342.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="478.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="618.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="748.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="882.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="342.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="468.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réservée">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Text>
+      <AnchorPane prefHeight="768.0" prefWidth="233.0" style="-fx-background-color: #292f36;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="28.0" layoutX="14.0" layoutY="251.0" stroke="WHITE" strokeType="INSIDE" width="202.0" />
+            <Line endX="100.0" fill="WHITE" layoutX="117.0" layoutY="175.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
+            <Text fill="#292f36" layoutX="24.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hébergement">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réception">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <ImageView layoutX="72.0" layoutY="15.0">
+               <image>
+                  <Image url="@Logo-Tom-Kha-Kai-White.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="24.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+   </children>
+</Pane>

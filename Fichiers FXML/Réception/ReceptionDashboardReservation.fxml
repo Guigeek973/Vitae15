@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="232.0" layoutY="55.0" stroke="WHITE" strokeType="INSIDE" width="215.0">
+         <effect>
+            <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
+         </effect>
+      </Rectangle>
+      <Text fill="#292f36" layoutX="259.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réservation">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <AnchorPane prefHeight="768.0" prefWidth="233.0" style="-fx-background-color: #292f36;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="28.0" layoutX="14.0" layoutY="352.0" stroke="WHITE" strokeType="INSIDE" width="202.0" />
+            <Line endX="100.0" fill="WHITE" layoutX="117.0" layoutY="175.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
+            <Text fill="WHITE" layoutX="24.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hébergement">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#292f36" layoutX="23.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réception">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <ImageView layoutX="72.0" layoutY="15.0">
+               <image>
+                  <Image url="@Logo-Tom-Kha-Kai-White.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="24.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <ImageView fitHeight="17.0" fitWidth="45.0" layoutX="386.0" layoutY="72.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/reservation.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="274.0" layoutY="284.0" stroke="WHITE" strokeType="INSIDE" width="200.0">
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0" />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="200.0" layoutX="527.0" layoutY="284.0" stroke="#292f36" strokeType="INSIDE" width="200.0">
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0" />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="779.0" layoutY="284.0" stroke="WHITE" strokeType="INSIDE" width="200.0">
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0" />
+         </effect>
+      </Rectangle>
+      <ImageView fitHeight="117.0" fitWidth="129.0" layoutX="312.0" layoutY="346.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/SPA.png" />
+         </image>
+      </ImageView>
+      <Text fill="#292f36" layoutX="358.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPA">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="583.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chambre">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="125.0" fitWidth="129.0" layoutX="563.0" layoutY="344.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/Chambre.png" />
+         </image>
+      </ImageView>
+      <Text fill="#292f36" layoutX="825.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="112.0" fitWidth="141.0" layoutX="809.0" layoutY="341.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Documents/Restaurant.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
