@@ -8,6 +8,24 @@ public class GestionRestaurant {
 	private List<Menu> lesMenus;
 	private List<ReservationRestaurant> lesReservationsRestau;
 	
+	public GestionRestaurant(List<Menu> lesMenus, List<ReservationRestaurant> lesReservationsRestau) {
+		super();
+		this.lesMenus = lesMenus;
+		this.lesReservationsRestau = lesReservationsRestau;
+	}
+	public List<Menu> getLesMenus() {
+		return lesMenus;
+	}
+	public List<ReservationRestaurant> getLesReservationsRestau() {
+		return lesReservationsRestau;
+	}
+	public void setLesMenus(List<Menu> lesMenus) {
+		this.lesMenus = lesMenus;
+	}
+	public void setLesReservationsRestau(List<ReservationRestaurant> lesReservationsRestau) {
+		this.lesReservationsRestau = lesReservationsRestau;
+	}
+
 	public int getNbPetitDejJour() {
 		return 0;
 	}

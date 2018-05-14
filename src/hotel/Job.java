@@ -10,8 +10,9 @@ public class Job {
 	private Service service;
 	private List<Permission> permission;
 	
-	public Job(String libelle, Service service, List<Permission> permission) {
+	public Job(int id, String libelle, Service service, List<Permission> permission) {
 		super();
+		this.id = id;
 		this.libelle = libelle;
 		this.service = service;
 		this.permission = permission;

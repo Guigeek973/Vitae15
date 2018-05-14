@@ -23,8 +23,9 @@ public class TypeChambre {
 		}
 	}
 
-	public TypeChambre(String libelle, float prix, TAXES tax, int places) {
+	public TypeChambre(int id, String libelle, float prix, TAXES tax, int places) {
 		super();
+		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.taxes = tax.getTaxe();

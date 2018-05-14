@@ -13,8 +13,9 @@ public class Personnel {
 	private Job job;
 	private Hashtable<String,Boolean> joursTravail;
 	
-	public Personnel(String nom, String prenom, String login, String password) {
+	public Personnel(int id, String nom, String prenom, String login, String password) {
 		super();
+		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;

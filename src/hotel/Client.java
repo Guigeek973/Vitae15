@@ -10,8 +10,9 @@ public class Client {
 	private int age;
 	private Boolean isExternal;
 	
-	public Client(String nom, String prenom, String adresse, String cP, String tel, int age) { //Client interne
+	public Client(int id, String nom, String prenom, String adresse, String cP, String tel, int age) { //Client interne
 		super();
+		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
@@ -21,8 +22,9 @@ public class Client {
 		this.isExternal = false;
 	}
 	
-	public Client(String nom, String prenom, String tel) { //Client externe
+	public Client(int id, String nom, String prenom, String tel) { //Client externe
 		super();
+		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.tel = tel;

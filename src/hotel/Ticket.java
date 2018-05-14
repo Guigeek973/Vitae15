@@ -16,8 +16,9 @@ public class Ticket {
 		EN_COURS,
 		VALIDE
 	}
-	public Ticket(String titre, String description, STATUT_TICKET statut, Service service) {
+	public Ticket(int id, String titre, String description, STATUT_TICKET statut, Service service) {
 		super();
+		this.id = id;
 		this.titre = titre;
 		this.description = description;
 		this.statut = statut;

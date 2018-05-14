@@ -2,7 +2,7 @@ package hotel;
 
 import java.util.Date;
 
-public class Reservation {
+public abstract class Reservation {
 	private int id;
 	private Client client;
 	private Date created_at;
@@ -13,8 +13,9 @@ public class Reservation {
 		EN_COURS,
 		VALIDE
 	}
-	public Reservation(Client client, Date startDate) {
+	public Reservation(int id, Client client, Date startDate) {
 		super();
+		this.id = id;
 		this.client = client;
 		this.startDate = startDate;
 		this.statut = STATUT_RESERVATION.EN_COURS;

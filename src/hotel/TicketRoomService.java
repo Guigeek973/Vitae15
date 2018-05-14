@@ -11,8 +11,8 @@ public class TicketRoomService extends Ticket {
 	private List<Menu> lesMenus;
 	private Chambre chambre;
 	
-	public TicketRoomService(String titre, String description, STATUT_TICKET statut, Service service, List<Article> articles, List<Menu> menus, Chambre ch) {
-		super(titre, description, statut, service);
+	public TicketRoomService(int id, String titre, String description, STATUT_TICKET statut, Service service, List<Article> articles, List<Menu> menus, Chambre ch) {
+		super(id, titre, description, statut, service);
 		this.lesArticles = articles;
 		this.lesMenus = menus;
 		this.chambre = ch;

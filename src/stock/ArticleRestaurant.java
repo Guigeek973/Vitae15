@@ -21,11 +21,32 @@ public class ArticleRestaurant extends Article {
 		}
 	}
 	
-	public ArticleRestaurant(String libelle, String description, TYPE_ARTICLE typeArticle, int quantite, double prix, TYPE_FOOD typeFood) {
-		super(libelle, description, typeArticle, quantite);
+	public ArticleRestaurant(int id, String libelle, String description, TYPE_ARTICLE typeArticle, int quantite, double prix, TYPE_FOOD typeFood) {
+		super(id, libelle, description, typeArticle, quantite);
 		this.prix = prix;
 		this.typeNourriture = typeFood;
 		this.taxes = typeFood.getTaxe();
 	}
+	
+	public double getPrix() {
+		return prix;
+	}
+	public double getTaxes() {
+		return taxes;
+	}
+	public TYPE_FOOD getTypeNourriture() {
+		return typeNourriture;
+	}
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+	public void setTaxes(double taxes) {
+		this.taxes = taxes;
+	}
+	public void setTypeNourriture(TYPE_FOOD typeNourriture) {
+		this.typeNourriture = typeNourriture;
+	}
+	
+	
 	
 }

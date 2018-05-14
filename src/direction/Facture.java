@@ -16,10 +16,14 @@ public class Facture {
 		 PAYEE,
 		 EN_COURS
 	 }
-	public Facture(String libelle, double total, String status) {
+	public Facture(int id, String libelle, double total, List<Reservation> lesReservations,
+			List<TicketRoomService> lesTicketsRoomService, String status) {
 		super();
+		this.id = id;
 		this.libelle = libelle;
 		this.total = total;
+		this.lesReservations = lesReservations;
+		this.lesTicketsRoomService = lesTicketsRoomService;
 		this.status = status;
 	}
 	public int getId() {

@@ -10,8 +10,9 @@ public class Chambre {
 		OCCUPE,
 		LIBRE
 	}
-	public Chambre(TypeChambre typeChambre, String libelle, String etatChambre, Boolean isOccuped) {
+	public Chambre(int id, TypeChambre typeChambre, String libelle, String etatChambre, Boolean isOccuped) {
 		super();
+		this.id = id;
 		this.typeChambre = typeChambre;
 		this.libelle = libelle;
 		this.etatChambre = etatChambre;
