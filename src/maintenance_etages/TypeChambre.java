@@ -9,6 +9,7 @@ public class TypeChambre {
 	
 	public enum TAXES {
 		LOW(5.5),
+		INTERMEDIATE(7),
 		MEDIUM(10),
 		HIGH(20);
 		
@@ -22,11 +23,11 @@ public class TypeChambre {
 		}
 	}
 
-	public TypeChambre(String libelle, float prix, double taxes, int places) {
+	public TypeChambre(String libelle, float prix, TAXES tax, int places) {
 		super();
 		this.libelle = libelle;
 		this.prix = prix;
-		this.taxes = taxes;
+		this.taxes = tax.getTaxe();
 		this.places = places;
 	}
 
