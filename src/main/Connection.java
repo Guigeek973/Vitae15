@@ -10,10 +10,10 @@ public final class Connection {
 	private Connection(String nomBase, String user, String password) {
 		String url = "jdbc:mysql://localhost/"+nomBase+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			this.connection = DriverManager.getConnection(url, user, password);
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection.connection = DriverManager.getConnection(url, user, password);
 			
-			if (this.connection != null) {
+			if (Connection.connection != null) {
 				System.out.println("Connexion établie !");
 			}
 		} catch (Exception e) {
@@ -42,5 +42,15 @@ public final class Connection {
 		}
 		
 		return rs;
+	}
+	
+	public static void execSQL(String req) {
+		Statement st = null;
+		try {
+			st = connection.createStatement();
+			st.executeQuery(req);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
