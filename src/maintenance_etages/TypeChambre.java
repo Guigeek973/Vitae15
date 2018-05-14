@@ -9,7 +9,6 @@ public class TypeChambre {
 	
 	public enum TAXES {
 		LOW(5.5),
-		INTERMEDIATE(7),
 		MEDIUM(10),
 		HIGH(20);
 		

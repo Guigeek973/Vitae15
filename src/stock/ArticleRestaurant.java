@@ -1,6 +1,12 @@
 package stock;
 
-public class ArticleRestaurant extends Article {
+
+
+public class ArticleRestaurant {
+	private int id;
+	private String libelle;
+	private String description;
+	private int quantite;
 	private double prix;
 	private double taxes;
 	private TYPE_FOOD typeNourriture;
@@ -21,12 +27,17 @@ public class ArticleRestaurant extends Article {
 		}
 	}
 	
-	public ArticleRestaurant(int id, String libelle, String description, TYPE_ARTICLE typeArticle, int quantite, double prix, TYPE_FOOD typeFood) {
-		super(id, libelle, description, typeArticle, quantite);
+	public ArticleRestaurant(int id, String libelle, String description, int quantite, double prix, TYPE_FOOD typeFood) {
+		super();
+		this.id = id;
+		this.libelle = libelle;
+		this.description = description;
+		this.quantite = quantite;
 		this.prix = prix;
 		this.typeNourriture = typeFood;
 		this.taxes = typeFood.getTaxe();
 	}
+	
 	
 	public double getPrix() {
 		return prix;
@@ -37,6 +48,24 @@ public class ArticleRestaurant extends Article {
 	public TYPE_FOOD getTypeNourriture() {
 		return typeNourriture;
 	}
+	public int getId() {
+		return id;
+	}
+	public String getLibelle() {
+		return libelle;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public int getQuantite() {
+		return quantite;
+	}
+	
+	
+	
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
@@ -45,6 +74,15 @@ public class ArticleRestaurant extends Article {
 	}
 	public void setTypeNourriture(TYPE_FOOD typeNourriture) {
 		this.typeNourriture = typeNourriture;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

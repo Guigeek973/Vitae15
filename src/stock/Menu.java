@@ -17,7 +17,7 @@ public class Menu {
 		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
-		this.setDescription(description);
+		this.description = description;;
 		this.lesArticles = lesArticles;
 	}
 
@@ -79,7 +79,7 @@ public class Menu {
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
 		// Pour chaque article dans la liste on va faire une requête SQL pour l'insérer
 		this.lesArticles = lesArticles;
-		for(Article article : lesArticles) {
+		for(ArticleRestaurant article : lesArticles) {
 			Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
 		}
 	}
@@ -92,7 +92,7 @@ public class Menu {
 	// SUPPRESSION
 	public void supprimerArticle(List<ArticleRestaurant> lesArticles) {
 		this.lesArticles = lesArticles;
-		for(Article article : lesArticles) {
+		for(ArticleRestaurant article : lesArticles) {
 			Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 		}
 	}
