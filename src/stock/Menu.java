@@ -17,7 +17,7 @@ public class Menu {
 		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
-		this.setDescription(description);
+		this.description = description;
 		this.lesArticles = lesArticles;
 	}
 
@@ -68,7 +68,7 @@ public class Menu {
 	public void setDescription(String description) {
 		if (this.description != description) {
 			this.description = description;
-			Connection.execSQL("UPDATE Menu SET description = " + this.description);
+			Connection.execSQL("UPDATE Menu SET description = '" + this.description + "'");
 		}
 	}
 	

@@ -14,8 +14,8 @@ public class Initialisation {
 	public static void initialisation() {
 		//Hotel hotel = new Hotel(null, null, recupererClients());
 		
-		Menu menu = new Menu(1, "Menu enfant", 22, "Le menu des tout petits", null);
-		//menu.setLibelle("mesCouilles");
+		//		Menu menu = new Menu(1, "Menu enfant", 22, "Le menu des tout petits", null);
+		//		menu.setLibelle("mesCouilles");
 	}
 	
 	private static List<Client> recupererClients() {

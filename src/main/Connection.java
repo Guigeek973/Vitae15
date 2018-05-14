@@ -10,7 +10,7 @@ public final class Connection {
 	private Connection(String nomBase, String user, String password) {
 		String url = "jdbc:mysql://localhost/"+nomBase+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection.connection = DriverManager.getConnection(url, user, password);
 			
 			if (Connection.connection != null) {
@@ -48,7 +48,7 @@ public final class Connection {
 		Statement st = null;
 		try {
 			st = connection.createStatement();
-			st.executeQuery(req);
+			st.execute(req);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
