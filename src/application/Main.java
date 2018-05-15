@@ -1,26 +1,71 @@
 package application;
 	
+import java.io.IOException;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import views.AccueilController;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
 
 public class Main extends Application {
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	    private Stage primaryStage;
+	    private Pane rootLayout;
+
+	    @Override
+	    public void start(Stage primaryStage) {
+	        this.primaryStage = primaryStage;
+	        this.primaryStage.setTitle("test");
+
+	        initRootLayout();
+
+	        //showPersonOverview();
+	    }
+
+	    /**
+	     * Initializes the root layout.
+	     * @return 
+	     */
+	    public boolean initRootLayout() {
+	        // Load root layout from fxml file.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/views/Accueil.fxml"));
+			try {
+				rootLayout = (Pane) loader.load();
+				Scene scene = new Scene(rootLayout);
+				AccueilController controller = loader.getController();
+		        controller.setStage(this.primaryStage);
+		        loader.setController(controller);
+		        primaryStage.setScene(scene);
+				primaryStage.show();
+
+		        return controller.isOkClicked();
+		        
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+			
+	    }
+
+	    /**
+	     * Shows the person overview inside the root layout.
+	     */
+	  
+
+	    /**
+	     * Returns the main stage.
+	     * @return
+	     */
+	    public Stage getPrimaryStage() {
+	        return primaryStage;
+	    }
+
+	    public static void main(String[] args) {
+	        launch(args);
+	    }
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 }
