@@ -8,10 +8,17 @@ public final class Connection {
 	private static java.sql.Connection connection = null;
 	
 	private Connection(String nomBase, String user, String password) {
-		String url = "jdbc:mysql://localhost/"+nomBase+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	
+		String url = "jdbc:mysql://localhost/"+nomBase+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+		
+		String uaM = "jdbc:mariadb://mysql-tomkhakhai.alwaysdata.net/"+ nomBase + "_db";
+
+		
+		String driverSQL = "com.mysql.cj.jdbc.Driver";
+		String driverMaria = "org.mariadb.jdbc.Driver";
+		            
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection.connection = DriverManager.getConnection(url, user, password);
+			Class.forName(driverMaria);
+			Connection.connection = DriverManager.getConnection(uaM, user, password);
 			
 			if (Connection.connection != null) {
 				System.out.println("Connexion établie !");
@@ -23,18 +30,17 @@ public final class Connection {
 	}
 	
 	public static Connection getInstance() {
-		Connection conn = null;
 		if (Connection.instance == null) {
-			conn = new Connection("tomkhakai","root","");
+			Connection.instance = new Connection("tomkhakhai","159495","vitae15");
 		}
-		return conn;
+		return Connection.instance;
 	}
 	
 	public static ResultSet getResultSetSQL(String req) {
 		ResultSet rs = null;
 		Statement st = null;
 		try {
-			st = connection.createStatement();
+			st = Connection.connection.createStatement();
 			rs = st.executeQuery(req);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -47,7 +53,7 @@ public final class Connection {
 	public static void execSQL(String req) {
 		Statement st = null;
 		try {
-			st = connection.createStatement();
+			st = Connection.connection.createStatement();
 			st.execute(req);
 		} catch (SQLException e) {
 			e.printStackTrace();

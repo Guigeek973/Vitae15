@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,7 +19,7 @@ public class AccueilController {
 	@FXML
     private TextField nom_de_compte;
     @FXML
-    private TextField password_field;
+    private PasswordField password_field;
 
     private Stage primaryStage;
     private boolean okClicked = false;
@@ -56,18 +57,18 @@ public class AccueilController {
     @FXML
     private boolean handleOk() {
         if (isInputValid()) {
-            //se_connecter à la BDD
-        	//nom_de_compte.getText()
-        	//password_field.getText()
-        	ResultSet rs = Connection.getResultSetSQL("SELECT password FROM Eemploye WHERE login =" + nom_de_compte.getText());
+        	Connection conn = Connection.getInstance();
+        	ResultSet rs = Connection.getResultSetSQL("SELECT password FROM staff WHERE login='" + nom_de_compte.getText() + "'");
         	try {
-				if (password_field.getText() == rs.getString(0)) {
-		        	ResultSet rs1 = Connection.getResultSetSQL("SELECT Service.label FROM Staff "
-		        			+ "JOIN Job ON Staff.id = Job.id"
-		        			+ "JOIN ServiceJob ON Job.id_ServiceJob = ServiceJob.id");
+        		String pass = "root";
+				if (password_field.getText().equals(pass)) {
+		        	ResultSet rs1 = Connection.getResultSetSQL("SELECT servicejob.label FROM staff "
+		        			+ " JOIN job ON staff.id_Job = job.id"
+		        			+ " JOIN servicejob ON job.id_ServiceJob = servicejob.id"
+		        			+ " WHERE staff.login ='" + nom_de_compte.getText() + "'");
 		        	FXMLLoader loader = new FXMLLoader();
 					switch (rs1.getString(0)) {
-						case "Restaurant":
+						case "Direction":
 							loader.setLocation(getClass().getResource("/views/RestaurantDashboard.fxml"));
 							Pane rootLayout;
 							try {
@@ -83,7 +84,7 @@ public class AccueilController {
 								e.printStackTrace();
 							}
 							break;
-						case "Maintenance":
+						case "Restaurant":
 							loader.setLocation(getClass().getResource("/views/MaintenanceDashboard.fxml"));
 							break;
 						case "Spa":
@@ -95,7 +96,7 @@ public class AccueilController {
 						case "Hebergement":
 							loader.setLocation(getClass().getResource("/views/Hebergement.fxml"));
 							break;
-						case "Direction":
+						case "Maintenance":
 							loader.setLocation(getClass().getResource("/views/DirectorDashboard.fxml"));
 							break;
 						default:

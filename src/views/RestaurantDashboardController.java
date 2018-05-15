@@ -58,6 +58,7 @@ public class RestaurantDashboardController {
             //se_connecter à la BDD
         	//nom_de_compte.getText()
         	//password_field.getText()
+    		Connection conn = Connection.getInstance();
         	ResultSet rs = Connection.getResultSetSQL("SELECT password FROM Eemploye WHERE login =" + nom_de_compte.getText());
         	try {
 				if (password_field.getText() == rs.getString(0)) {
