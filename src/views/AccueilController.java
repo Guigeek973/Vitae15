@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -55,37 +57,27 @@ public class AccueilController {
      * @return 
      */
     @FXML
-    private boolean handleOk() {
+    private boolean handleOk(javafx.event.Event event) {
         if (isInputValid()) {
         	Connection conn = Connection.getInstance();
         	ResultSet rs = Connection.getResultSetSQL("SELECT password FROM staff WHERE login='" + nom_de_compte.getText() + "'");
         	try {
-        		String pass = "root";
-				if (password_field.getText().equals(pass)) {
+        		if (rs.next())
+				if (password_field.getText().equals(rs.getString(1))) {
 		        	ResultSet rs1 = Connection.getResultSetSQL("SELECT servicejob.label FROM staff "
 		        			+ " JOIN job ON staff.id_Job = job.id"
 		        			+ " JOIN servicejob ON job.id_ServiceJob = servicejob.id"
 		        			+ " WHERE staff.login ='" + nom_de_compte.getText() + "'");
 		        	FXMLLoader loader = new FXMLLoader();
-					switch (rs1.getString(0)) {
+		        	String resultLog = null;
+		        	if(rs1.next()) 
+		        		resultLog = rs1.getString(1);
+					switch (resultLog) {
 						case "Direction":
-							loader.setLocation(getClass().getResource("/views/RestaurantDashboard.fxml"));
-							Pane rootLayout;
-							try {
-								rootLayout = (Pane) loader.load();
-								Scene scene = new Scene(rootLayout);
-								RestaurantDashboardController controller = loader.getController();
-						        controller.setStage(this.primaryStage);
-						        loader.setController(controller);
-						        primaryStage.setScene(scene);
-								primaryStage.show();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+							loader.setLocation(getClass().getResource("/views/DirectorDashboard.fxml"));
 							break;
 						case "Restaurant":
-							loader.setLocation(getClass().getResource("/views/MaintenanceDashboard.fxml"));
+							loader.setLocation(getClass().getResource("/views/RestaurantDashboard.fxml"));
 							break;
 						case "Spa":
 							loader.setLocation(getClass().getResource("/views/ReceptionDashboard.fxml"));
@@ -97,20 +89,32 @@ public class AccueilController {
 							loader.setLocation(getClass().getResource("/views/Hebergement.fxml"));
 							break;
 						case "Maintenance":
-							loader.setLocation(getClass().getResource("/views/DirectorDashboard.fxml"));
+							loader.setLocation(getClass().getResource("/views/MaintenanceDashboard.fxml"));
 							break;
 						default:
 							break;
 					}
+					Pane rootLayout;
+					try {
+						rootLayout = (Pane) loader.load();
+						Scene scene = new Scene(rootLayout);
+						DirectorDashboardController controller = loader.getController();
+				        loader.setController(controller);
+				        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				        primaryStage.setScene(scene);
+				        controller.setStage(primaryStage);
+						primaryStage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		        	
-					primaryStage.close();
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
             okClicked = true;
-            primaryStage.close();
         }
 		return okClicked;
     }
