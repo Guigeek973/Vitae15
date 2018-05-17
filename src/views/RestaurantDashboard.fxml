@@ -21,17 +21,17 @@
                   <Font name="Calibri" size="24.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="23.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hébergement">
+            <Text fill="WHITE" layoutX="23.0" layoutY="323.0" onMouseClicked="#goToHebergement" strokeType="OUTSIDE" strokeWidth="0.0" text="Hébergement">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="23.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
+            <Text fill="WHITE" layoutX="23.0" layoutY="423.0" onMouseClicked="#goToMaintenance" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="23.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réception">
+            <Text fill="WHITE" layoutX="23.0" layoutY="373.0" onMouseClicked="#goToReception" strokeType="OUTSIDE" strokeWidth="0.0" text="Réception">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
@@ -41,7 +41,7 @@
                   <Image url="@Logo-Tom-Kha-Kai-White.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="24.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction">
+            <Text fill="WHITE" layoutX="24.0" layoutY="222.0" onMouseClicked="#goToDirection" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>

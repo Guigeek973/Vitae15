@@ -1,22 +1,18 @@
 package views;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.Connection;
 
-public class RestaurantDashboardController {
-    private Stage primaryStage;
+public class HebergementDashboardController {
+	private Stage primaryStage;
     private boolean okClicked = false;
 
-    /**
+	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
@@ -41,17 +37,9 @@ public class RestaurantDashboardController {
     public boolean isOkClicked() {
         return okClicked;
     }
-
-    /**
-     * Called when the user clicks cancel.
-     */
-    @FXML
-    private void handleCancel() {
-        primaryStage.close();
-    }
     
     /**
-     * Called when the user clicks Restaurant.
+     * Called when the user clicks Direction.
      * @return 
      * @throws IOException 
      */
@@ -154,5 +142,30 @@ public class RestaurantDashboardController {
     	
 		return okClicked;
     }
-
+    
+    /**
+     * Called when the user clicks Restaurant.
+     * @return 
+     * @throws IOException 
+     */
+    @FXML
+    private boolean goToRestaurant() throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/RestaurantDashboard.fxml"));
+		Pane rootLayout;
+		try {
+			rootLayout = (Pane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			RestaurantDashboardController controller = loader.getController();
+	        loader.setController(controller);
+	        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        primaryStage.setScene(scene);
+	        controller.setStage(primaryStage);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return okClicked;
+    }
 }

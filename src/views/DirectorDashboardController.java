@@ -44,16 +44,111 @@ public class DirectorDashboardController {
 	    }
 
 	    /**
+	     * Called when the user clicks Restaurant.
+	     * @return 
+	     * @throws IOException 
+	     */
+	    @FXML
+	    private boolean goToRestaurant() throws IOException {
+	    	FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/views/RestaurantDashboard.fxml"));
+			Pane rootLayout;
+			try {
+				rootLayout = (Pane) loader.load();
+				Scene scene = new Scene(rootLayout);
+				RestaurantDashboardController controller = loader.getController();
+		        loader.setController(controller);
+		        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		        primaryStage.setScene(scene);
+		        controller.setStage(primaryStage);
+				primaryStage.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return okClicked;
+	    }
+	    
+	    /**
+	     * Called when the user clicks Hebergement.
+	     * @return 
+	     * @throws IOException 
+	     */
+	    @FXML
+	    private boolean goToHebergement() throws IOException {
+	    	FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/views/Hebergement.fxml"));
+			Pane rootLayout;
+			try {
+				rootLayout = (Pane) loader.load();
+				Scene scene = new Scene(rootLayout);
+				HebergementDashboardController controller = loader.getController();
+		        loader.setController(controller);
+		        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		        primaryStage.setScene(scene);
+		        controller.setStage(primaryStage);
+				primaryStage.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return okClicked;
+	    }
+
+	    /**
+	     * Called when the user clicks Reception.
+	     * @return 
+	     * @throws IOException 
+	     */
+	    @FXML
+	    private boolean goToReception() throws IOException {
+	    	FXMLLoader loader = new FXMLLoader();
+	    	loader.setLocation(getClass().getResource("/views/ReceptionDashboard.fxml"));
+	    	Pane rootLayout;
+			try {
+				rootLayout = (Pane) loader.load();
+				Scene scene = new Scene(rootLayout);
+				ReceptionDashboardController controller = loader.getController();
+		        loader.setController(controller);
+		        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		        primaryStage.setScene(scene);
+		        controller.setStage(primaryStage);
+				primaryStage.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return okClicked;
+	    }
+	    
+	    /**
 	     * Called when the user clicks ok.
 	     * @return 
 	     * @throws IOException 
 	     */
 	    @FXML
-	    private boolean handleOk() throws IOException {
-				return okClicked;
+	    private boolean goToMaintenance() throws IOException {
+	    	FXMLLoader loader = new FXMLLoader();
+	    	loader.setLocation(getClass().getResource("/views/MaintenanceDashboard.fxml"));
+	    	Pane rootLayout;
+			try {
+				rootLayout = (Pane) loader.load();
+				Scene scene = new Scene(rootLayout);
+				MaintenanceDashboardController controller = loader.getController();
+		        loader.setController(controller);
+		        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		        primaryStage.setScene(scene);
+		        controller.setStage(primaryStage);
+				primaryStage.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+			return okClicked;
 	    }
-
-
+	    
+	    
 	    /**
 	     * Called when the user clicks cancel.
 	     */
