@@ -1,5 +1,7 @@
 package stock;
 
+import main.Connection;
+
 public class Article {
 	private int id;
 	private String libelle;
@@ -37,20 +39,31 @@ public class Article {
 	public int getQuantite() {
 		return quantite;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
+	//SETTERS
 	public void setLibelle(String libelle) {
-		this.libelle = libelle;
+		if (this.libelle != libelle) {
+			this.libelle = libelle;
+			Connection.execSQL("UPDATE Article SET label = '" + this.libelle + "'");
+		}
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		if (this.description != description) {
+			this.description = description;
+			Connection.execSQL("UPDATE Article SET description = '" + this.description + "'");
+		}
 	}
 	public void setTypeArticle(TYPE_ARTICLE typeArticle) {
-		this.typeArticle = typeArticle;
+		if (this.typeArticle != typeArticle) {
+			this.typeArticle = typeArticle;
+			Connection.execSQL("UPDATE Article SET type = '" + this.typeArticle + "'");
+		}
 	}
 	public void setQuantite(int quantite) {
-		this.quantite = quantite;
+		if (this.quantite != quantite) {
+			this.quantite = quantite;
+			Connection.execSQL("UPDATE Article SET quantity = '" + this.quantite + "'");
+		}
 	}
 	
 	

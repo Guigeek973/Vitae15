@@ -1,6 +1,6 @@
 package stock;
 
-
+import main.Connection;
 
 public class ArticleRestaurant {
 	private int id;
@@ -62,27 +62,42 @@ public class ArticleRestaurant {
 	}
 	
 	
-	
+	//SETTERS
 	public void setQuantite(int quantite) {
-		this.quantite = quantite;
+		if (this.quantite != quantite) {
+			this.quantite = quantite;
+			Connection.execSQL("UPDATE ArticleRestaurant SET quantity = '" + this.quantite + "'");
+		}
 	}
 	public void setPrix(double prix) {
-		this.prix = prix;
+		if (this.prix != prix) {
+			this.prix = prix;
+			Connection.execSQL("UPDATE ArticleRestaurant SET price = '" + this.prix + "'");
+		}
 	}
 	public void setTaxes(double taxes) {
-		this.taxes = taxes;
+		if (this.taxes != taxes) {
+			this.taxes = taxes;
+			Connection.execSQL("UPDATE ArticleRestaurant SET taxes = '" + this.taxes + "'");
+		}
 	}
 	public void setTypeNourriture(TYPE_FOOD typeNourriture) {
-		this.typeNourriture = typeNourriture;
-	}
-	public void setId(int id) {
-		this.id = id;
+		if (this.typeNourriture != typeNourriture) {
+			this.typeNourriture = typeNourriture;
+			Connection.execSQL("UPDATE ArticleRestaurant SET typeFood = '" + this.typeNourriture + "'");
+		}
 	}
 	public void setLibelle(String libelle) {
-		this.libelle = libelle;
+		if (this.libelle != libelle) {
+			this.libelle = libelle;
+			Connection.execSQL("UPDATE ArticleRestaurant SET label = '" + this.libelle + "'");
+		}
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		if (this.description != description) {
+			this.description = description;
+			Connection.execSQL("UPDATE ArticleRestaurant SET description = '" + this.description + "'");
+		}
 	}
 	
 	

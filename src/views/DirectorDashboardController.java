@@ -1,16 +1,11 @@
 package views;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.Connection;
 
 public class DirectorDashboardController {
 

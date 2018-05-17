@@ -3,11 +3,8 @@ package views;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -55,7 +52,7 @@ public class AccueilController {
     
     public boolean connect() {
     	if (isInputValid()) {	
-    		Connection conn = Connection.getInstance();
+    		Connection.getInstance();
         	ResultSet rs = Connection.getResultSetSQL("SELECT password FROM staff WHERE login='" + nom_de_compte.getText() + "'");
         	try {
         		if (rs.next())
