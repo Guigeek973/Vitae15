@@ -20,7 +20,7 @@
                   <Font name="Calibri" size="15.0" />
                </font>
             </TextField>
-            <PasswordField id="password_field" fx:id="password_field" accessibleText="Mot de passe" layoutX="128.0" layoutY="454.0" prefHeight="31.0" prefWidth="255.0" promptText="Mot de passe">
+            <PasswordField id="password_field" fx:id="password_field" onKeyPressed="#keyPressed" accessibleText="Mot de passe" layoutX="128.0" layoutY="454.0" prefHeight="31.0" prefWidth="255.0" promptText="Mot de passe">
                <font>
                   <Font name="Calibri" size="15.0" />
                </font></PasswordField>

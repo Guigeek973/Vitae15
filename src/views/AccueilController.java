@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import main.Connection;
 
@@ -51,15 +52,10 @@ public class AccueilController {
     public boolean isOkClicked() {
         return okClicked;
     }
-
-    /**
-     * Called when the user clicks ok.
-     * @return 
-     */
-    @FXML
-    private boolean handleOk(javafx.event.Event event) {
-        if (isInputValid()) {
-        	Connection conn = Connection.getInstance();
+    
+    public boolean connect() {
+    	if (isInputValid()) {	
+    		Connection conn = Connection.getInstance();
         	ResultSet rs = Connection.getResultSetSQL("SELECT password FROM staff WHERE login='" + nom_de_compte.getText() + "'");
         	try {
         		if (rs.next())
@@ -100,7 +96,7 @@ public class AccueilController {
 						Scene scene = new Scene(rootLayout);
 						DirectorDashboardController controller = loader.getController();
 				        loader.setController(controller);
-				        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				        primaryStage.setScene(scene);
 				        controller.setStage(primaryStage);
 						primaryStage.show();
@@ -117,6 +113,28 @@ public class AccueilController {
             okClicked = true;
         }
 		return okClicked;
+    }
+    
+    /**
+     * Called when the user press ENTER
+     * @return 
+     */
+    @FXML
+    public boolean keyPressed(KeyEvent event) {
+    	if ((javafx.scene.input.KeyCode)(event.getCode()) == javafx.scene.input.KeyCode.ENTER)
+    		return connect();
+    	else 
+    		return false;
+    	
+    }
+
+    /**
+     * Called when the user clicks on connect.
+     * @return 
+     */
+    @FXML
+    private boolean handleOk(javafx.event.Event event) {
+        return connect();
     }
 
 
