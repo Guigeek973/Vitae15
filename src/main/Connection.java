@@ -50,6 +50,25 @@ public final class Connection {
 		return rs;
 	}
 	
+	public static boolean existSQL(String requete) {
+		ResultSet rs = null;
+		Statement st = null;
+		try {
+			st = Connection.connection.createStatement();
+			rs = st.executeQuery(requete);
+		
+			// Si un résultat est renvoyé
+			if (rs.getFetchSize() > 0) {
+				return true;
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public static void execSQL(String req) {
 		Statement st = null;
 		try {
