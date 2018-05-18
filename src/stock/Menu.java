@@ -17,8 +17,16 @@ public class Menu {
 		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
-		this.description = description;;
+		this.description = description;
 		this.lesArticles = lesArticles;
+	}
+	
+	public Menu(int id, String libelle, double prix, String description) {
+		super();
+		this.id = id;
+		this.libelle = libelle;
+		this.prix = prix;
+		this.description = description;
 	}
 
 	
@@ -83,6 +91,7 @@ public class Menu {
 		ajoutArticle(lesArticles);
 	}
 	
+	
 	// AJOUT
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
 		// Pour chaque article dans la liste on va faire une requ�te SQL pour l'ins�rer
@@ -97,6 +106,7 @@ public class Menu {
 		this.lesArticles.add(article);
 		Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
 	}
+	
 	
 	// SUPPRESSION
 	public void supprimerArticle(List<ArticleRestaurant> lesArticles) {
