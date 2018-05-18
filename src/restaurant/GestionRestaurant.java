@@ -22,6 +22,16 @@ public class GestionRestaurant {
 	public List<Menu> getLesMenus() {
 		return lesMenus;
 	}
+	public Menu getMenu(int id) {
+		Menu menuReturn = null;
+		for (Menu menu : lesMenus) {
+			if (menu.getId() == id) {
+				menuReturn = lesMenus.get(menu.getId());
+			}
+		}
+		return menuReturn;
+	}
+	
 	public List<ReservationRestaurant> getLesReservationsRestau() {
 		return lesReservationsRestau;
 	}
@@ -59,9 +69,7 @@ public class GestionRestaurant {
 	}
 	
 	public void supprimerMenu(Menu menu) {
+		this.lesMenus.remove(menu);
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());
-	}
-	public Menu getMenu(int id) {
-		return null;
 	}
 }
