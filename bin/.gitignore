@@ -1,6 +1,10 @@
 /maintenance_etages/
 /hotel/
 <<<<<<< HEAD
+/direction/
+/spa/
+=======
+<<<<<<< HEAD
 /restaurant/
 /direction/
 /spa/
@@ -10,4 +14,5 @@
 /restaurant/
 /stock/
 /direction/
+>>>>>>> dév
 >>>>>>> dév
