@@ -10,12 +10,14 @@ public class GestionRestaurant {
 	private List<Menu> lesMenus;
 	private List<ReservationRestaurant> lesReservationsRestau;
 	
+	// CONSTRUCTEUR
 	public GestionRestaurant(List<Menu> lesMenus, List<ReservationRestaurant> lesReservationsRestau) {
 		super();
 		this.lesMenus = lesMenus;
 		this.lesReservationsRestau = lesReservationsRestau;
 	}
 	
+	// GETTERS
 	public List<Menu> getLesMenus() {
 		return lesMenus;
 	}
@@ -23,8 +25,7 @@ public class GestionRestaurant {
 		return lesReservationsRestau;
 	}
 	
-	
-	
+	// SETTERS
 	public void setLesMenus(List<Menu> lesMenus) {
 		this.lesMenus = lesMenus;
 	}

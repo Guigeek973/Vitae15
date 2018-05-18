@@ -8,9 +8,9 @@ public class Menu {
 	private double prix;
 	private String description;
 	private List<ArticleRestaurant> lesArticles;
-	
-	
-	
+
+
+
 	// CONSTRUCTEUR
 	public Menu(int id, String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
 		super();
@@ -75,6 +75,14 @@ public class Menu {
 	
 	
 	// ----- GESTION DE LA LISTE ------
+	// SETTERS GLOBAUX
+	public void setLesArticles(List<ArticleRestaurant> lesArticles) {
+		// ON VIDE LA TABLE COMPOSER MENU DU MENU EN QUESTION
+		Connection.execSQL("DELETE FROM composermenu WHERE id_Menu = " + this.getId());
+		// On utilise la fonction ajoutArticle pour ajouter la liste passée en paramètre d'article au menu
+		ajoutArticle(lesArticles);
+	}
+	
 	// AJOUT
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
 		// Pour chaque article dans la liste on va faire une requï¿½te SQL pour l'insï¿½rer
