@@ -3,6 +3,7 @@ package hotel;
 import java.util.Hashtable;
 
 import hotel.Job;
+import main.Connection;
 
 public class Personnel {
 	private int id;
@@ -43,24 +44,40 @@ public class Personnel {
 	public Hashtable<String,Boolean> getJoursTravail() {
 		return joursTravail;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
+	
 	public void setNom(String nom) {
-		this.nom = nom;
+		if (this.nom != nom) {
+			this.nom = nom;
+			Connection.execSQL("UPDATE staff SET firstname = '" + this.nom + "'");
+		}
 	}
 	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+		if (this.prenom != prenom) {
+			this.prenom = prenom;
+			Connection.execSQL("UPDATE staff SET lastname = '" + this.prenom + "'");
+		}
 	}
 	public void setLogin(String login) {
-		this.login = login;
+		if (this.login != login) {
+			this.login = login;
+			Connection.execSQL("UPDATE staff SET login = '" + this.login + "'");
+		}
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		if (this.password != password) {
+			this.password = password;
+			Connection.execSQL("UPDATE staff SET password = '" + this.password + "'");
+		}
 	}
 	public void setJob(Job job) {
-		this.job = job;
+		if (this.job != job) {
+			this.job = job;
+			Connection.execSQL("UPDATE staff SET id_Job = '" + this.job.getId() + "'");
+		}
 	}
+	
+	//TODO : PAS DE TABLE BD POUR STOCKER JOURS TRAVAIL
 	public void setJoursTravail(Hashtable<String,Boolean> joursTravail) {
 		this.joursTravail = joursTravail;
 	}

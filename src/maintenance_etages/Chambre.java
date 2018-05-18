@@ -51,10 +51,17 @@ public class Chambre {
 		}
 	}
 	public void setEtatChambre(ETAT_CHAMBRE etatChambre) {
-		this.etatChambre = etatChambre.name();
+		this.etatChambre = etatChambre;
+		if (this.etatChambre != etatChambre) {
+			this.etatChambre = etatChambre;
+			Connection.execSQL("UPDATE room SET status = '" + etatChambre + "'");
+		}
 	}
 	public void setIsOccuped(Boolean isOccuped) {
-		this.isOccuped = isOccuped;
+		if (this.isOccuped != isOccuped) {
+			this.isOccuped = isOccuped;
+			Connection.execSQL("UPDATE room SET isAvailable = '" + isOccuped + "'");
+		}
 	}
 	
 	

@@ -1,5 +1,7 @@
 package maintenance_etages;
 
+import main.Connection;
+
 public class TypeChambre {
 	private int id;
 	private String libelle;
@@ -46,20 +48,32 @@ public class TypeChambre {
 	public int getPlaces() {
 		return places;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
+	
+	
 	public void setLibelle(String libelle) {
-		this.libelle = libelle;
+		if (this.libelle != libelle) {
+			this.libelle = libelle;
+			Connection.execSQL("UPDATE roomtype SET label = '" + this.libelle + "'");
+		}
 	}
 	public void setPrix(float prix) {
-		this.prix = prix;
+		if (this.prix != prix) {
+			this.prix = prix;
+			Connection.execSQL("UPDATE roomtype SET price = '" + this.prix + "'");
+		}
 	}
 	public void setTaxes(double taxes) {
-		this.taxes = taxes;
+		if (this.taxes != taxes) {
+			this.taxes = taxes;
+			Connection.execSQL("UPDATE roomtype SET taxes = '" + this.taxes + "'");
+		}
 	}
 	public void setPlaces(int places) {
-		this.places = places;
+		if (this.places != places) {
+			this.places = places;
+			Connection.execSQL("UPDATE roomtype SET nbPlaces = '" + this.places + "'");
+		}
 	}
 	
 	

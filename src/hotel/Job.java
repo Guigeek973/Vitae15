@@ -3,19 +3,20 @@ package hotel;
 import java.util.List;
 
 import hotel.Job;
+import main.Connection;
 
 public class Job {
 	private int id;
 	private String libelle;
 	private Service service;
-	private List<Permission> permissions;
+	private Permission permission;
 	
-	public Job(int id, String libelle, Service service, List<Permission> permission) {
+	public Job(int id, String libelle, Service service, Permission permission) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
 		this.service = service;
-		this.permissions = permission;
+		this.permission = permission;
 	}
 	
 	public int getId() {
@@ -27,20 +28,28 @@ public class Job {
 	public Service getService() {
 		return service;
 	}
-	public List<Permission> getPermission() {
-		return permissions;
+	public Permission getPermission() {
+		return permission;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
+
 	public void setLibelle(String libelle) {
-		this.libelle = libelle;
+		if (this.libelle != libelle) {
+			this.libelle = libelle;
+			Connection.execSQL("UPDATE job SET label = '" + this.libelle + "'");
+		}
 	}
 	public void setService(Service service) {
-		this.service = service;
+		if (this.service != service) {
+			this.service = service;
+			Connection.execSQL("UPDATE job SET id_ServiceJob = '" + this.service + "'");
+		}
 	}
-	public void setPermission(List<Permission> permission) {
-		this.permissions = permission;
+	public void setPermission(Permission permission) {
+		if (this.permission != permission) {
+			this.permission = permission;
+			Connection.execSQL("UPDATE job SET id_TypePermission = '" + this.permission + "'");
+		}
 	}
 	
 	
