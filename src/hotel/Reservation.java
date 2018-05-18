@@ -46,7 +46,7 @@ public abstract class Reservation {
 	public void setClient(Client client) {
 		if (this.client != client) {
 			this.client = client;
-			Connection.execSQL("UPDATE reservation SET id_Client = '" + this.client + "'");
+			Connection.execSQL("UPDATE reservation SET id_Client = " + this.client.getId());
 		}
 	}
 	public void setCreated_at(Date created_at) {

@@ -62,10 +62,7 @@ public class Article {
 	public void setQuantite(int quantite) {
 		if (this.quantite != quantite) {
 			this.quantite = quantite;
-			Connection.execSQL("UPDATE Article SET quantity = '" + this.quantite + "'");
+			Connection.execSQL("UPDATE Article SET quantity = " + this.quantite);
 		}
 	}
-	
-	
-	
 }

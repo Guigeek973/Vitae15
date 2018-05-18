@@ -88,8 +88,7 @@ public class Menu {
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
 		// Pour chaque article dans la liste on va faire une requ�te SQL pour l'inserer
 		for (ArticleRestaurant article : lesArticles) {
-			this.lesArticles.add(article);
-			Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
+			ajoutArticle(article);
 		}
 	}
 
@@ -102,15 +101,12 @@ public class Menu {
 	// SUPPRESSION
 	public void supprimerArticle(List<ArticleRestaurant> lesArticles) {
 		for (ArticleRestaurant article : lesArticles) {
-			this.lesArticles.remove(article);
-			Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = "
-					+ this.getId());
+			supprimerArticle(article);
 		}
 	}
 
-	public void supprimerArticle(Article article) {
+	public void supprimerArticle(ArticleRestaurant article) {
 		this.lesArticles.remove(article);
-		Connection.execSQL(
-				"DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
+		Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 	}
 }

@@ -88,11 +88,7 @@ public class Client {
 	public void setIsExternal(Boolean isExternal) {
 		if (this.isExternal != isExternal) {
 			this.isExternal = isExternal;
-			Connection.execSQL("UPDATE client SET isExternal = '" + this.isExternal + "'");
+			Connection.execSQL("UPDATE client SET isExternal = " + this.isExternal);
 		}
 	}
-	
-	
-	
-
 }

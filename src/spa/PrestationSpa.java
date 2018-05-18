@@ -9,6 +9,8 @@ public class PrestationSpa {
 	private String libelle;
 	private double prix;
 	private Date duree;
+	
+	
 	public PrestationSpa(int id, String libelle, double prix, Date duree) {
 		super();
 		this.id = id;
@@ -16,6 +18,8 @@ public class PrestationSpa {
 		this.prix = prix;
 		this.duree = duree;
 	}
+	
+	
 	//GETTER
 	public int getId() {
 		return id;

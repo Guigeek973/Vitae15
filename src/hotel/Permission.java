@@ -40,25 +40,25 @@ public class Permission {
 	public void setCreate(Boolean create) {
 		if (this.create != create) {
 			this.create = create;
-			Connection.execSQL("UPDATE typepermission SET creating = '" + this.create + "'");
+			Connection.execSQL("UPDATE typepermission SET creating = " + this.create);
 		}
 	}
 	public void setRead(Boolean read) {
 		if (this.read != read) {
 			this.read = read;
-			Connection.execSQL("UPDATE typepermission SET reading = '" + this.read + "'");
+			Connection.execSQL("UPDATE typepermission SET reading = " + this.read);
 		}
 	}
 	public void setUpdate(Boolean update) {
 		if (this.update != update) {
 			this.update = update;
-			Connection.execSQL("UPDATE typepermission SET updating = '" + this.update + "'");
+			Connection.execSQL("UPDATE typepermission SET updating = " + this.update);
 		}
 	}
 	public void setDelete(Boolean delete) {
 		if (this.delete != delete) {
 			this.delete = delete;
-			Connection.execSQL("UPDATE typepermission SET deleting = '" + this.delete + "'");
+			Connection.execSQL("UPDATE typepermission SET deleting = " + this.delete);
 		}
 	}
 	

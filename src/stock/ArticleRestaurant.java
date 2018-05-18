@@ -66,19 +66,19 @@ public class ArticleRestaurant {
 	public void setQuantite(int quantite) {
 		if (this.quantite != quantite) {
 			this.quantite = quantite;
-			Connection.execSQL("UPDATE ArticleRestaurant SET quantity = '" + this.quantite + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET quantity = " + this.quantite);
 		}
 	}
 	public void setPrix(double prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE ArticleRestaurant SET price = '" + this.prix + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET price = " + this.prix);
 		}
 	}
 	public void setTaxes(double taxes) {
 		if (this.taxes != taxes) {
 			this.taxes = taxes;
-			Connection.execSQL("UPDATE ArticleRestaurant SET taxes = '" + this.taxes + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET taxes = " + this.taxes);
 		}
 	}
 	public void setTypeNourriture(TYPE_FOOD typeNourriture) {
@@ -99,7 +99,4 @@ public class ArticleRestaurant {
 			Connection.execSQL("UPDATE ArticleRestaurant SET description = '" + this.description + "'");
 		}
 	}
-	
-	
-	
 }

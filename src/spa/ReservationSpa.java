@@ -20,9 +20,7 @@ public class ReservationSpa extends Reservation {
 	public void setPrestation(PrestationSpa prestation) {
 		if (this.prestation != prestation) {
 			this.prestation = prestation;
-			Connection.execSQL("UPDATE Menu SET id_Prestation = '" + this.prestation.getId() + "'");
+			Connection.execSQL("UPDATE reservationspa SET id_Prestation = " + this.prestation.getId() + " WHERE id = " + this.getId());
 		}
 	}
-	
-	
 }

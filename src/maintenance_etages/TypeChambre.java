@@ -6,7 +6,7 @@ public class TypeChambre {
 	private int id;
 	private String libelle;
 	private float prix;
-	private double taxes; /// changer dans MCD ==> TYPE DOUBLE
+	private double taxes;
 	private int places;
 	
 	public enum TAXES {
@@ -60,19 +60,19 @@ public class TypeChambre {
 	public void setPrix(float prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE roomtype SET price = '" + this.prix + "'");
+			Connection.execSQL("UPDATE roomtype SET price = " + this.prix);
 		}
 	}
 	public void setTaxes(double taxes) {
 		if (this.taxes != taxes) {
 			this.taxes = taxes;
-			Connection.execSQL("UPDATE roomtype SET taxes = '" + this.taxes + "'");
+			Connection.execSQL("UPDATE roomtype SET taxes = " + this.taxes);
 		}
 	}
 	public void setPlaces(int places) {
 		if (this.places != places) {
 			this.places = places;
-			Connection.execSQL("UPDATE roomtype SET nbPlaces = '" + this.places + "'");
+			Connection.execSQL("UPDATE roomtype SET nbPlaces = " + this.places);
 		}
 	}
 	

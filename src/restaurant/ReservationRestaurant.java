@@ -46,13 +46,14 @@ public class ReservationRestaurant extends Reservation {
 	public void setNbCouverts(int nbCouverts) {
 		if (this.nbCouverts != nbCouverts) {
 			this.nbCouverts = nbCouverts;
-			Connection.execSQL("UPDATE reservationtableset SET nbTableSet = '" + this.nbCouverts + "'");
+			Connection.execSQL("UPDATE reservationtableset SET nbTableSet = " + this.nbCouverts);
 		}
 	}
 	public void setService(ServiceTable service) {
 		if (this.service != service) {
 			this.service = service;
-			Connection.execSQL("UPDATE reservationtableset SET id_ServiceTable = '" + this.service + "'");
+			// TODO : Requête fuckd up
+			//Connection.execSQL("UPDATE reservationtableset SET id_ServiceTable = " + this.service);
 		}
 	}
 	// ----- GESTION DE LA LISTE -----
