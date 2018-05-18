@@ -88,8 +88,8 @@ public class GestionRestaurant {
 	}
 	
 	  
-//	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {
-//		// AJOUTER UNE RESERVATION
+	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {
+		// AJOUTER UNE RESERVATION
 //		this.lesReservationsRestau.add(new ReservationRestaurant(nbCouverts, null, null, nbCouverts, service, null, null));
 //		try {
 //			if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id = " + libelle)) {
@@ -101,8 +101,8 @@ public class GestionRestaurant {
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
-//		return false;
-//	}
+return false;
+	}
 	
 	public void supprimerReservationRestaurant(ReservationRestaurant reservationRestaurant) {
 		this.lesReservationsRestau.remove(reservationRestaurant);
