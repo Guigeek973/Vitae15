@@ -2,6 +2,8 @@ package hotel;
 
 import java.util.Date;
 
+import main.Connection;
+
 public abstract class Reservation {
 	private int id;
 	private Client client;
@@ -38,23 +40,38 @@ public abstract class Reservation {
 	public STATUT_RESERVATION getStatut() {
 		return statut;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
+	
+	
 	public void setClient(Client client) {
-		this.client = client;
+		if (this.client != client) {
+			this.client = client;
+			Connection.execSQL("UPDATE reservation SET id_Client = '" + this.client + "'");
+		}
 	}
 	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+		if (this.created_at != created_at) {
+			this.created_at = created_at;
+			Connection.execSQL("UPDATE reservation SET created_at = '" + this.created_at + "'");
+		}
 	}
 	public void setModified_at(Date modified_at) {
-		this.modified_at = modified_at;
+		if (this.modified_at != modified_at) {
+			this.modified_at = modified_at;
+			Connection.execSQL("UPDATE reservation SET modified_at = '" + this.modified_at + "'");
+		}
 	}
 	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+		if (this.startDate != startDate) {
+			this.startDate = startDate;
+			Connection.execSQL("UPDATE reservation SET startDate = '" + this.startDate + "'");
+		}
 	}
 	public void setStatut(STATUT_RESERVATION statut) {
-		this.statut = statut;
+		if (this.statut != statut) {
+			this.statut = statut;
+			Connection.execSQL("UPDATE reservation SET status = '" + this.statut + "'");
+		}
 	}
 	
 	

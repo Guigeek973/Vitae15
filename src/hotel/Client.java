@@ -1,5 +1,7 @@
 package hotel;
 
+import main.Connection;
+
 public class Client {
 	private int id;
 	private String nom;
@@ -50,26 +52,44 @@ public class Client {
 	public Boolean getIsExternal() {
 		return isExternal;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
+	
+	
 	public void setNom(String nom) {
-		this.nom = nom;
+		if (this.nom != nom) {
+			this.nom = nom;
+			Connection.execSQL("UPDATE client SET firstname = '" + this.nom + "'");
+		}
 	}
 	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+		if (this.prenom != prenom) {
+			this.prenom = prenom;
+			Connection.execSQL("UPDATE client SET lastname = '" + this.prenom + "'");
+		}
 	}
 	public void setAdresse(String adresse) {
-		this.adresse = adresse;
+		if (this.adresse != adresse) {
+			this.adresse = adresse;
+			Connection.execSQL("UPDATE client SET adress = '" + this.adresse + "'");
+		}
 	}
-	public void setCP(String cP) {
-		CP = cP;
+	public void setCP(String CP) {
+		if (this.CP != CP) {
+			this.CP = CP;
+			Connection.execSQL("UPDATE client SET postal_code = '" + this.CP + "'");
+		}
 	}
 	public void setTel(String tel) {
-		this.tel = tel;
+		if (this.tel != tel) {
+			this.tel = tel;
+			Connection.execSQL("UPDATE client SET tel = '" + this.tel + "'");
+		}
 	}
 	public void setIsExternal(Boolean isExternal) {
-		this.isExternal = isExternal;
+		if (this.isExternal != isExternal) {
+			this.isExternal = isExternal;
+			Connection.execSQL("UPDATE client SET isExternal = '" + this.isExternal + "'");
+		}
 	}
 	
 	

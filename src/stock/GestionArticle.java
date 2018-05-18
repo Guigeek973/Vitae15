@@ -24,7 +24,7 @@ public class GestionArticle {
 		
 	}
 	public void modifierArticleRestau(int id, String libelle, String description, int quantite, double prix, double taxe, TYPE_FOOD typeFood) {
-		
+		 
 	}
 	public void deleteArticle(Article article) {
 		
