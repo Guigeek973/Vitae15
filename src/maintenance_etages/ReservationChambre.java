@@ -32,19 +32,27 @@ public class ReservationChambre extends Reservation {
 		}
 	}
 	
-	public void ajoutChambre(List<Chambre> lesChambres) {
+	public void setLesChambres(List<Chambre> lesChambres) {
 		this.lesChambres = lesChambres;
 		for(Chambre chambre : lesChambres) {
 			Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + ", " + chambre.getId() + ")");
 		}
 	}
+	
+	public void ajoutChambre(List<Chambre> lesChambres) {
+		for(Chambre chambre : lesChambres) {
+			this.lesChambres.add(chambre);
+			Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + ", " + chambre.getId() + ")");
+		}
+	}
 	public void ajoutChambre(Chambre chambre) {
+		this.lesChambres.add(chambre);
 		Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + ", " + chambre.getId() + ")");
 	}
 	public void supprimerChambre(Chambre chambre) {
 		this.lesChambres.remove(chambre);
+		Connection.execSQL("DELETE FROM avoirchambresdansreservation WHERE id_Room = " + chambre.getId());
 	}
-	
-	
+		
 	
 }
