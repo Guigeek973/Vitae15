@@ -4,21 +4,24 @@ import java.util.List;
 
 import maintenance_etages.Chambre;
 import stock.Article;
+import stock.ArticleRestaurant;
 import stock.Menu;
 
 public class TicketRoomService extends Ticket {
-	private List<Article> lesArticles;
+	private List<ArticleRestaurant> lesArticles;
 	private List<Menu> lesMenus;
 	private Chambre chambre;
 	
-	public TicketRoomService(int id, String titre, String description, STATUT_TICKET statut, Service service, List<Article> articles, List<Menu> menus, Chambre ch) {
+	//CONSTRUCTOR
+	public TicketRoomService(int id, String titre, String description, STATUT_TICKET statut, Service service, List<ArticleRestaurant> articles, List<Menu> menus, Chambre ch) {
 		super(id, titre, description, statut, service);
 		this.lesArticles = articles;
 		this.lesMenus = menus;
 		this.chambre = ch;
 	}
 
-	public List<Article> getLesArticles() {
+	//GETTERS
+	public List<ArticleRestaurant> getLesArticles() {
 		return lesArticles;
 	}
 	public List<Menu> getLesMenus() {
@@ -27,11 +30,19 @@ public class TicketRoomService extends Ticket {
 	public Chambre getChambre() {
 		return chambre;
 	}
-	public void setLesArticles(List<Article> lesArticles) {
+	
+	//SETTERS
+	public void setLesArticles(List<ArticleRestaurant> lesArticles) {
 		this.lesArticles = lesArticles;
+	}
+	public void addArticleRestaurant(Menu menu) {
+		
 	}
 	public void setLesMenus(List<Menu> lesMenus) {
 		this.lesMenus = lesMenus;
+	}
+	public void addMenu(Menu menu) {
+		
 	}
 	public void setChambre(Chambre chambre) {
 		this.chambre = chambre;

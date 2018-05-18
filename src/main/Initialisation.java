@@ -14,8 +14,8 @@ public class Initialisation {
 	public static void initialisation() {
 		//Hotel hotel = new Hotel(null, null, recupererClients());
 		
-		Menu menu = new Menu(1, "Menu enfant", 22, "Le menu des tout petits", null);
-		//menu.setLibelle("mesCouilles");
+		//		Menu menu = new Menu(1, "Menu enfant", 22, "Le menu des tout petits", null);
+		//		menu.setLibelle("mesCouilles");
 	}
 	
 	private static List<Client> recupererClients() {
@@ -23,7 +23,7 @@ public class Initialisation {
 		ResultSet rs = Connection.getResultSetSQL(reqClients);
 		try {
 			while (rs.next()) {
-				lesClients.add(new Client((int)rs.getInt(1), (String)rs.getString(2), (String)rs.getString(3), (String)rs.getString(4), (String)rs.getString(5), (String)rs.getString(6)));
+				lesClients.add(new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

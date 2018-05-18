@@ -10,28 +10,28 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1021.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.DirectorDashboardController">
    <children>
       <AnchorPane prefHeight="768.0" prefWidth="233.0" style="-fx-background-color: #292f36;">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="28.0" layoutX="14.0" layoutY="251.0" stroke="WHITE" strokeType="INSIDE" width="202.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="28.0" layoutX="14.0" layoutY="201.0" stroke="WHITE" strokeType="INSIDE" width="202.0" />
             <Line endX="100.0" fill="WHITE" layoutX="117.0" layoutY="175.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
-            <Text fill="#292f36" layoutX="24.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
+            <Text fill="WHITE" layoutX="24.0" layoutY="272.0" onMouseClicked="#goToRestaurant" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="23.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hébergement">
+            <Text fill="WHITE" layoutX="23.0" layoutY="323.0" onMouseClicked="#goToHebergement" strokeType="OUTSIDE" strokeWidth="0.0" text="Hébergement">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="23.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
+            <Text fill="WHITE" layoutX="23.0" layoutY="423.0" onMouseClicked="#goToMaintenance" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="23.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réception">
+            <Text fill="WHITE" layoutX="23.0" layoutY="373.0" onMouseClicked="#goToReception" strokeType="OUTSIDE" strokeWidth="0.0" text="Réception">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
@@ -41,7 +41,7 @@
                   <Image url="@Logo-Tom-Kha-Kai-White.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="24.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction">
+            <Text fill="#292f36" layoutX="24.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
@@ -61,55 +61,45 @@
             <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
          </effect>
       </Rectangle>
-      <Text fill="#292f36" layoutX="354.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des tables">
+      <Text fill="#292f36" layoutX="342.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'employés">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="723.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Création du menu" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="675.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de petits déjeuners" textAlignment="CENTER">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="640.0" layoutY="384.0" stroke="WHITE" strokeType="INSIDE" width="346.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="218.0" layoutX="520.0" layoutY="384.0" stroke="#292f36" strokeType="INSIDE" width="212.0">
          <effect>
             <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
          </effect>
       </Rectangle>
-      <Text fill="#292f36" layoutX="717.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service de chambre">
+      <Text fill="WHITE" layoutX="553.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Taux journalier">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="218.0" layoutX="269.0" layoutY="384.0" stroke="#292f36" strokeType="INSIDE" width="346.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="269.0" layoutY="384.0" stroke="WHITE" strokeType="INSIDE" width="212.0">
          <effect>
             <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
          </effect>
       </Rectangle>
-      <Text fill="WHITE" layoutX="352.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des stocks">
+      <Text fill="#292f36" layoutX="297.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée moyenne">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
       </Text>
-      <ImageView fitHeight="81.0" fitWidth="140.0" layoutX="374.0" layoutY="229.0" preserveRatio="true">
-         <image>
-            <Image url="@../../Documents/tables.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="94.0" fitWidth="98.0" layoutX="769.0" layoutY="221.0" preserveRatio="true">
-         <image>
-            <Image url="@../../Documents/menu.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="103.0" fitWidth="107.0" layoutX="394.0" layoutY="452.0" preserveRatio="true">
-         <image>
-            <Image url="@../../Documents/stock.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="79.0" fitWidth="140.0" layoutX="744.0" layoutY="464.0" preserveRatio="true">
-         <image>
-            <Image url="@../../Documents/room-service.png" />
-         </image>
-      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="769.0" layoutY="384.0" stroke="WHITE" strokeType="INSIDE" width="212.0">
+         <effect>
+            <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
+         </effect>
+      </Rectangle>
+      <Text fill="#292f36" layoutX="797.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Panier moyen">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
