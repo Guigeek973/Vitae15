@@ -87,7 +87,9 @@ public class GestionRestaurant {
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());
 	}
 	
-//	public boolean ajouterReservationRestaurant(int nbCouverts, double prix, String description) {
+//	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {
+//		// AJOUTER UNE RESERVATION
+//		this.lesReservationsRestau.add(new ReservationRestaurant(nbCouverts, null, null, nbCouverts, service, null, null));
 //		try {
 //			if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id = " + libelle)) {
 //				Connection.execSQL("INSERT INTO Menu VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
