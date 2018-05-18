@@ -23,6 +23,12 @@ public class ReservationRestaurant extends Reservation {
 		this.lesPlats = plats;
 		this.lesMenus = menus;
 	}
+	
+	public ReservationRestaurant(int id, Client client, Date startDate, int nbCouverts, ServiceTable service) {
+		super(id, client, startDate);
+		this.nbCouverts = nbCouverts;
+		this.service = service;
+	}
 
 	public int getNbCouverts() {
 		return nbCouverts;
@@ -101,7 +107,8 @@ public class ReservationRestaurant extends Reservation {
 		}
 		
 		public void supprimerMenu(Menu menu) {
-			Connection.execSQL("DELETE FROM commandermenu WHERE id_Reservation = " + this.getId() + " AND id_Menu = " + menu.getId());
+			this.lesMenus.remove(menu);
+			Connection.execSQL("DELETE FROM commandermenu WHERE id_Menu = " + menu.getId());
 		}
 	
 	

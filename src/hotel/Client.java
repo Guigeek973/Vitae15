@@ -58,13 +58,13 @@ public class Client {
 	public void setNom(String nom) {
 		if (this.nom != nom) {
 			this.nom = nom;
-			Connection.execSQL("UPDATE client SET firstname = '" + this.nom + "'");
+			Connection.execSQL("UPDATE client SET lastname = '" + this.nom + "'");
 		}
 	}
 	public void setPrenom(String prenom) {
 		if (this.prenom != prenom) {
 			this.prenom = prenom;
-			Connection.execSQL("UPDATE client SET lastname = '" + this.prenom + "'");
+			Connection.execSQL("UPDATE client SET firstname = '" + this.prenom + "'");
 		}
 	}
 	public void setAdresse(String adresse) {

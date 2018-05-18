@@ -49,13 +49,13 @@ public class Personnel {
 	public void setNom(String nom) {
 		if (this.nom != nom) {
 			this.nom = nom;
-			Connection.execSQL("UPDATE staff SET firstname = '" + this.nom + "'");
+			Connection.execSQL("UPDATE staff SET lastname = '" + this.nom + "'");
 		}
 	}
 	public void setPrenom(String prenom) {
 		if (this.prenom != prenom) {
 			this.prenom = prenom;
-			Connection.execSQL("UPDATE staff SET lastname = '" + this.prenom + "'");
+			Connection.execSQL("UPDATE staff SET firstname = '" + this.prenom + "'");
 		}
 	}
 	public void setLogin(String login) {
