@@ -87,7 +87,7 @@ public class GestionRestaurant {
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());
 	}
 	
-	
+	  
 //	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {
 //		// AJOUTER UNE RESERVATION
 //		this.lesReservationsRestau.add(new ReservationRestaurant(nbCouverts, null, null, nbCouverts, service, null, null));
