@@ -65,11 +65,11 @@ public class GestionRestaurant {
 	public boolean ajouterMenu(String libelle, double prix, String description) {
 		try {
 			// SI LE LABEL DU MENU N'EXISTE PAS
-			if (!Connection.existSQL("SELECT id FROM menu WHERE label = " + libelle)) {
+			if (!Connection.existSQL("SELECT id FROM menu WHERE label = '" + libelle + "'")) {
 				// On insert un nouveau menu dans la bdd
-				Connection.execSQL("INSERT INTO Menu VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
+				Connection.execSQL("INSERT INTO Menu(label, price, description) VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
 				// On récupère l'id de ce menu tout juste inséré
-				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = " + libelle).getInt("id");
+				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = '" + libelle + "'").getInt("id");
 				// On ajoute ce nouveau menu à la liste des menus
 				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
 				// L'ajout a fonctionné on retourne vrai
@@ -89,6 +89,8 @@ public class GestionRestaurant {
 	
 	  
 	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {
+		// TODO : ajouterReservationRestaurant
+		
 		// AJOUTER UNE RESERVATION
 //		this.lesReservationsRestau.add(new ReservationRestaurant(nbCouverts, null, null, nbCouverts, service, null, null));
 //		try {
