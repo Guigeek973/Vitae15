@@ -14,26 +14,38 @@ public class GestionRestaurant {
 	// CONSTRUCTEUR
 	public GestionRestaurant(List<Menu> lesMenus, List<ReservationRestaurant> lesReservationsRestau) {
 		super();
-		this.lesMenus = lesMenus;
-		this.lesReservationsRestau = lesReservationsRestau;
+		// On peut utiliser les setters car il n'ya pas de requête SQL dans les setters de gestion
+		setLesMenus(lesMenus);
+		setLesReservationsRestau(lesReservationsRestau);
 	}
 	
 	// GETTERS
 	public List<Menu> getLesMenus() {
-		return lesMenus;
+		return this.lesMenus;
 	}
 	public Menu getMenu(int id) {
 		Menu menuReturn = null;
-		for (Menu menu : lesMenus) {
+		// On boucle sur les menus pour trouver le menu avec l'id passé en paramètre
+		for (Menu menu : this.lesMenus) {
 			if (menu.getId() == id) {
-				menuReturn = lesMenus.get(menu.getId());
+				// On a trouvé le menu
+				menuReturn = this.lesMenus.get(menu.getId());
 			}
 		}
+		// On retourne le menu trouvé par la boucle
 		return menuReturn;
 	}
-	
 	public List<ReservationRestaurant> getLesReservationsRestau() {
 		return lesReservationsRestau;
+	}
+	public ReservationRestaurant getReservationRestaurant(int id) {
+		ReservationRestaurant reservationRestaurant = null;
+		for (ReservationRestaurant reservation : this.lesReservationsRestau) {
+			if (reservation.getId() == id) {
+				reservationRestaurant = this.lesReservationsRestau.get(reservation.getId());
+			}
+		}
+		return reservationRestaurant;
 	}
 	public int getNbPetitDejJour() {
 		return 0;
@@ -47,6 +59,8 @@ public class GestionRestaurant {
 		this.lesReservationsRestau = lesReservationsRestau;
 	}
 	
+	
+	// AJOUT - SUPPRESSION LISTES
 
 	public boolean ajouterMenu(String libelle, double prix, String description) {
 		try {
@@ -71,5 +85,24 @@ public class GestionRestaurant {
 	public void supprimerMenu(Menu menu) {
 		this.lesMenus.remove(menu);
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());
+	}
+	
+//	public boolean ajouterReservationRestaurant(int nbCouverts, double prix, String description) {
+//		try {
+//			if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id = " + libelle)) {
+//				Connection.execSQL("INSERT INTO Menu VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
+//				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = " + libelle).getInt("id");
+//				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
+//				return true;
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return false;
+//	}
+	
+	public void supprimerReservationRestaurant(ReservationRestaurant reservationRestaurant) {
+		this.lesReservationsRestau.remove(reservationRestaurant);
+		Connection.execSQL("DELETE FROM reservationtableset WHERE id = " + reservationRestaurant.getId());
 	}
 }
