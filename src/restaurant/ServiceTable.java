@@ -3,12 +3,14 @@ package restaurant;
 import java.util.Date;
 
 public class ServiceTable {
+	private int id;
 	private int nbCouvertsRestant;
 	private int numero;
 	private Date date;
 	
-	public ServiceTable(int nbCouvertsRestant, int numero, Date date) {
+	public ServiceTable(int id, int nbCouvertsRestant, int numero, Date date) {
 		super();
+		this.id = id;
 		this.nbCouvertsRestant = nbCouvertsRestant;
 		this.numero = numero;
 		this.date = date;
@@ -23,6 +25,11 @@ public class ServiceTable {
 	public Date getDate() {
 		return date;
 	}
+	public int getId() {
+		return id;
+	}
+	
+	
 	public void setNbCouvertsRestant(int nbCouvertsRestant) {
 		this.nbCouvertsRestant = nbCouvertsRestant;
 	}
