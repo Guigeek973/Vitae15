@@ -4,6 +4,7 @@ import java.util.Date;
 
 import hotel.Client;
 import hotel.Reservation;
+import main.Connection;
 
 public class ReservationSpa extends Reservation {
 	PrestationSpa prestation;
@@ -17,7 +18,10 @@ public class ReservationSpa extends Reservation {
 		return prestation;
 	}
 	public void setPrestation(PrestationSpa prestation) {
-		this.prestation = prestation;
+		if (this.prestation != prestation) {
+			this.prestation = prestation;
+			Connection.execSQL("UPDATE Menu SET id_Prestation = '" + this.prestation.getId() + "'");
+		}
 	}
 	
 	
