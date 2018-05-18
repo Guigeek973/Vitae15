@@ -78,26 +78,28 @@ public class Menu {
 	// AJOUT
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
 		// Pour chaque article dans la liste on va faire une requ�te SQL pour l'ins�rer
-		this.lesArticles = lesArticles;
 		for(ArticleRestaurant article : lesArticles) {
+			this.lesArticles.add(article);
 			Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
 		}
 	}
 	
 	// SURCHARGE de ajoutArticle qui prend une liste d'articles en param�tre, ici on ne prend qu'un article
-	public void ajoutArticle(Article article) {
+	public void ajoutArticle(ArticleRestaurant article) {
+		this.lesArticles.add(article);
 		Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
 	}
 	
 	// SUPPRESSION
 	public void supprimerArticle(List<ArticleRestaurant> lesArticles) {
-		this.lesArticles = lesArticles;
 		for(ArticleRestaurant article : lesArticles) {
+			this.lesArticles.remove(article);
 			Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 		}
 	}
 	
 	public void supprimerArticle(Article article) {
+		this.lesArticles.remove(article);
 		Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 	}
 }
