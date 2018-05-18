@@ -2,6 +2,8 @@ package restaurant;
 
 import java.util.Date;
 
+import main.Connection;
+
 public class ServiceTable {
 	private int nbCouvertsRestant;
 	private int numero;
@@ -23,14 +25,28 @@ public class ServiceTable {
 	public Date getDate() {
 		return date;
 	}
+	
+	
 	public void setNbCouvertsRestant(int nbCouvertsRestant) {
-		this.nbCouvertsRestant = nbCouvertsRestant;
+		
+		if (this.nbCouvertsRestant != nbCouvertsRestant) {
+			this.nbCouvertsRestant = nbCouvertsRestant;
+			Connection.execSQL("UPDATE servicetable SET nbRestant = '" + this.nbCouvertsRestant + "'");
+		}
 	}
 	public void setNumero(int numero) {
-		this.numero = numero;
+		
+		if (this.numero != numero) {
+			this.numero = numero;
+			Connection.execSQL("UPDATE servicetable SET num_service = '" + this.numero + "'");
+		}
 	}
 	public void setDate(Date date) {
-		this.date = date;
+		
+		if (this.date != date) {
+			this.date = date;
+			Connection.execSQL("UPDATE servicetable SET dateTime = '" + this.date + "'");
+		}
 	}
 	
 }

@@ -2,6 +2,8 @@ package hotel;
 
 import java.util.List;
 
+import main.Connection;
+
 public class Service {
 	private int id;
 	private String nom;
@@ -23,11 +25,16 @@ public class Service {
 	public List<Personnel> getLesEmployes() {
 		return lesEmployes;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
+	
 	public void setNom(String nom) {
-		this.nom = nom;
+		
+		
+		if(this.nom != nom) 
+		{
+			this.nom = nom;
+			Connection.execSQL("UPDATE servicejob SET laber = '" + this.nom + "'");
+		}
 	}
 	public void setLesEmployes(List<Personnel> lesEmployes) {
 		this.lesEmployes = lesEmployes;
