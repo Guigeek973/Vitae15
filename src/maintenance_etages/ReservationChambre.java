@@ -12,9 +12,13 @@ public class ReservationChambre extends Reservation {
 	private List<Chambre> lesChambres;
 	private Date endDate;
 	
-	public ReservationChambre(int id, Client client, Date startDate, List<Chambre> chambres, Date endDate) {
+	public ReservationChambre(int id, Client client, Date startDate, Date endDate, List<Chambre> chambres) {
 		super(id, client, startDate);
 		this.lesChambres = chambres;
+		this.endDate = endDate;
+	}
+	public ReservationChambre(int id, Client client, Date startDate, Date endDate) {
+		super(id, client, startDate);
 		this.endDate = endDate;
 	}
 

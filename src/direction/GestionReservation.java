@@ -6,6 +6,8 @@ import java.util.List;
 import hotel.Client;
 import hotel.Reservation;
 import maintenance_etages.Chambre;
+import maintenance_etages.ReservationChambre;
+import restaurant.ReservationRestaurant;
 import restaurant.ServiceTable;
 import spa.PrestationSpa;
 
@@ -14,6 +16,8 @@ public class GestionReservation {
 	
 	public void prendreReservation(Client client, Date startDate, Date endDate, List<Chambre> lesChambres) {
 		
+		int idReservationResto = 0;
+		ReservationChambre resa = new ReservationChambre(idReservationResto, client, startDate, endDate);
 	}
 	public void prendreReservation(Client client, Date startDate, int nbCouverts, ServiceTable service) {
 		
