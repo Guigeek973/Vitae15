@@ -5,6 +5,8 @@ import java.util.List;
 
 import hotel.Client;
 import hotel.Reservation;
+import main.Connection;
+import stock.ArticleRestaurant;
 
 public class ReservationChambre extends Reservation {
 	private List<Chambre> lesChambres;
@@ -22,11 +24,25 @@ public class ReservationChambre extends Reservation {
 	public Date getEndDate() {
 		return endDate;
 	}
-	public void setLesChambres(List<Chambre> lesChambres) {
-		this.lesChambres = lesChambres;
-	}
+	
 	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+		if (this.endDate != endDate) {
+			this.endDate = endDate;
+			Connection.execSQL("UPDATE reservationroom SET endDate = '" + this.endDate + "'");
+		}
+	}
+	
+	public void ajoutChambre(List<Chambre> lesChambres) {
+		this.lesChambres = lesChambres;
+		for(Chambre chambre : lesChambres) {
+			Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + ", " + chambre.getId() + ")");
+		}
+	}
+	public void ajoutChambre(Chambre chambre) {
+		Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + ", " + chambre.getId() + ")");
+	}
+	public void supprimerChambre(Chambre chambre) {
+		this.lesChambres.remove(chambre);
 	}
 	
 	

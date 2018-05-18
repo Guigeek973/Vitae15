@@ -1,6 +1,9 @@
 package hotel;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import main.Connection;
 
 public class Permission {
 	private int id;
@@ -8,16 +11,14 @@ public class Permission {
 	private Boolean read;
 	private Boolean update;
 	private Boolean delete;
-	private Service service;
 	
-	public Permission(int id, Boolean create, Boolean read, Boolean update, Boolean delete, Service service) {
+	public Permission(int id, Boolean create, Boolean read, Boolean update, Boolean delete) {
 		super();
 		this.id = id;
 		this.create = create;
 		this.read = read;
 		this.update = update;
 		this.delete = delete;
-		this.service = service;
 	}
 	public int getId() {
 		return id;
@@ -34,33 +35,46 @@ public class Permission {
 	public Boolean getDelete() {
 		return delete;
 	}
-	public Service getService() {
-		return service;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
+	
 	public void setCreate(Boolean create) {
-		this.create = create;
+		if (this.create != create) {
+			this.create = create;
+			Connection.execSQL("UPDATE typepermission SET creating = '" + this.create + "'");
+		}
 	}
 	public void setRead(Boolean read) {
-		this.read = read;
+		if (this.read != read) {
+			this.read = read;
+			Connection.execSQL("UPDATE typepermission SET reading = '" + this.read + "'");
+		}
 	}
 	public void setUpdate(Boolean update) {
-		this.update = update;
+		if (this.update != update) {
+			this.update = update;
+			Connection.execSQL("UPDATE typepermission SET updating = '" + this.update + "'");
+		}
 	}
 	public void setDelete(Boolean delete) {
-		this.delete = delete;
-	}
-	public void setService(Service service) {
-		this.service = service;
+		if (this.delete != delete) {
+			this.delete = delete;
+			Connection.execSQL("UPDATE typepermission SET deleting = '" + this.delete + "'");
+		}
 	}
 	
 	
-	public void modifierPermissions() {
-		
+	public void modifierPermissions(Boolean c, Boolean r, Boolean u, Boolean d) {
+		this.setCreate(c);
+		this.setRead(r);
+		this.setUpdate(u);
+		this.setDelete(d);
 	}
 	public List<Boolean> getCRUD() {
-		return null;
+		ArrayList<Boolean> list = new ArrayList<Boolean>();
+		list.add(this.create);
+		list.add(this.read);
+		list.add(this.update);
+		list.add(this.delete);
+		return list;
 	}
 }
