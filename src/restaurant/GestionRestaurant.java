@@ -10,35 +10,35 @@ public class GestionRestaurant {
 	private List<Menu> lesMenus;
 	private List<ReservationRestaurant> lesReservationsRestau;
 	
+	// CONSTRUCTEUR
 	public GestionRestaurant(List<Menu> lesMenus, List<ReservationRestaurant> lesReservationsRestau) {
 		super();
 		this.lesMenus = lesMenus;
 		this.lesReservationsRestau = lesReservationsRestau;
 	}
 	
+	// GETTERS
 	public List<Menu> getLesMenus() {
 		return lesMenus;
 	}
 	public List<ReservationRestaurant> getLesReservationsRestau() {
 		return lesReservationsRestau;
 	}
+	public int getNbPetitDejJour() {
+		return 0;
+	}
 	
-	
-	
+	// SETTERS GLOBAUX
 	public void setLesMenus(List<Menu> lesMenus) {
 		this.lesMenus = lesMenus;
 	}
 	public void setLesReservationsRestau(List<ReservationRestaurant> lesReservationsRestau) {
 		this.lesReservationsRestau = lesReservationsRestau;
 	}
+	
 
-	public int getNbPetitDejJour() {
-		return 0;
-	}
-	public void addMenu(String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
-//		Connection.execSQL("INSERT INTO menu(price, label, description) VALUES (" + prix + ",'" + libelle + "', '" + description + "')");
-//		
-//		lesMenus.add(new Menu(0, "", prix, description, lesArticles));
+	public void ajouterMenu(String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
+		
 	}
 	public void supprimerMenu(Menu menu) {
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());

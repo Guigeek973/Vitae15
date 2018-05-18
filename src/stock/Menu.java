@@ -8,17 +8,25 @@ public class Menu {
 	private double prix;
 	private String description;
 	private List<ArticleRestaurant> lesArticles;
-	
-	
-	
+
+
+
 	// CONSTRUCTEUR
 	public Menu(int id, String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
-		this.description = description;;
+		this.description = description;
 		this.lesArticles = lesArticles;
+	}
+	
+	public Menu(int id, String libelle, double prix, String description) {
+		super();
+		this.id = id;
+		this.libelle = libelle;
+		this.prix = prix;
+		this.description = description;
 	}
 
 	
@@ -75,29 +83,41 @@ public class Menu {
 	
 	
 	// ----- GESTION DE LA LISTE ------
+	// SETTERS GLOBAUX
+	public void setLesArticles(List<ArticleRestaurant> lesArticles) {
+		// ON VIDE LA TABLE COMPOSER MENU DU MENU EN QUESTION
+		Connection.execSQL("DELETE FROM composermenu WHERE id_Menu = " + this.getId());
+		// On utilise la fonction ajoutArticle pour ajouter la liste passée en paramètre d'article au menu
+		ajoutArticle(lesArticles);
+	}
+	
+	
 	// AJOUT
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
 		// Pour chaque article dans la liste on va faire une requï¿½te SQL pour l'insï¿½rer
-		this.lesArticles = lesArticles;
 		for(ArticleRestaurant article : lesArticles) {
+			this.lesArticles.add(article);
 			Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
 		}
 	}
 	
 	// SURCHARGE de ajoutArticle qui prend une liste d'articles en paramï¿½tre, ici on ne prend qu'un article
-	public void ajoutArticle(Article article) {
+	public void ajoutArticle(ArticleRestaurant article) {
+		this.lesArticles.add(article);
 		Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
 	}
 	
+	
 	// SUPPRESSION
 	public void supprimerArticle(List<ArticleRestaurant> lesArticles) {
-		this.lesArticles = lesArticles;
 		for(ArticleRestaurant article : lesArticles) {
+			this.lesArticles.remove(article);
 			Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 		}
 	}
 	
 	public void supprimerArticle(Article article) {
+		this.lesArticles.remove(article);
 		Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 	}
 }
