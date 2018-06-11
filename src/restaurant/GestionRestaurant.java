@@ -69,20 +69,14 @@ public class GestionRestaurant {
 	
 	// AJOUT - SUPPRESSION LISTES
 	public boolean ajouterMenu(String libelle, double prix, String description) {
-		try {
-			// SI LE LABEL DU MENU N'EXISTE PAS
-			if (!Connection.existSQL("SELECT id FROM menu WHERE label = '" + libelle + "'")) {
-				// On insert un nouveau menu dans la bdd
-				Connection.execSQL("INSERT INTO Menu(label, price, description) VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
-				// On ajoute ce nouveau menu � la liste des menus
-				// L'ajout a fonctionn� on retourne vrai
-				return true;
-				this.lesMenus.add(new Menu(libelle, prix, description));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		// SI LE LABEL DU MENU N'EXISTE PAS
+		if (!Connection.existSQL("SELECT id FROM menu WHERE label = '" + libelle + "'")) {
+			// On insert un nouveau menu dans la bdd
+			Connection.execSQL("INSERT INTO Menu(label, price, description) VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
+			this.lesMenus.add(new Menu(libelle, prix, description));
+			return true;
 		}
-		// Si l'ajout n'a pas fonctionn� on retourne fau		return false;
+		return false;
 	}
 	
 	public void supprimerMenu(Menu menu) {
