@@ -1,29 +1,47 @@
 package hotel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 import main.Connection;
 
 public abstract class Reservation {
-	private int id;
-	private Client client;
-	private Date created_at;
-	private Date modified_at;
-	private Date startDate;
-	private STATUT_RESERVATION statut;
+	protected int id;
+	protected Client client;
+	protected Date created_at;
+	protected Date modified_at;
+	protected Date startDate;
+	protected STATUT_RESERVATION statut;
 	public enum STATUT_RESERVATION {
 		EN_COURS,
 		VALIDE
 	}
-	public Reservation(int id, Client client, Date startDate) {
+	public Reservation(Client client, Date startDate) {
 		super();
-		this.id = id;
 		this.client = client;
 		this.startDate = startDate;
 		this.statut = STATUT_RESERVATION.EN_COURS;
 	}
 	public int getId() {
-		return id;
+		int id = 0;
+		try {
+			id = Connection.getResultSetSQL(
+					"SELECT id FROM reservation "
+					+ "WHERE reservation.id_Client = " + this.client 
+					+ " AND startDate = " + this.startDate + " AND created_at = " 
+					+ this.created_at + " AND updated_at = " + this.modified_at
+					+ " AND status = " + this.statut).getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Client getClient() {
 		return client;
@@ -46,7 +64,7 @@ public abstract class Reservation {
 	public void setClient(Client client) {
 		if (this.client != client) {
 			this.client = client;
-			Connection.execSQL("UPDATE reservation SET id_Client = '" + this.client + "'");
+			Connection.execSQL("UPDATE reservation SET id_Client = " + this.client.getId());
 		}
 	}
 	public void setCreated_at(Date created_at) {

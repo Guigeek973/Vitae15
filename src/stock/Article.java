@@ -1,5 +1,8 @@
 package stock;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import main.Connection;
 
 public class Article {
@@ -15,9 +18,8 @@ public class Article {
 		RESTAURANT
 	}
 	
-	public Article(int id, String libelle, String description, TYPE_ARTICLE typeArticle, int quantite) {
+	public Article(String libelle, String description, TYPE_ARTICLE typeArticle, int quantite) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.description = description;
 		this.typeArticle = typeArticle;
@@ -25,7 +27,24 @@ public class Article {
 	}
 
 	public int getId() {
-		return id;
+		int id = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL(
+					"SELECT id FROM article "
+					+ "WHERE label = " + this.libelle
+					+ " AND description = " + this.description
+					+ " AND quantity = " + this.quantite
+					+ " AND type = " + this.typeArticle);
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getLibelle() {
 		return libelle;
@@ -62,10 +81,7 @@ public class Article {
 	public void setQuantite(int quantite) {
 		if (this.quantite != quantite) {
 			this.quantite = quantite;
-			Connection.execSQL("UPDATE Article SET quantity = '" + this.quantite + "'");
+			Connection.execSQL("UPDATE Article SET quantity = " + this.quantite);
 		}
 	}
-	
-	
-	
 }

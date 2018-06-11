@@ -1,12 +1,15 @@
 package maintenance_etages;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import main.Connection;
 
 public class TypeChambre {
 	private int id;
 	private String libelle;
 	private float prix;
-	private double taxes; /// changer dans MCD ==> TYPE DOUBLE
+	private double taxes;
 	private int places;
 	
 	public enum TAXES {
@@ -24,9 +27,8 @@ public class TypeChambre {
 		}
 	}
 
-	public TypeChambre(int id, String libelle, float prix, TAXES tax, int places) {
+	public TypeChambre(String libelle, float prix, TAXES tax, int places) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.taxes = tax.getTaxe();
@@ -34,7 +36,23 @@ public class TypeChambre {
 	}
 
 	public int getId() {
-		return id;
+		int id = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM roomtype"
+					+ " WHERE label = " + this.libelle
+					+ " AND price = " + this.prix
+					+ " AND taxes = " + this.taxes
+					+ " AND nbPlaces = " + this.places);
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getLibelle() {
 		return libelle;
@@ -60,19 +78,19 @@ public class TypeChambre {
 	public void setPrix(float prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE roomtype SET price = '" + this.prix + "'");
+			Connection.execSQL("UPDATE roomtype SET price = " + this.prix);
 		}
 	}
 	public void setTaxes(double taxes) {
 		if (this.taxes != taxes) {
 			this.taxes = taxes;
-			Connection.execSQL("UPDATE roomtype SET taxes = '" + this.taxes + "'");
+			Connection.execSQL("UPDATE roomtype SET taxes = " + this.taxes);
 		}
 	}
 	public void setPlaces(int places) {
 		if (this.places != places) {
 			this.places = places;
-			Connection.execSQL("UPDATE roomtype SET nbPlaces = '" + this.places + "'");
+			Connection.execSQL("UPDATE roomtype SET nbPlaces = " + this.places);
 		}
 	}
 	

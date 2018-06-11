@@ -1,5 +1,7 @@
 package hotel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,25 @@ public class Permission {
 		this.delete = delete;
 	}
 	public int getId() {
-		return id;
+		int id = 0;
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM typepermission"
+				+ " WHERE create = " + this.create
+				+ " AND read = " + this.read
+				+ " AND update = " + this.update
+				+ " AND delete = " + this.delete);
+			
+		try {
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Boolean getCreate() {
 		return create;
@@ -40,25 +60,25 @@ public class Permission {
 	public void setCreate(Boolean create) {
 		if (this.create != create) {
 			this.create = create;
-			Connection.execSQL("UPDATE typepermission SET creating = '" + this.create + "'");
+			Connection.execSQL("UPDATE typepermission SET creating = " + this.create);
 		}
 	}
 	public void setRead(Boolean read) {
 		if (this.read != read) {
 			this.read = read;
-			Connection.execSQL("UPDATE typepermission SET reading = '" + this.read + "'");
+			Connection.execSQL("UPDATE typepermission SET reading = " + this.read);
 		}
 	}
 	public void setUpdate(Boolean update) {
 		if (this.update != update) {
 			this.update = update;
-			Connection.execSQL("UPDATE typepermission SET updating = '" + this.update + "'");
+			Connection.execSQL("UPDATE typepermission SET updating = " + this.update);
 		}
 	}
 	public void setDelete(Boolean delete) {
 		if (this.delete != delete) {
 			this.delete = delete;
-			Connection.execSQL("UPDATE typepermission SET deleting = '" + this.delete + "'");
+			Connection.execSQL("UPDATE typepermission SET deleting = " + this.delete);
 		}
 	}
 	

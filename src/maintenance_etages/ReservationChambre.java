@@ -1,5 +1,7 @@
 package maintenance_etages;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -7,19 +9,47 @@ import hotel.Client;
 import hotel.Reservation;
 import main.Connection;
 import stock.ArticleRestaurant;
+import stock.Menu;
 
 public class ReservationChambre extends Reservation {
+	private int id;
 	private List<Chambre> lesChambres;
 	private Date endDate;
 	
-	public ReservationChambre(int id, Client client, Date startDate, List<Chambre> chambres, Date endDate) {
-		super(id, client, startDate);
-		this.lesChambres = chambres;
+	public ReservationChambre(Client client, Date startDate, Date endDate) {
+		super(client, startDate);
 		this.endDate = endDate;
+	}
+	
+	public int getId() {
+		int id = 0;
+		try {
+			id = Connection.getResultSetSQL(
+					"SELECT id FROM reservationroom "
+					+ "WHERE id_Reservation = " + super.getId()
+					+ " AND endDate = " + this.endDate).getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public List<Chambre> getLesChambres() {
 		return lesChambres;
+	}
+	public Chambre getChambre(int id) {
+		Chambre chambreReturn = null;
+		for (Chambre chambre : this.lesChambres) {
+			if (chambre.getId() == id) {
+				chambreReturn = this.lesChambres.get(chambre.getId());
+			}
+		}
+		return chambreReturn;
 	}
 	public Date getEndDate() {
 		return endDate;
@@ -33,26 +63,26 @@ public class ReservationChambre extends Reservation {
 	}
 	
 	public void setLesChambres(List<Chambre> lesChambres) {
-		this.lesChambres = lesChambres;
-		for(Chambre chambre : lesChambres) {
-			Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + ", " + chambre.getId() + ")");
-		}
+		Connection.execSQL("DELETE FROM avoirchambresdansreservation WHERE id = " + this.getId());
+		ajoutChambre(lesChambres);
 	}
 	
 	public void ajoutChambre(List<Chambre> lesChambres) {
 		for(Chambre chambre : lesChambres) {
-			this.lesChambres.add(chambre);
-			Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + ", " + chambre.getId() + ")");
+			ajoutChambre(chambre);
 		}
 	}
 	public void ajoutChambre(Chambre chambre) {
 		this.lesChambres.add(chambre);
-		Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + ", " + chambre.getId() + ")");
+		Connection.execSQL("INSERT INTO avoirchambresdansreservation VALUES (" + this.getId() + "," + this.getId() + "," + chambre.getId() + ")");
+	}
+	public void supprimerChambre(List<Chambre> lesChambres) {
+		for(Chambre chambre : lesChambres) {
+			supprimerChambre(chambre);
+		}
 	}
 	public void supprimerChambre(Chambre chambre) {
 		this.lesChambres.remove(chambre);
 		Connection.execSQL("DELETE FROM avoirchambresdansreservation WHERE id_Room = " + chambre.getId());
 	}
-		
-	
 }

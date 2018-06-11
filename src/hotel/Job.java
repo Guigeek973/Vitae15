@@ -1,5 +1,7 @@
 package hotel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import hotel.Job;
@@ -11,16 +13,32 @@ public class Job {
 	private Service service;
 	private Permission permission;
 	
-	public Job(int id, String libelle, Service service, Permission permission) {
+	public Job(String libelle, Service service, Permission permission) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.service = service;
 		this.permission = permission;
 	}
 	
 	public int getId() {
-		return id;
+		int id = 0;
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM job"
+				+ " WHERE label = " + this.libelle 
+				+ " AND id_ServiceJob = " + this.service.getId() 
+				+ " AND id_TypePermission = " + this.permission.getId());
+			
+		try {
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getLibelle() {
 		return libelle;

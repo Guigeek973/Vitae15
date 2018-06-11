@@ -1,9 +1,13 @@
 package restaurant;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
+import hotel.Client;
 import main.Connection;
+import spa.PrestationSpa;
 import stock.ArticleRestaurant;
 import stock.Menu;
 
@@ -23,6 +27,7 @@ public class GestionRestaurant {
 	public List<Menu> getLesMenus() {
 		return this.lesMenus;
 	}
+	
 	public Menu getMenu(int id) {
 		Menu menuReturn = null;
 		// On boucle sur les menus pour trouver le menu avec l'id passé en paramètre
@@ -35,9 +40,11 @@ public class GestionRestaurant {
 		// On retourne le menu trouvé par la boucle
 		return menuReturn;
 	}
+	
 	public List<ReservationRestaurant> getLesReservationsRestau() {
 		return lesReservationsRestau;
 	}
+	
 	public ReservationRestaurant getReservationRestaurant(int id) {
 		ReservationRestaurant reservationRestaurant = null;
 		for (ReservationRestaurant reservation : this.lesReservationsRestau) {
@@ -47,6 +54,7 @@ public class GestionRestaurant {
 		}
 		return reservationRestaurant;
 	}
+	
 	public int getNbPetitDejJour() {
 		return 0;
 	}
@@ -55,23 +63,22 @@ public class GestionRestaurant {
 	public void setLesMenus(List<Menu> lesMenus) {
 		this.lesMenus = lesMenus;
 	}
+	
 	public void setLesReservationsRestau(List<ReservationRestaurant> lesReservationsRestau) {
 		this.lesReservationsRestau = lesReservationsRestau;
 	}
 	
-	
 	// AJOUT - SUPPRESSION LISTES
-
 	public boolean ajouterMenu(String libelle, double prix, String description) {
 		try {
 			// SI LE LABEL DU MENU N'EXISTE PAS
-			if (!Connection.existSQL("SELECT id FROM menu WHERE label = " + libelle)) {
+			if (!Connection.existSQL("SELECT id FROM menu WHERE label = '" + libelle + "'")) {
 				// On insert un nouveau menu dans la bdd
-				Connection.execSQL("INSERT INTO Menu VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
+				Connection.execSQL("INSERT INTO Menu(label, price, description) VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
 				// On récupère l'id de ce menu tout juste inséré
-				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = " + libelle).getInt("id");
+				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = '" + libelle + "'").getInt("id");
 				// On ajoute ce nouveau menu à la liste des menus
-				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
+				this.lesMenus.add(new Menu(libelle, prix, description));
 				// L'ajout a fonctionné on retourne vrai
 				return true;
 			}
@@ -87,19 +94,22 @@ public class GestionRestaurant {
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());
 	}
 	
-//	public boolean ajouterReservationRestaurant(int nbCouverts, double prix, String description) {
-//		try {
-//			if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id = " + libelle)) {
-//				Connection.execSQL("INSERT INTO Menu VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
-//				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = " + libelle).getInt("id");
-//				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
-//				return true;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return false;
-//	}
+	public boolean ajouterReservationRestaurant(Client client, Date startDate, int nbCouverts, ServiceTable service) {	
+		ReservationRestaurant rr = new ReservationRestaurant(client, startDate, nbCouverts, service);
+		if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id_Reservation = " + rr.getId() 
+				+ " AND id_ServiceTable = " + service.getId()
+				+ " AND nbTableSet = " + nbCouverts)) {
+			Connection.execSQL("INSERT INTO reservationtableset VALUES ('" + rr.getId() + "', " + service.getId() + ", '" + nbCouverts + "')");
+			this.lesReservationsRestau.add(rr);
+			return true;
+		}
+		else 
+			return false;
+	}
+	
+	public void modifierMenu(Menu menu, String libelle, double prix, String description) {
+		
+	}
 	
 	public void supprimerReservationRestaurant(ReservationRestaurant reservationRestaurant) {
 		this.lesReservationsRestau.remove(reservationRestaurant);

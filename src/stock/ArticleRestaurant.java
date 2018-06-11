@@ -1,5 +1,8 @@
 package stock;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import main.Connection;
 
 public class ArticleRestaurant {
@@ -27,9 +30,8 @@ public class ArticleRestaurant {
 		}
 	}
 	
-	public ArticleRestaurant(int id, String libelle, String description, int quantite, double prix, TYPE_FOOD typeFood) {
+	public ArticleRestaurant(String libelle, String description, int quantite, double prix, TYPE_FOOD typeFood) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.description = description;
 		this.quantite = quantite;
@@ -37,8 +39,29 @@ public class ArticleRestaurant {
 		this.typeNourriture = typeFood;
 		this.taxes = typeFood.getTaxe();
 	}
+
+	public int getId() {
+		int id = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL(
+					"SELECT id FROM article "
+					+ "WHERE label = " + this.libelle
+					+ " AND description = " + this.description
+					+ " AND quantity = " + this.quantite
+					+ " AND taxes = " + this.taxes
+					+ " AND typeFood = " + this.typeNourriture);
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
 	
-	
+	public void setId(int id) {
+		this.id = id;
+	}
 	public double getPrix() {
 		return prix;
 	}
@@ -47,9 +70,6 @@ public class ArticleRestaurant {
 	}
 	public TYPE_FOOD getTypeNourriture() {
 		return typeNourriture;
-	}
-	public int getId() {
-		return id;
 	}
 	public String getLibelle() {
 		return libelle;
@@ -66,19 +86,19 @@ public class ArticleRestaurant {
 	public void setQuantite(int quantite) {
 		if (this.quantite != quantite) {
 			this.quantite = quantite;
-			Connection.execSQL("UPDATE ArticleRestaurant SET quantity = '" + this.quantite + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET quantity = " + this.quantite);
 		}
 	}
 	public void setPrix(double prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE ArticleRestaurant SET price = '" + this.prix + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET price = " + this.prix);
 		}
 	}
 	public void setTaxes(double taxes) {
 		if (this.taxes != taxes) {
 			this.taxes = taxes;
-			Connection.execSQL("UPDATE ArticleRestaurant SET taxes = '" + this.taxes + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET taxes = " + this.taxes);
 		}
 	}
 	public void setTypeNourriture(TYPE_FOOD typeNourriture) {
@@ -99,7 +119,4 @@ public class ArticleRestaurant {
 			Connection.execSQL("UPDATE ArticleRestaurant SET description = '" + this.description + "'");
 		}
 	}
-	
-	
-	
 }

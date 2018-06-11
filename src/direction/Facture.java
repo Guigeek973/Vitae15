@@ -1,5 +1,7 @@
 package direction;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import hotel.Reservation;
@@ -29,7 +31,10 @@ public class Facture {
 		this.status = status;
 	}
 	public int getId() {
-		return id;
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getLibelle() {
 		return libelle;
@@ -81,6 +86,7 @@ public class Facture {
 	}
 	
 	
+	// chaque ticket a une chambre donc selectionnez la chambre et recuperer le client associé pour une date donné et donc sa reservation (abstract pour le facturer.
 	/*
 	public void setLesTicketsRoomService(List<TicketRoomService> lesTicketsRoomService) {
 		Connection.execSQL("DELETE FROM XXXXXXXXXX WHERE id_Bill = " + this.getId());

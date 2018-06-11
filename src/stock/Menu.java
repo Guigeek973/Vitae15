@@ -1,5 +1,7 @@
 package stock;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import main.Connection;
 
@@ -11,26 +13,40 @@ public class Menu {
 	private List<ArticleRestaurant> lesArticles;
 
 	// CONSTRUCTEUR
-	public Menu(int id, String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
+	public Menu(String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.description = description;
 		this.lesArticles = lesArticles;
 	}
 
-	public Menu(int id, String libelle, double prix, String description) {
+	public Menu(String libelle, double prix, String description) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.description = description;
 	}
 
-	// ----- GETTERS ------
 	public int getId() {
-		return id;
+		int id = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL(
+					"SELECT id FROM article "
+					+ "WHERE label = " + this.libelle
+					+ " AND description = " + this.description
+					+ " AND price = " + this.prix);
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getLibelle() {
@@ -80,16 +96,14 @@ public class Menu {
 	public void setLesArticles(List<ArticleRestaurant> lesArticles) {
 		// ON VIDE LA TABLE COMPOSER MENU DU MENU EN QUESTION
 		Connection.execSQL("DELETE FROM composermenu WHERE id_Menu = " + this.getId());
-		// On utilise la fonction ajoutArticle pour ajouter la liste passée en paramètre d'article au menu
-		ajoutArticle(lesArticles);
+		// On utilise la fonction ajoutArticle pour ajouter la liste passï¿½e en paramï¿½tre d'article au m		ajoutArticle(lesArticles);
 	}
 
 	// AJOUT
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
 		// Pour chaque article dans la liste on va faire une requï¿½te SQL pour l'inserer
 		for (ArticleRestaurant article : lesArticles) {
-			this.lesArticles.add(article);
-			Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
+			ajoutArticle(article);
 		}
 	}
 
@@ -102,15 +116,12 @@ public class Menu {
 	// SUPPRESSION
 	public void supprimerArticle(List<ArticleRestaurant> lesArticles) {
 		for (ArticleRestaurant article : lesArticles) {
-			this.lesArticles.remove(article);
-			Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = "
-					+ this.getId());
+			supprimerArticle(article);
 		}
 	}
 
-	public void supprimerArticle(Article article) {
+	public void supprimerArticle(ArticleRestaurant article) {
 		this.lesArticles.remove(article);
-		Connection.execSQL(
-				"DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
+		Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 	}
 }
