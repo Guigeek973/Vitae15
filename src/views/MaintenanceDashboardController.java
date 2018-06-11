@@ -168,5 +168,83 @@ public class MaintenanceDashboardController {
 		}
 		return okClicked;
     }
+    
+    /**
+     * Called when the user clicks Direction.
+     * @return 
+     * @throws IOException 
+     */
+    @FXML
+    private boolean goToStockGestion() throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/MaintenanceDashboardStockGestion.fxml"));
+		Pane rootLayout;
+		try {
+			rootLayout = (Pane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			DirectorDashboardController controller = loader.getController();
+	        loader.setController(controller);
+	        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        primaryStage.setScene(scene);
+	        controller.setStage(primaryStage);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return okClicked;
+    }
+    
+    /**
+     * Called when the user clicks Direction.
+     * @return 
+     * @throws IOException 
+     */
+    @FXML
+    private boolean goToStocks() throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/MaintenanceDashboardStocks.fxml"));
+		Pane rootLayout;
+		try {
+			rootLayout = (Pane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			DirectorDashboardController controller = loader.getController();
+	        loader.setController(controller);
+	        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        primaryStage.setScene(scene);
+	        controller.setStage(primaryStage);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return okClicked;
+    }
+    
+    /**
+     * Called when the user clicks Direction.
+     * @return 
+     * @throws IOException 
+     */
+    @FXML
+    private boolean goToTickets() throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/MaintenanceDashboardTickets.fxml"));
+		Pane rootLayout;
+		try {
+			rootLayout = (Pane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			DirectorDashboardController controller = loader.getController();
+	        loader.setController(controller);
+	        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        primaryStage.setScene(scene);
+	        controller.setStage(primaryStage);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return okClicked;
+    }
 
 }
