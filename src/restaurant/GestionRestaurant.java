@@ -1,9 +1,11 @@
 package restaurant;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import main.Connection;
+import spa.PrestationSpa;
 import stock.ArticleRestaurant;
 import stock.Menu;
 
@@ -23,6 +25,7 @@ public class GestionRestaurant {
 	public List<Menu> getLesMenus() {
 		return this.lesMenus;
 	}
+	
 	public Menu getMenu(int id) {
 		Menu menuReturn = null;
 		// On boucle sur les menus pour trouver le menu avec l'id passé en paramètre
@@ -35,9 +38,11 @@ public class GestionRestaurant {
 		// On retourne le menu trouvé par la boucle
 		return menuReturn;
 	}
+	
 	public List<ReservationRestaurant> getLesReservationsRestau() {
 		return lesReservationsRestau;
 	}
+	
 	public ReservationRestaurant getReservationRestaurant(int id) {
 		ReservationRestaurant reservationRestaurant = null;
 		for (ReservationRestaurant reservation : this.lesReservationsRestau) {
@@ -55,13 +60,12 @@ public class GestionRestaurant {
 	public void setLesMenus(List<Menu> lesMenus) {
 		this.lesMenus = lesMenus;
 	}
+	
 	public void setLesReservationsRestau(List<ReservationRestaurant> lesReservationsRestau) {
 		this.lesReservationsRestau = lesReservationsRestau;
 	}
 	
-	
 	// AJOUT - SUPPRESSION LISTES
-
 	public boolean ajouterMenu(String libelle, double prix, String description) {
 		try {
 			// SI LE LABEL DU MENU N'EXISTE PAS
@@ -87,7 +91,6 @@ public class GestionRestaurant {
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());
 	}
 	
-	  
 	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {
 		// TODO : ajouterReservationRestaurant
 		
@@ -104,6 +107,10 @@ public class GestionRestaurant {
 //			e.printStackTrace();
 //		}
 return false;
+	}
+	
+public void modifierMenu(Menu menu, String libelle, double prix, String description) {
+		
 	}
 	
 	public void supprimerReservationRestaurant(ReservationRestaurant reservationRestaurant) {
