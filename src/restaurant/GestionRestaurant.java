@@ -52,6 +52,7 @@ public class GestionRestaurant {
 		}
 		return reservationRestaurant;
 	}
+	
 	public int getNbPetitDejJour() {
 		return 0;
 	}
@@ -91,21 +92,18 @@ public class GestionRestaurant {
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());
 	}
 	
-	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {
-		// TODO : ajouterReservationRestaurant
-		
-		// AJOUTER UNE RESERVATION
-//		this.lesReservationsRestau.add(new ReservationRestaurant(nbCouverts, null, null, nbCouverts, service, null, null));
-//		try {
-//			if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id = " + libelle)) {
-//				Connection.execSQL("INSERT INTO Menu VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
-//				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = " + libelle).getInt("id");
-//				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
-//				return true;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {		
+		this.lesReservationsRestau.add(new ReservationRestaurant(nbCouverts, null, null, nbCouverts, service, null, null));
+		try {
+			if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id = " + libelle)) {
+				Connection.execSQL("INSERT INTO Menu VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
+				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = " + libelle).getInt("id");
+				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 return false;
 	}
 	
