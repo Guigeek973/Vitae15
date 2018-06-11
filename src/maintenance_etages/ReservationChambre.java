@@ -22,19 +22,18 @@ public class ReservationChambre extends Reservation {
 	}
 	
 	public int getId() {
-		ResultSet rs = Connection.getResultSetSQL(
-				"SELECT id FROM reservationtableset "
-				+ "WHERE id_Reservation = " + super.getId()
-				+ " AND endDate = " + this.endDate);
-			
+		int id = 0;
 		try {
-			rs.getInt(1);
+			id = Connection.getResultSetSQL(
+					"SELECT id FROM reservationtableset "
+					+ "WHERE id_Reservation = " + super.getId()
+					+ " AND endDate = " + this.endDate).getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.setId(id);
-		return id;
+		return this.id;
 	}
 	public void setId(int id) {
 		this.id = id;

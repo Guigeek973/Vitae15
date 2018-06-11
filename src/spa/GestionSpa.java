@@ -65,20 +65,14 @@ public class GestionSpa {
 	
 	// AJOUT - SUPPRESSION LISTES
 	public boolean addPrestationSpa(String libelle, double prix, Date duree) {
-		try {
-			// SI LE LABEL DE LA PRESTATION N'EXISTE PAS
-			if (!Connection.existSQL("SELECT id FROM prestation WHERE label = '" + libelle + "'")) {
-				// On insert une nouvelle prestation dans la bdd
-				Connection.execSQL("INSERT INTO Prestation(label, price, duration) VALUES ('" + libelle + "', " + prix + ", '" + duree + "')");
-				// On récupère l'id de cette prestation tout juste inséré
-				int idNewPrestationSpa = Connection.getResultSetSQL("SELECT id FROM prestation WHERE label = '" + libelle + "'").getInt("id");
-				// On ajoute cette prestation à la liste des prestations
-				this.lesPrestationsSpa.add(new PrestationSpa(idNewPrestationSpa, libelle, prix, duree));
-				// L'ajout a fonctionné on retourne vrai
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		// SI LE LABEL DE LA PRESTATION N'EXISTE PAS
+		if (!Connection.existSQL("SELECT id FROM prestation WHERE label = '" + libelle + "'")) {
+			// On insert une nouvelle prestation dans la bdd
+			Connection.execSQL("INSERT INTO Prestation(label, price, duration) VALUES ('" + libelle + "', " + prix + ", '" + duree + "')");
+			// On ajoute cette prestation à la liste des prestations
+			this.lesPrestationsSpa.add(new PrestationSpa(libelle, prix, duree));
+			// L'ajout a fonctionné on retourne vrai
+			return true;
 		}
 		// Si l'ajout n'a pas fonctionné on retourne faux
 		return false;

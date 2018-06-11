@@ -1,5 +1,8 @@
 package maintenance_etages;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import main.Connection;
 
 public class TypeChambre {
@@ -24,9 +27,8 @@ public class TypeChambre {
 		}
 	}
 
-	public TypeChambre(int id, String libelle, float prix, TAXES tax, int places) {
+	public TypeChambre(String libelle, float prix, TAXES tax, int places) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.taxes = tax.getTaxe();
@@ -34,7 +36,23 @@ public class TypeChambre {
 	}
 
 	public int getId() {
-		return id;
+		int id = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM prestation"
+					+ " WHERE label = " + this.libelle
+					+ " AND price = " + this.prix
+					+ " AND taxes = " + this.taxes
+					+ " AND nbPlaces = " + this.places);
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getLibelle() {
 		return libelle;
