@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import hotel.Client;
 import main.Connection;
 import spa.PrestationSpa;
 import stock.ArticleRestaurant;
@@ -16,8 +17,7 @@ public class GestionRestaurant {
 	// CONSTRUCTEUR
 	public GestionRestaurant(List<Menu> lesMenus, List<ReservationRestaurant> lesReservationsRestau) {
 		super();
-		// On peut utiliser les setters car il n'ya pas de requête SQL dans les setters de gestion
-		setLesMenus(lesMenus);
+		// On peut utiliser les setters car il n'ya pas de requï¿½te SQL dans les setters de gestio		setLesMenus(lesMenus);
 		setLesReservationsRestau(lesReservationsRestau);
 	}
 	
@@ -28,14 +28,14 @@ public class GestionRestaurant {
 	
 	public Menu getMenu(int id) {
 		Menu menuReturn = null;
-		// On boucle sur les menus pour trouver le menu avec l'id passé en paramètre
+		// On boucle sur les menus pour trouver le menu avec l'id passï¿½ en paramï¿½tre
 		for (Menu menu : this.lesMenus) {
 			if (menu.getId() == id) {
-				// On a trouvé le menu
+				// On a trouvï¿½ le menu
 				menuReturn = this.lesMenus.get(menu.getId());
 			}
 		}
-		// On retourne le menu trouvé par la boucle
+		// On retourne le menu trouvï¿½ par la boucle
 		return menuReturn;
 	}
 	
@@ -73,18 +73,14 @@ public class GestionRestaurant {
 			if (!Connection.existSQL("SELECT id FROM menu WHERE label = '" + libelle + "'")) {
 				// On insert un nouveau menu dans la bdd
 				Connection.execSQL("INSERT INTO Menu(label, price, description) VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
-				// On récupère l'id de ce menu tout juste inséré
-				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = '" + libelle + "'").getInt("id");
-				// On ajoute ce nouveau menu à la liste des menus
-				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
-				// L'ajout a fonctionné on retourne vrai
-				return true;
+				// On rï¿½cupï¿½re l'id de ce menu tout juste ins				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = '" + libelle + "'").getInt("id");
+				// On ajoute ce nouveau menu ï¿½ la liste des menu				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
+				// L'ajout a fonctionnï¿½ on retourne vra				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// Si l'ajout n'a pas fonctionné on retourne faux
-		return false;
+		// Si l'ajout n'a pas fonctionnï¿½ on retourne fau		return false;
 	}
 	
 	public void supprimerMenu(Menu menu) {
