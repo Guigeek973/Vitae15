@@ -18,11 +18,12 @@ import stock.Menu;
 public class GestionReservation {
 	private List<Reservation> lesReservations;
 	
-	public boolean prendreReservation(Client client, Date startDate, Date endDate) throws SQLException {
+	public boolean prendreReservation(Client client, Date startDate, Date endDate, Chambre chambre) throws SQLException {
 		if (!Connection.existSQL("SELECT id FROM reservationroom WHERE client = " + client + "AND startDate =" + startDate + "AND endDate = " + endDate)) {
 			Connection.execSQL("INSERT INTO reservationroom VALUES(" + client + "," + startDate + "," + endDate +")" );
 			int idReservationRoom = Connection.getResultSetSQL("SELECT id FROM reservationroom WHERE client = " + client + "AND startDate =" + startDate + "AND endDate = " + endDate).getInt("id");
-			this.lesReservations.add(new ReservationChambre(idReservationRoom, client, startDate, endDate));
+			/*Plusieurs choix chambres*/
+			/*this.lesReservations.add(new ReservationChambre(idReservationRoom, client, startDate, endDate, Chambre chambre));*/
 			return true;
 		}
 		return false;
