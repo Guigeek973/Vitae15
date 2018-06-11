@@ -76,7 +76,7 @@ public class Hotel {
 			if (!Connection.existSQL("SELECT id FROM room WHERE label = '" + label + "'")) {
 				Connection.execSQL("INSERT INTO room(label, status, isAvailable, id_RoomType) VALUES ('" + label + "', '" + etatChambre + "', " + isAvailable + ", '"+typeChambre.getId()+"')");
 				int idNewRoom = Connection.getResultSetSQL("SELECT id FROM room WHERE label = '" + label + "'").getInt("id");
-				this.lesChambres.add(new Chambre(idNewRoom, typeChambre, label, etatChambre, isAvailable));
+				this.lesChambres.add(new Chambre(typeChambre, label, etatChambre, isAvailable));
 				return true;
 			}
 		} catch (SQLException e) {
