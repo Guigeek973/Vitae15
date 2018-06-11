@@ -25,7 +25,7 @@ public class ServiceTable {
 			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM servicetable"
 					+ " WHERE nbRestant = " + this.nbCouvertsRestant
 					+ " AND num_service = " + this.numero
-					+ " AND dateTime = " + this.date);
+					+ " AND dateTime = '" + this.date + "'");
 			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -57,14 +57,14 @@ public class ServiceTable {
 		
 		if (this.nbCouvertsRestant != nbCouvertsRestant) {
 			this.nbCouvertsRestant = nbCouvertsRestant;
-			Connection.execSQL("UPDATE servicetable SET nbRestant = '" + this.nbCouvertsRestant + "'");
+			Connection.execSQL("UPDATE servicetable SET nbRestant = " + this.nbCouvertsRestant);
 		}
 	}
 	public void setNumero(int numero) {
 		
 		if (this.numero != numero) {
 			this.numero = numero;
-			Connection.execSQL("UPDATE servicetable SET num_service = '" + this.numero + "'");
+			Connection.execSQL("UPDATE servicetable SET num_service = " + this.numero);
 		}
 	}
 	public void setDate(Date date) {

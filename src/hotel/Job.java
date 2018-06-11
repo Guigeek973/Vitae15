@@ -2,8 +2,6 @@ package hotel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-
 import hotel.Job;
 import main.Connection;
 
