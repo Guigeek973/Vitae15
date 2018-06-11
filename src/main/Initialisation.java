@@ -23,7 +23,7 @@ public class Initialisation {
 		ResultSet rs = Connection.getResultSetSQL(reqClients);
 		try {
 			while (rs.next()) {
-				lesClients.add(new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+				lesClients.add(new Client(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

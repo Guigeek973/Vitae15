@@ -1,5 +1,8 @@
 package hotel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import main.Connection;
 
 public class Client {
@@ -11,9 +14,8 @@ public class Client {
 	private String tel;
 	private Boolean isExternal;
 	
-	public Client(int id, String nom, String prenom, String adresse, String cP, String tel) { //Client interne
+	public Client(String nom, String prenom, String adresse, String cP, String tel) { //Client interne
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
@@ -22,17 +24,35 @@ public class Client {
 		this.isExternal = false;
 	}
 	
-	public Client(int id, String nom, String prenom, String tel) { //Client externe
+	public Client(String nom, String prenom, String tel) { //Client externe
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.tel = tel;
 		this.isExternal = true;
+		this.CP = "";
+		this.adresse = "";
 	}
 	
 	public int getId() {
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM client "
+				+ "WHERE nom = " + this.nom 
+				+ " AND prenom = " + this.prenom 
+				+ " AND tel = " + this.tel 
+				+ " AND postal_code = " + this.CP
+				+ " AND adress = " + this.adresse);
+		try {
+			rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
 		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNom() {
 		return nom;
@@ -52,7 +72,6 @@ public class Client {
 	public Boolean getIsExternal() {
 		return isExternal;
 	}
-	
 	
 	
 	public void setNom(String nom) {

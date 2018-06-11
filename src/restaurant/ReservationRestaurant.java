@@ -1,5 +1,7 @@
 package restaurant;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -11,23 +13,36 @@ import stock.ArticleRestaurant;
 import stock.Menu;
 
 public class ReservationRestaurant extends Reservation {
+	private int id;
 	private int nbCouverts;
 	private ServiceTable service;
 	private List<ArticleRestaurant> lesPlats;
 	private List<Menu> lesMenus;
 	
-	public ReservationRestaurant(int id, Client client, Date startDate, int nbCouverts, ServiceTable service, List<ArticleRestaurant> plats, List<Menu> menus) {
-		super(id, client, startDate);
+	public ReservationRestaurant(Client client, Date startDate, int nbCouverts, ServiceTable service) {
+		super(client, startDate);
 		this.nbCouverts = nbCouverts;
 		this.service = service;
-		this.lesPlats = plats;
-		this.lesMenus = menus;
 	}
 	
-	public ReservationRestaurant(int id, Client client, Date startDate, int nbCouverts, ServiceTable service) {
-		super(id, client, startDate);
-		this.nbCouverts = nbCouverts;
-		this.service = service;
+	public int getId() {
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM reservationtableset "
+				+ "WHERE nbTableSet = " + this.nbCouverts 
+				+ " AND id_ServiceTable = " + this.service.getId() + " AND id_Reservation = " 
+				+ super.getId());
+			
+		try {
+			rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getNbCouverts() {

@@ -1,18 +1,11 @@
-/maintenance_etages/
+/application/
+/views/
+/controllers/
+/direction/
 /hotel/
-<<<<<<< HEAD
-/direction/
-/spa/
-=======
-<<<<<<< HEAD
-/restaurant/
-/direction/
-/spa/
-/stock/
-=======
 /main/
+/maintenance_etages/
+/models/
 /restaurant/
+/spa/
 /stock/
-/direction/
->>>>>>> dév
->>>>>>> dév
