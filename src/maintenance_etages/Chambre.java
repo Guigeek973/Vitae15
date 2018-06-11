@@ -15,9 +15,8 @@ public class Chambre {
 		SALE,
 		PROPRE
 	}
-	public Chambre(int id, TypeChambre typeChambre, String libelle, ETAT_CHAMBRE etatChambre, Boolean isOccuped) {
+	public Chambre(TypeChambre typeChambre, String libelle, ETAT_CHAMBRE etatChambre, Boolean isOccuped) {
 		super();
-		this.id = id;
 		this.typeChambre = typeChambre;
 		this.libelle = libelle;
 		this.etatChambre = etatChambre;
@@ -26,7 +25,7 @@ public class Chambre {
 	public int getId() {
 		int id = 0;
 		try {
-			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM prestation"
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM room"
 					+ " WHERE label = " + this.libelle
 					+ " AND id_RoomType = " + this.typeChambre.getId()
 					+ " AND isAvailable = " + this.isOccuped

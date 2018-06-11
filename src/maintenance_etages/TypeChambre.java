@@ -38,7 +38,7 @@ public class TypeChambre {
 	public int getId() {
 		int id = 0;
 		try {
-			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM prestation"
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM roomtype"
 					+ " WHERE label = " + this.libelle
 					+ " AND price = " + this.prix
 					+ " AND taxes = " + this.taxes

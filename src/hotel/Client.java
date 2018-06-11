@@ -35,6 +35,7 @@ public class Client {
 	}
 	
 	public int getId() {
+		int id= 0;
 		ResultSet rs = Connection.getResultSetSQL(
 				"SELECT id FROM client "
 				+ "WHERE nom = " + this.nom 
@@ -43,13 +44,13 @@ public class Client {
 				+ " AND postal_code = " + this.CP
 				+ " AND adress = " + this.adresse);
 		try {
-			rs.getInt(1);
+			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.setId(id);
-		return id;
+		return this.id;
 	}
 	public void setId(int id) {
 		this.id = id;

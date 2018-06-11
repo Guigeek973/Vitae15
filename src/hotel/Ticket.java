@@ -1,5 +1,7 @@
 package hotel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 import main.Connection;
@@ -18,9 +20,8 @@ public class Ticket {
 		EN_COURS,
 		VALIDE
 	}
-	public Ticket(int id, String titre, String description, STATUT_TICKET statut, Service service) {
+	public Ticket(String titre, String description, STATUT_TICKET statut, Service service) {
 		super();
-		this.id = id;
 		this.titre = titre;
 		this.description = description;
 		this.statut = statut;
@@ -28,7 +29,26 @@ public class Ticket {
 	}
 	
 	public int getId() {
-		return id;
+		int id = 0;
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM ticket"
+				+ " WHERE details = " + this.description 
+				+ " AND status = " + this.statut
+				+ " AND title = " + this.titre
+				+ " AND id_ServiceJob = " + this.service.getId()
+				+ " AND created_at  = " + this.created_at);
+			
+		try {
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getTitre() {
 		return titre;

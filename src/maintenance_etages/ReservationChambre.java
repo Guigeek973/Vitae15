@@ -25,7 +25,7 @@ public class ReservationChambre extends Reservation {
 		int id = 0;
 		try {
 			id = Connection.getResultSetSQL(
-					"SELECT id FROM reservationtableset "
+					"SELECT id FROM reservationroom "
 					+ "WHERE id_Reservation = " + super.getId()
 					+ " AND endDate = " + this.endDate).getInt(1);
 		} catch (SQLException e) {
