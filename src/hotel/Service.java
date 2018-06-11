@@ -18,7 +18,6 @@ public class Service {
 		this.lesEmployes = lesEmployes;
 	}
 	
-
 	public int getId() {
 		int id = 0;
 		ResultSet rs = Connection.getResultSetSQL(
@@ -34,6 +33,9 @@ public class Service {
 		this.setId(id);
 		return this.id;
 	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNom() {
 		return nom;
 	}
@@ -43,10 +45,7 @@ public class Service {
 	
 	
 	public void setNom(String nom) {
-		
-		
-		if(this.nom != nom) 
-		{
+		if(this.nom != nom) {
 			this.nom = nom;
 			Connection.execSQL("UPDATE servicejob SET laber = '" + this.nom + "'");
 		}
@@ -54,7 +53,5 @@ public class Service {
 	public void setLesEmployes(List<Personnel> lesEmployes) {
 		this.lesEmployes = lesEmployes;
 	}
-	
-	
 	
 }
