@@ -7,9 +7,8 @@ import hotel.Client;
 
 import java.sql.SQLException;
 import main.Connection;
-import restaurant.ReservationRestaurant;
-import restaurant.ServiceTable;
-import stock.Menu;
+import spa.ReservationSpa;
+import spa.PrestationSpa;
 
 public class GestionSpa {
 	private List<PrestationSpa> lesPrestationsSpa;
@@ -85,26 +84,13 @@ public class GestionSpa {
 		return false;
 	}
 	
-	public void deletePrestationSpa(PrestationSpa p) {
-		this.lesPrestationsSpa.remove(p);
-		Connection.execSQL("DELETE FROM prestation WHERE id = " + p.getId());
+	public void deletePrestationSpa(PrestationSpa prestationSpa) {
+		this.lesPrestationsSpa.remove(prestationSpa);
+		Connection.execSQL("DELETE FROM prestation WHERE id = " + prestationSpa.getId());
 	}
 	
-	public boolean ajouterReservationSpa(Client client, Date startDate, PrestationSpa prestation) {
-		// TODO : ajouterReservationSpa
-		
-		//AJOUTER UNE RESERVATION
-		//this.lesReservationsSpa.add(new ReservationSpa(Client client, Date startDate, PrestationSpa prestationspa));
-		//try {
-		//	if (!Connection.existSQL("SELECT id FROM reservationspa WHERE id = " + id)) {
-		//		Connection.execSQL("INSERT INTO Prestation VALUES ('" + libelle + "', " + prix + ", '" + duree + "')");
-		//		int idNewPrestationSpa = Connection.getResultSetSQL("SELECT id FROM prestation WHERE label = " + libelle).getInt("id");
-		//		this.lesPrestationsSpa.add(new PrestationSpa(idNewPrestationSpa, libelle, prix, duree));
-				//		return true;
-		//	}
-		//} catch (SQLException e) {
-			//	e.printStackTrace();
-		//}
+	public boolean addReservationSpa(Client client, Date startDate, PrestationSpa prestationSpa) {
+
 		return false;
 
 	}
