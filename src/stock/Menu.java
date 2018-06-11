@@ -80,16 +80,14 @@ public class Menu {
 	public void setLesArticles(List<ArticleRestaurant> lesArticles) {
 		// ON VIDE LA TABLE COMPOSER MENU DU MENU EN QUESTION
 		Connection.execSQL("DELETE FROM composermenu WHERE id_Menu = " + this.getId());
-		// On utilise la fonction ajoutArticle pour ajouter la liste passée en paramètre d'article au menu
-		ajoutArticle(lesArticles);
+		// On utilise la fonction ajoutArticle pour ajouter la liste passï¿½e en paramï¿½tre d'article au m		ajoutArticle(lesArticles);
 	}
 
 	// AJOUT
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
 		// Pour chaque article dans la liste on va faire une requï¿½te SQL pour l'inserer
 		for (ArticleRestaurant article : lesArticles) {
-			this.lesArticles.add(article);
-			Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");
+			ajoutArticle(article);
 		}
 	}
 
@@ -102,15 +100,12 @@ public class Menu {
 	// SUPPRESSION
 	public void supprimerArticle(List<ArticleRestaurant> lesArticles) {
 		for (ArticleRestaurant article : lesArticles) {
-			this.lesArticles.remove(article);
-			Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = "
-					+ this.getId());
+			supprimerArticle(article);
 		}
 	}
 
-	public void supprimerArticle(Article article) {
+	public void supprimerArticle(ArticleRestaurant article) {
 		this.lesArticles.remove(article);
-		Connection.execSQL(
-				"DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
+		Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 	}
 }

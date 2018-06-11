@@ -2,6 +2,8 @@ package hotel;
 
 import java.util.Date;
 
+import main.Connection;
+
 public class Ticket {
 	private int id;
 	private String titre;
@@ -24,6 +26,7 @@ public class Ticket {
 		this.statut = statut;
 		this.service = service;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -48,11 +51,13 @@ public class Ticket {
 	public Service getService() {
 		return service;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
+	
 	public void setTitre(String titre) {
-		this.titre = titre;
+		if (this.titre != titre) {
+			this.titre = titre;
+			Connection.execSQL("UPDATE ticket SET title = '" + this.titre + "'");
+		}
 	}
 	public void setDescription(String description) {
 		this.description = description;

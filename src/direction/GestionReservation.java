@@ -23,7 +23,7 @@ public class GestionReservation {
 	
 	public boolean prendreReservation(Client client, Date startDate, Date endDate) throws SQLException { //CHAMBRE
 		int idReservation = 0;
-		//si une reservation avec ce client et cette startDate existe alors on la prend en reference sinon on la crée
+		//si une reservation avec ce client et cette startDate existe alors on la prend en reference sinon on la crï¿½e
 		if (Connection.existSQL("SELECT id FROM reservation"
 				+ " WHERE id_Client = " + client.getId()
 				+ " AND startDate = " + startDate)) {

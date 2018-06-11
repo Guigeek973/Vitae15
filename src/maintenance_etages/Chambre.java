@@ -40,7 +40,7 @@ public class Chambre {
 	public void setTypeChambre(TypeChambre typeChambre) {
 		if (this.typeChambre != typeChambre) {
 			this.typeChambre = typeChambre;
-			Connection.execSQL("UPDATE room SET id_RoomType = '" + typeChambre.getId() + "'");
+			Connection.execSQL("UPDATE room SET id_RoomType = " + typeChambre.getId());
 		}
 	}
 	public void setLibelle(String libelle) {
@@ -60,10 +60,7 @@ public class Chambre {
 	public void setIsOccuped(Boolean isOccuped) {
 		if (this.isOccuped != isOccuped) {
 			this.isOccuped = isOccuped;
-			Connection.execSQL("UPDATE room SET isAvailable = '" + isOccuped + "'");
+			Connection.execSQL("UPDATE room SET isAvailable = " + isOccuped);
 		}
 	}
-	
-	
-	
 }
