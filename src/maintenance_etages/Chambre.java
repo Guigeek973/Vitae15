@@ -9,8 +9,8 @@ public class Chambre {
 	private ETAT_CHAMBRE etatChambre;
 	private Boolean isOccuped;
 	public enum ETAT_CHAMBRE {
-		OCCUPE,
-		LIBRE
+		SALE,
+		PROPRE
 	}
 	public Chambre(int id, TypeChambre typeChambre, String libelle, ETAT_CHAMBRE etatChambre, Boolean isOccuped) {
 		super();
