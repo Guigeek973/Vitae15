@@ -10,7 +10,7 @@ public class ReservationSpa extends Reservation {
 	PrestationSpa prestation;
 	
 	public ReservationSpa(int id, Client client, Date startDate, PrestationSpa prestation) {
-		super(id, client, startDate);
+		super(client, startDate);
 		this.prestation = prestation;
 	}
 

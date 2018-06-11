@@ -57,7 +57,7 @@ public class Hotel {
 				// On récupère l'id de ce client tout juste inséré
 				int idNewClient = Connection.getResultSetSQL("SELECT id FROM client WHERE firstname = '" + nom + "' AND lastname = '"+ prenom + "' AND tel = '" + tel + "'").getInt("id");
 				// On ajoute ce nouveau client à la liste des clients
-				this.lesClients.add(new Client(idNewClient, nom, prenom, tel));
+				this.lesClients.add(new Client(nom, prenom, tel));
 				// L'ajout a fonctionné on retourne vrai
 				return true;
 			}

@@ -1,5 +1,7 @@
 package hotel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 import main.Connection;
@@ -15,15 +17,30 @@ public abstract class Reservation {
 		EN_COURS,
 		VALIDE
 	}
-	public Reservation(int id, Client client, Date startDate) {
+	public Reservation(Client client, Date startDate) {
 		super();
-		this.id = id;
 		this.client = client;
 		this.startDate = startDate;
 		this.statut = STATUT_RESERVATION.EN_COURS;
 	}
 	public int getId() {
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM reservation "
+				+ "WHERE reservation.id_Client = " + this.client 
+				+ " AND startDate = " + this.startDate + " AND created_at = " 
+				+ this.created_at + " AND updated_at = " + this.modified_at
+				+ " AND status = " + this.statut);
+		try {
+			rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
 		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Client getClient() {
 		return client;

@@ -1,11 +1,14 @@
 package direction;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import hotel.Client;
 import hotel.Reservation;
+import hotel.Reservation.STATUT_RESERVATION;
 import main.Connection;
 import maintenance_etages.Chambre;
 import maintenance_etages.ReservationChambre;
@@ -18,26 +21,78 @@ import stock.Menu;
 public class GestionReservation {
 	private List<Reservation> lesReservations;
 	
-	public boolean prendreReservation(Client client, Date startDate, Date endDate, Chambre chambre) throws SQLException {
-		if (!Connection.existSQL("SELECT id FROM reservationroom WHERE client = " + client + "AND startDate =" + startDate + "AND endDate = " + endDate)) {
-			Connection.execSQL("INSERT INTO reservationroom VALUES(" + client + "," + startDate + "," + endDate +")" );
-			int idReservationRoom = Connection.getResultSetSQL("SELECT id FROM reservationroom WHERE client = " + client + "AND startDate =" + startDate + "AND endDate = " + endDate).getInt("id");
-			/*Plusieurs choix chambres*/
-			/*this.lesReservations.add(new ReservationChambre(idReservationRoom, client, startDate, endDate, Chambre chambre));*/
+	public int doesClientHasReservation(Client client, Date startDate) {
+		int idReservation = 0;
+		if (Connection.existSQL("SELECT id FROM reservation"
+				+ " WHERE id_Client = " + client.getId()
+				+ " AND startDate = " + startDate)) {
+			try {
+				idReservation = Connection.getResultSetSQL("SELECT id FROM reservation"
+						+ " WHERE id_Client = " + client.getId()
+						+ " AND startDate = " + startDate).getInt(1);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+		    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		    
+			Connection.execSQL("INSERT INTO reservation VALUES(" + sdf.format(timestamp) + ", "  + startDate + ", " +  STATUT_RESERVATION.EN_COURS + ", " +  client.getId() + ")" );
+			try {
+				idReservation = Connection.getResultSetSQL("SELECT id FROM reservation"
+						+ " WHERE id_Client = " + client.getId()
+						+ " AND startDate = " + startDate
+						+ " AND created_at = " + sdf.format(timestamp)
+						+ " AND status = " + STATUT_RESERVATION.EN_COURS).getInt(1);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return idReservation;
+	}
+	
+	public boolean prendreReservation(Client client, Date startDate, Date endDate) throws SQLException { //CHAMBRE
+		int idReservation = doesClientHasReservation(client, startDate);
+		
+		if (!Connection.existSQL("SELECT id FROM reservation"
+				+ " JOIN reservationroom"
+				+ " ON reservationroom.id_Reservation = reservation.id"
+				+ " WHERE id_Client = " + client.getId()
+				+ " AND startDate = " + startDate 
+				+ " AND endDate = " + endDate)) {
+
+			Connection.execSQL("INSERT INTO reservationroom VALUES(" +  endDate + ", " + idReservation + ")" );
+			this.lesReservations.add(new ReservationChambre(client, startDate, endDate));
 			return true;
 		}
 		return false;
 	}
-	public boolean prendreReservation(Client client, Date startDate, int nbCouverts, ServiceTable service) throws SQLException {
+	public boolean prendreReservation(Client client, Date startDate, int nbCouverts, ServiceTable service) throws SQLException { //TABLE
+		int idReservation = doesClientHasReservation(client, startDate);
+		
+		if (!Connection.existSQL("SELECT id FROM reservation"
+				+ " JOIN reservationtableset"
+				+ " ON reservationroom.id_Reservation = reservation.id"
+				+ " WHERE id_Client = " + client.getId()
+				+ " AND startDate = " + startDate)) {
+
+			Connection.execSQL("INSERT INTO reservationtableset VALUES(" +  endDate + ", " + idReservation + ")" );
+			this.lesReservations.add(new ReservationRestaurant(client, startDate, idReservation, service.getId()));
+			return true;
+		}
+		return false;
 		if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE client = " + client + "AND startDate =" + startDate + "AND nbTableSet = " + nbCouverts + "AND id_ServiceTable = " + service.getId())) {
 			Connection.execSQL("INSERT INTO reservationtableset VALUES(" + client + "," + startDate + "," + nbCouverts + "," + service.getId() + ")" );
-			int idReservationResto = Connection.getResultSetSQL("SELECT id FROM reservationtableset WHERE client = " + client + "AND startDate =" + startDate + "AND nbTableSet = " + nbCouverts + "AND id_ServiceTable = " + service.getId()).getInt("id");
-			this.lesReservations.add(new ReservationRestaurant(idReservationResto, client, startDate, nbCouverts, service));
+			this.lesReservations.add(new ReservationRestaurant(client, startDate, nbCouverts, service));
 			return true;
 		}
 		return false;
 	}
-	public boolean prendreReservation(Client client, Date startDate, PrestationSpa prestation) throws SQLException {
+	public boolean prendreReservation(Client client, Date startDate, PrestationSpa prestation) throws SQLException { //SPA
+		int idReservation = doesClientHasReservation(client, startDate);
 		if (!Connection.existSQL("SELECT id FROM reservationspa WHERE client = " + client + "AND startDate =" + startDate + "AND id_Prestation = " + prestation.getId())) {
 			Connection.execSQL("INSERT INTO reservationspa VALUES(" + client + "," + startDate + "," + prestation.getId() + ")" );
 			int idReservationResto = Connection.getResultSetSQL("SELECT id FROM reservationspa WHERE client = " + client + "AND startDate =" + startDate + "AND id_Prestation = " + prestation.getId()).getInt("id");

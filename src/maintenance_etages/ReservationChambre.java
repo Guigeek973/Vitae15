@@ -1,5 +1,7 @@
 package maintenance_etages;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -10,18 +12,32 @@ import stock.ArticleRestaurant;
 import stock.Menu;
 
 public class ReservationChambre extends Reservation {
+	private int id;
 	private List<Chambre> lesChambres;
 	private Date endDate;
 	
-	public ReservationChambre(int id, Client client, Date startDate, Date endDate, List<Chambre> chambres) {
-		super(id, client, startDate);
-		this.lesChambres = chambres;
+	public ReservationChambre(Client client, Date startDate, Date endDate) {
+		super(client, startDate);
 		this.endDate = endDate;
 	}
-	public ReservationChambre(int id, Client client, Date startDate, Date endDate, Chambre chambre) {
-		super(id, client, startDate);
-		this.endDate = endDate;
-		this.lesChambres.add(chambre);
+	
+	public int getId() {
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM reservationtableset "
+				+ "WHERE id_Reservation = " + super.getId()
+				+ " AND endDate = " + this.endDate);
+			
+		try {
+			rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public List<Chambre> getLesChambres() {

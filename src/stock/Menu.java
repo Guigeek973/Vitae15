@@ -80,8 +80,7 @@ public class Menu {
 	public void setLesArticles(List<ArticleRestaurant> lesArticles) {
 		// ON VIDE LA TABLE COMPOSER MENU DU MENU EN QUESTION
 		Connection.execSQL("DELETE FROM composermenu WHERE id_Menu = " + this.getId());
-		// On utilise la fonction ajoutArticle pour ajouter la liste passée en paramètre d'article au menu
-		ajoutArticle(lesArticles);
+		// On utilise la fonction ajoutArticle pour ajouter la liste passï¿½e en paramï¿½tre d'article au m		ajoutArticle(lesArticles);
 	}
 
 	// AJOUT
