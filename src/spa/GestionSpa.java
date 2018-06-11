@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import hotel.Client;
-
-import java.sql.SQLException;
 import main.Connection;
 import spa.ReservationSpa;
 import spa.PrestationSpa;

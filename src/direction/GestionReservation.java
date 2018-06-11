@@ -11,13 +11,11 @@ import hotel.Client;
 import hotel.Reservation;
 import hotel.Reservation.STATUT_RESERVATION;
 import main.Connection;
-import maintenance_etages.Chambre;
 import maintenance_etages.ReservationChambre;
 import restaurant.ReservationRestaurant;
 import restaurant.ServiceTable;
 import spa.PrestationSpa;
 import spa.ReservationSpa;
-import stock.Menu;
 
 public class GestionReservation {
 	private List<Reservation> lesReservations;

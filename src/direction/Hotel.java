@@ -9,8 +9,6 @@ import main.Connection;
 import maintenance_etages.Chambre;
 import maintenance_etages.ReservationChambre;
 import maintenance_etages.TypeChambre;
-import maintenance_etages.Chambre.ETAT_CHAMBRE;
-import stock.Menu;
 
 public class Hotel {
 	private List<Chambre> lesChambres;
@@ -49,20 +47,14 @@ public class Hotel {
 	
 	// AJOUT - SUPRESSION
 	public boolean ajoutClient(String nom, String prenom, String tel) {
-		try {
-			// SI LE CLIENT N'EXISTE PAS
-			if (!Connection.existSQL("SELECT id FROM client WHERE firstname = '" + nom + "' AND lastname = '"+ prenom + "' AND tel = '" + tel + "'")) {
-				// On insert un nouveau client dans la bdd
-				Connection.execSQL("INSERT INTO client(firstname, lastname, tel) VALUES ('" + nom + "', '" + prenom + "', '" + tel + "')");
-				// On récupère l'id de ce client tout juste inséré
-				int idNewClient = Connection.getResultSetSQL("SELECT id FROM client WHERE firstname = '" + nom + "' AND lastname = '"+ prenom + "' AND tel = '" + tel + "'").getInt("id");
-				// On ajoute ce nouveau client à la liste des clients
-				this.lesClients.add(new Client(nom, prenom, tel));
-				// L'ajout a fonctionné on retourne vrai
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		// SI LE CLIENT N'EXISTE PAS
+		if (!Connection.existSQL("SELECT id FROM client WHERE firstname = '" + nom + "' AND lastname = '"+ prenom + "' AND tel = '" + tel + "'")) {
+			// On insert un nouveau client dans la bdd
+			Connection.execSQL("INSERT INTO client(firstname, lastname, tel) VALUES ('" + nom + "', '" + prenom + "', '" + tel + "')");
+			// On ajoute ce nouveau client à la liste des clients
+			this.lesClients.add(new Client(nom, prenom, tel));
+			// L'ajout a fonctionné on retourne vrai
+			return true;
 		}
 		// Si l'ajout n'a pas fonctionné on retourne faux
 		return false;
@@ -72,15 +64,10 @@ public class Hotel {
 			Connection.execSQL("DELETE FROM client WHERE id = " + client.getId());
 	}
 	public boolean ajoutChambre(String label, Chambre.ETAT_CHAMBRE etatChambre, boolean isAvailable, TypeChambre typeChambre) {
-		try {
-			if (!Connection.existSQL("SELECT id FROM room WHERE label = '" + label + "'")) {
-				Connection.execSQL("INSERT INTO room(label, status, isAvailable, id_RoomType) VALUES ('" + label + "', '" + etatChambre + "', " + isAvailable + ", '"+typeChambre.getId()+"')");
-				int idNewRoom = Connection.getResultSetSQL("SELECT id FROM room WHERE label = '" + label + "'").getInt("id");
-				this.lesChambres.add(new Chambre(typeChambre, label, etatChambre, isAvailable));
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if (!Connection.existSQL("SELECT id FROM room WHERE label = '" + label + "'")) {
+			Connection.execSQL("INSERT INTO room(label, status, isAvailable, id_RoomType) VALUES ('" + label + "', '" + etatChambre + "', " + isAvailable + ", '"+typeChambre.getId()+"')");
+			this.lesChambres.add(new Chambre(typeChambre, label, etatChambre, isAvailable));
+			return true;
 		}
 		// Si l'ajout n'a pas fonctionné on retourne faux
 		return false;

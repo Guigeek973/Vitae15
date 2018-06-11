@@ -2,7 +2,6 @@ package hotel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import main.Connection;
@@ -20,11 +19,10 @@ public class Service {
 	
 	public int getId() {
 		int id = 0;
+		try {
 		ResultSet rs = Connection.getResultSetSQL(
 				"SELECT id FROM servicejob"
-				+ " WHERE label = " + this.nom );
-			
-		try {
+				+ " WHERE label = '" + this.nom + "'");
 			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -47,7 +45,7 @@ public class Service {
 	public void setNom(String nom) {
 		if(this.nom != nom) {
 			this.nom = nom;
-			Connection.execSQL("UPDATE servicejob SET laber = '" + this.nom + "'");
+			Connection.execSQL("UPDATE servicejob SET label = '" + this.nom + "'");
 		}
 	}
 	public void setLesEmployes(List<Personnel> lesEmployes) {

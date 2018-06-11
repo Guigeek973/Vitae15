@@ -6,7 +6,6 @@ import java.util.List;
 
 import main.Connection;
 import maintenance_etages.Chambre;
-import stock.Article;
 import stock.ArticleRestaurant;
 import stock.Menu;
 
