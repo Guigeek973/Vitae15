@@ -2,6 +2,7 @@ package direction;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -36,15 +37,11 @@ public class GestionReservation {
 			}
 		}
 		else {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-		    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		    
-			Connection.execSQL("INSERT INTO reservation VALUES(" + sdf.format(timestamp) + ", "  + startDate + ", " +  STATUT_RESERVATION.EN_COURS + ", " +  client.getId() + ")" );
+			Connection.execSQL("INSERT INTO reservation() VALUES("  + startDate + ", " +  STATUT_RESERVATION.EN_COURS + ", " +  client.getId() + ")" );
 			try {
 				idReservation = Connection.getResultSetSQL("SELECT id FROM reservation"
 						+ " WHERE id_Client = " + client.getId()
 						+ " AND startDate = " + startDate
-						+ " AND created_at = " + sdf.format(timestamp)
 						+ " AND status = " + STATUT_RESERVATION.EN_COURS).getInt(1);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -57,14 +54,14 @@ public class GestionReservation {
 	public boolean prendreReservation(Client client, Date startDate, Date endDate) throws SQLException { //CHAMBRE
 		int idReservation = doesClientHasReservation(client, startDate);
 		
-		if (!Connection.existSQL("SELECT id FROM reservation"
+		if (idReservation != 0 && !Connection.existSQL("SELECT id FROM reservation"
 				+ " JOIN reservationroom"
 				+ " ON reservationroom.id_Reservation = " + idReservation
 				+ " WHERE id_Client = " + client.getId()
 				+ " AND startDate = " + startDate 
 				+ " AND endDate = " + endDate)) {
 
-			Connection.execSQL("INSERT INTO reservationroom VALUES(" +  endDate + ", " + idReservation + ")" );
+			Connection.execSQL("INSERT INTO reservationroom(endDate, id_Reservation) VALUES(" +  endDate + ", " + idReservation + ")" );
 			this.lesReservations.add(new ReservationChambre(client, startDate, endDate));
 			return true;
 		}
@@ -81,7 +78,7 @@ public class GestionReservation {
 				+ "AND nbTableSet = " + nbCouverts 
 				+ "AND id_ServiceTable = " + service.getId())) {
 
-			Connection.execSQL("INSERT INTO reservationtableset VALUES(" +  nbCouverts + ", " +  idReservation + ", " +  service.getId() + ")" );
+			Connection.execSQL("INSERT INTO reservationtableset(nbTableSet, id_Reservation, id_ServiceTable) VALUES(" +  nbCouverts + ", " +  idReservation + ", " +  service.getId() + ")" );
 			this.lesReservations.add(new ReservationRestaurant(client, startDate, idReservation, service));
 			return true;
 		}
@@ -97,7 +94,23 @@ public class GestionReservation {
 				+ "AND startDate =" + startDate 
 				+ "AND id_Prestation = " + prestation.getId())) {
 			
-			Connection.execSQL("INSERT INTO reservationspa VALUES(" + client + "," + startDate + "," + prestation.getId() + ")" );
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("k:m");
+			String firstParsedDate = dateFormat.format(startDate);
+			String secondParsedDate = dateFormat.format(prestation.getDuree());
+			Date d1 = null;
+			Date d2 = null;
+			try {
+				d1 = dateFormat.parse(firstParsedDate);
+				d2 = dateFormat.parse(secondParsedDate);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			long diff = d2.getTime() - d1.getTime();
+			
+			Connection.execSQL("INSERT INTO reservationspa(endDate, id_Reservation, id_Prestation) VALUES(" + diff + "," + idReservation + "," + prestation.getId() + ")" );
 			this.lesReservations.add(new ReservationSpa(client, startDate, prestation));
 			return true;
 		}
@@ -121,17 +134,33 @@ public class GestionReservation {
 		}
 	}
 	
-	//TODO : verif ces fonctions
 	public void modifierReservation(Client client, Date startDate, Date endDate) {
-		Connection.execSQL("INSERT INTO reservationroom VALUES(" + client + "," + startDate + "," + endDate +")" );
+		int idReservation = doesClientHasReservation(client, startDate);
+		Connection.execSQL("INSERT INTO reservationroom VALUES(" + endDate + ", " + idReservation + ")" );
 		
 	}
 	public void modifierReservation(Client client, Date startDate, int nbCouverts, ServiceTable service) {
-		Connection.execSQL("INSERT INTO reservationtableset VALUES(" + client + "," + startDate + "," + nbCouverts + "," + service.getId() + ")" );
+		int idReservation = doesClientHasReservation(client, startDate);
+		Connection.execSQL("INSERT INTO reservationtableset VALUES(" + nbCouverts + "," + idReservation + ", " + service.getId() + ")" );
 
 	}
 	public void modifierReservation(Client client, Date startDate, PrestationSpa prestation) {
-		Connection.execSQL("INSERT INTO reservationspa VALUES(" + client + "," + startDate + "," + prestation.getId() + ")" );
+		int idReservation = doesClientHasReservation(client, startDate);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("k:m");
+		String firstParsedDate = dateFormat.format(startDate);
+		String secondParsedDate = dateFormat.format(prestation.getDuree());
+		Date d1 = null;
+		Date d2 = null;
+		try {
+			d1 = dateFormat.parse(firstParsedDate);
+			d2 = dateFormat.parse(secondParsedDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		long diff = d2.getTime() - d1.getTime();
+		Connection.execSQL("INSERT INTO reservationspa VALUES(" + diff + "," + idReservation + "," + prestation.getId() + ")" );
 
 	}
 }

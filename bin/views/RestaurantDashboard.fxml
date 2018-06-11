@@ -16,7 +16,7 @@
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="28.0" layoutX="14.0" layoutY="251.0" stroke="WHITE" strokeType="INSIDE" width="202.0" />
             <Line endX="100.0" fill="WHITE" layoutX="117.0" layoutY="175.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
-            <Text fill="#292f36" layoutX="24.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
+            <Text fill="#292f36" layoutX="24.0" layoutY="272.0" onMouseClicked="#goToRestaurant" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
@@ -51,12 +51,12 @@
             <DropShadow />
          </effect>
       </AnchorPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="268.0" layoutY="144.0" stroke="WHITE" strokeType="INSIDE" width="346.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="268.0" layoutY="144.0" onMouseClicked="#goToGestionTables" stroke="WHITE" strokeType="INSIDE" width="346.0">
          <effect>
             <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
          </effect>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="218.0" layoutX="639.0" layoutY="144.0" stroke="#292f36" strokeType="INSIDE" width="346.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="218.0" layoutX="639.0" layoutY="144.0" onMouseClicked="#goToGestionMenus" stroke="#292f36" strokeType="INSIDE" width="346.0">
          <effect>
             <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
          </effect>
@@ -71,7 +71,7 @@
             <Font name="Calibri" size="24.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="640.0" layoutY="384.0" stroke="WHITE" strokeType="INSIDE" width="346.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="218.0" layoutX="640.0" layoutY="384.0" onMouseClicked="#goToGestionRoomService" stroke="WHITE" strokeType="INSIDE" width="346.0">
          <effect>
             <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
          </effect>
@@ -81,12 +81,12 @@
             <Font name="Calibri" size="24.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="218.0" layoutX="269.0" layoutY="384.0" stroke="#292f36" strokeType="INSIDE" width="346.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="218.0" layoutX="269.0" layoutY="384.0" onMouseClicked="#goToGestionStockRestau" stroke="#292f36" strokeType="INSIDE" width="346.0">
          <effect>
             <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
          </effect>
       </Rectangle>
-      <Text fill="WHITE" layoutX="352.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des stocks">
+      <Text fill="WHITE" layoutX="352.0" layoutY="417.0" onMouseClicked="#goToGestionStockRestau" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des stocks">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
