@@ -1,13 +1,10 @@
 package direction;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import hotel.Reservation;
 import hotel.TicketRoomService;
 import main.Connection;
-import stock.ArticleRestaurant;
 
 public class Facture {
 	 private int id;

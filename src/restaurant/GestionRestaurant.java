@@ -1,14 +1,10 @@
 package restaurant;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 import hotel.Client;
 import main.Connection;
-import spa.PrestationSpa;
-import stock.ArticleRestaurant;
 import stock.Menu;
 
 public class GestionRestaurant {

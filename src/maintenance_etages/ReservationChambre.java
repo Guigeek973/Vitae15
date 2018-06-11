@@ -1,6 +1,5 @@
 package maintenance_etages;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -8,8 +7,6 @@ import java.util.List;
 import hotel.Client;
 import hotel.Reservation;
 import main.Connection;
-import stock.ArticleRestaurant;
-import stock.Menu;
 
 public class ReservationChambre extends Reservation {
 	private int id;
