@@ -59,7 +59,7 @@ public class GestionReservation {
 		
 		if (!Connection.existSQL("SELECT id FROM reservation"
 				+ " JOIN reservationroom"
-				+ " ON reservationroom.id_Reservation = reservation.id"
+				+ " ON reservationroom.id_Reservation = " + idReservation
 				+ " WHERE id_Client = " + client.getId()
 				+ " AND startDate = " + startDate 
 				+ " AND endDate = " + endDate)) {
@@ -75,32 +75,35 @@ public class GestionReservation {
 		
 		if (!Connection.existSQL("SELECT id FROM reservation"
 				+ " JOIN reservationtableset"
-				+ " ON reservationroom.id_Reservation = reservation.id"
+				+ " ON reservationtableset.id_Reservation = " + idReservation
 				+ " WHERE id_Client = " + client.getId()
-				+ " AND startDate = " + startDate)) {
+				+ " AND startDate = " + startDate
+				+ "AND nbTableSet = " + nbCouverts 
+				+ "AND id_ServiceTable = " + service.getId())) {
 
-			Connection.execSQL("INSERT INTO reservationtableset VALUES(" +  endDate + ", " + idReservation + ")" );
-			this.lesReservations.add(new ReservationRestaurant(client, startDate, idReservation, service.getId()));
+			Connection.execSQL("INSERT INTO reservationtableset VALUES(" +  nbCouverts + ", " +  idReservation + ", " +  service.getId() + ")" );
+			this.lesReservations.add(new ReservationRestaurant(client, startDate, idReservation, service));
 			return true;
 		}
 		return false;
-		if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE client = " + client + "AND startDate =" + startDate + "AND nbTableSet = " + nbCouverts + "AND id_ServiceTable = " + service.getId())) {
-			Connection.execSQL("INSERT INTO reservationtableset VALUES(" + client + "," + startDate + "," + nbCouverts + "," + service.getId() + ")" );
-			this.lesReservations.add(new ReservationRestaurant(client, startDate, nbCouverts, service));
-			return true;
-		}
-		return false;
+		
 	}
 	public boolean prendreReservation(Client client, Date startDate, PrestationSpa prestation) throws SQLException { //SPA
 		int idReservation = doesClientHasReservation(client, startDate);
-		if (!Connection.existSQL("SELECT id FROM reservationspa WHERE client = " + client + "AND startDate =" + startDate + "AND id_Prestation = " + prestation.getId())) {
+		if (!Connection.existSQL("SELECT id FROM reservationspa "
+				+ " JOIN reservationspa"
+				+ " ON reservationspa.id_Reservation = " + idReservation
+				+ "WHERE client = " + client 
+				+ "AND startDate =" + startDate 
+				+ "AND id_Prestation = " + prestation.getId())) {
+			
 			Connection.execSQL("INSERT INTO reservationspa VALUES(" + client + "," + startDate + "," + prestation.getId() + ")" );
-			int idReservationResto = Connection.getResultSetSQL("SELECT id FROM reservationspa WHERE client = " + client + "AND startDate =" + startDate + "AND id_Prestation = " + prestation.getId()).getInt("id");
-			this.lesReservations.add(new ReservationSpa(idReservationResto, client, startDate, prestation));
+			this.lesReservations.add(new ReservationSpa(client, startDate, prestation));
 			return true;
 		}
 		return false;
 	}
+	
 	public void deleteReservation(Reservation reservation) {
 		this.lesReservations.remove(reservation);
 		
@@ -112,7 +115,7 @@ public class GestionReservation {
 			ReservationRestaurant resa = (ReservationRestaurant) reservation;
 			Connection.getResultSetSQL("SELECT id FROM reservationtableset WHERE client = " + resa.getClass() + "AND startDate =" + resa.getStartDate() + "AND nbTableSet = " + resa.getNbCouverts() + "AND id_ServiceTable = " + resa.getService().getId());
 		}
-		else if (reservation.getClass().getSimpleName() == "ReservatioSpa") {
+		else if (reservation.getClass().getSimpleName() == "ReservationSpa") {
 			ReservationSpa resa = (ReservationSpa) reservation;
 			Connection.getResultSetSQL("DELETE FROM reservationspa WHERE client = " + reservation.getClient() + "AND startDate =" + reservation.getStartDate() + "AND id_Prestation = " + resa.getPrestation().getId());
 		}

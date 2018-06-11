@@ -7,11 +7,18 @@ import hotel.Reservation;
 import main.Connection;
 
 public class ReservationSpa extends Reservation {
+	private int id;
 	PrestationSpa prestation;
 	
-	public ReservationSpa(int id, Client client, Date startDate, PrestationSpa prestation) {
+	public ReservationSpa(Client client, Date startDate, PrestationSpa prestation) {
 		super(client, startDate);
 		this.prestation = prestation;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public PrestationSpa getPrestation() {
