@@ -1,5 +1,6 @@
 package direction;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -70,24 +71,18 @@ public class Hotel {
 			this.lesClients.remove(client);
 			Connection.execSQL("DELETE FROM client WHERE id = " + client.getId());
 	}
-	public boolean ajoutChambre(TypeChambre typeChambre, String libelle) {
-		// TODO : ajoutChambre
-//		try {
-//			// SI LE CLIENT N'EXISTE PAS
-//			if (!Connection.existSQL("SELECT id FROM room WHERE libelle = '" + libelle + "'")) {
-//				// On insert un nouveau client dans la bdd
-//				Connection.execSQL("INSERT INTO room(label, lastname, tel) VALUES ('" + nom + "', '" + prenom + "', '" + tel + "')");
-//				// On récupère l'id de ce client tout juste inséré
-//				int idNewClient = Connection.getResultSetSQL("SELECT id FROM client WHERE firstname = '" + nom + "' AND lastname = '"+ prenom + "' AND tel = '" + tel + "'").getInt("id");
-//				// On ajoute ce nouveau client à la liste des clients
-//				this.lesClients.add(new Client(idNewClient, nom, prenom, tel));
-//				// L'ajout a fonctionné on retourne vrai
-//				return true;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		// Si l'ajout n'a pas fonctionné on retourne faux
+	public boolean ajoutChambre(String label, Chambre.ETAT_CHAMBRE etatChambre, boolean isAvailable, TypeChambre typeChambre) {
+		try {
+			if (!Connection.existSQL("SELECT id FROM room WHERE label = '" + label + "'")) {
+				Connection.execSQL("INSERT INTO room(label, status, isAvailable, id_RoomType) VALUES ('" + label + "', '" + etatChambre + "', " + isAvailable + ", '"+typeChambre.getId()+"')");
+				int idNewRoom = Connection.getResultSetSQL("SELECT id FROM room WHERE label = '" + label + "'").getInt("id");
+				this.lesChambres.add(new Chambre(idNewRoom, typeChambre, label, etatChambre, isAvailable));
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// Si l'ajout n'a pas fonctionné on retourne faux
 		return false;
 	}
 	public void suppressionChambre(Chambre chambre) {
@@ -101,12 +96,28 @@ public class Hotel {
 	
 	
 	public double getTauxJournalier() {
-		return 0;
+		double tauxJ = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL("SELECT((SELECT count(room.id) FROM room WHERE room.isAvailable = 1) / (SELECT count(room.id) FROM room)) AS tauxJ");
+			tauxJ = rs.getDouble("tauxJ");
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return tauxJ;
 	}
 	public double getDureeMoyenne() {
-		return 0;
+		double dureeMoyenne = 0;
+		try {
+		ResultSet rs = Connection.getResultSetSQL("SELECT AVG(DATEDIFF(reservationroom.endDate, reservation.startDate)) AS DureeMoyenne FROM reservationroom INNER join reservation on reservation.id = reservationroom.id");
+		dureeMoyenne = rs.getDouble("DureeMoyenne");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dureeMoyenne;
 	}
 	public double getPanierMoyen() {
+		// TODO : Récupérer le panier moyen des clients
 		return 0;
 	}
 	
