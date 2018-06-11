@@ -1,5 +1,7 @@
 package hotel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,25 @@ public class Permission {
 		this.delete = delete;
 	}
 	public int getId() {
-		return id;
+		int id = 0;
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM typepermission"
+				+ " WHERE create = " + this.create
+				+ " AND read = " + this.read
+				+ " AND update = " + this.update
+				+ " AND delete = " + this.delete);
+			
+		try {
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Boolean getCreate() {
 		return create;

@@ -1,5 +1,8 @@
 package maintenance_etages;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import main.Connection;
 
 public class Chambre {
@@ -12,16 +15,31 @@ public class Chambre {
 		SALE,
 		PROPRE
 	}
-	public Chambre(int id, TypeChambre typeChambre, String libelle, ETAT_CHAMBRE etatChambre, Boolean isOccuped) {
+	public Chambre(TypeChambre typeChambre, String libelle, ETAT_CHAMBRE etatChambre, Boolean isOccuped) {
 		super();
-		this.id = id;
 		this.typeChambre = typeChambre;
 		this.libelle = libelle;
 		this.etatChambre = etatChambre;
 		this.isOccuped = isOccuped;
 	}
 	public int getId() {
-		return id;
+		int id = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM room"
+					+ " WHERE label = " + this.libelle
+					+ " AND id_RoomType = " + this.typeChambre.getId()
+					+ " AND isAvailable = " + this.isOccuped
+					+ " AND status = " + this.etatChambre);
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public TypeChambre getTypeChambre() {
 		return typeChambre;

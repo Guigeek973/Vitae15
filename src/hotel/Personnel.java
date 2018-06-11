@@ -1,5 +1,7 @@
 package hotel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Hashtable;
 
 import hotel.Job;
@@ -14,9 +16,8 @@ public class Personnel {
 	private Job job;
 	private Hashtable<String,Boolean> joursTravail;
 	
-	public Personnel(int id, String nom, String prenom, String login, String password) {
+	public Personnel(String nom, String prenom, String login, String password) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;
@@ -24,7 +25,26 @@ public class Personnel {
 	}
 
 	public int getId() {
-		return id;
+		int id = 0;
+		ResultSet rs = Connection.getResultSetSQL(
+				"SELECT id FROM job"
+				+ " WHERE nom = " + this.nom 
+				+ " AND prenom = " + this.prenom
+				+ " AND login = " + this.login
+				+ " AND password = " + this.password
+				+ " AND id_Job = " + this.job.getId());
+			
+		try {
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNom() {
 		return nom;

@@ -1,5 +1,7 @@
 package spa;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 import main.Connection;
@@ -11,18 +13,31 @@ public class PrestationSpa {
 	private Date duree;
 	
 	
-	public PrestationSpa(int id, String libelle, double prix, Date duree) {
+	public PrestationSpa(String libelle, double prix, Date duree) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.duree = duree;
 	}
 	
-	
+	public void setId(int id) {
+		this.id = id;
+	}
 	//GETTER
 	public int getId() {
-		return id;
+		int id = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM prestation"
+					+ " WHERE label = " + this.libelle
+					+ " AND price = " + this.prix
+					+ " AND duration = " + this.duree);
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
 	}
 	public String getLibelle() {
 		return libelle;

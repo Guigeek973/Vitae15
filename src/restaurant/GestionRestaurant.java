@@ -1,5 +1,6 @@
 package restaurant;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -73,9 +74,10 @@ public class GestionRestaurant {
 			if (!Connection.existSQL("SELECT id FROM menu WHERE label = '" + libelle + "'")) {
 				// On insert un nouveau menu dans la bdd
 				Connection.execSQL("INSERT INTO Menu(label, price, description) VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
-				// On r�cup�re l'id de ce menu tout juste ins				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = '" + libelle + "'").getInt("id");
-				// On ajoute ce nouveau menu � la liste des menu				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
-				// L'ajout a fonctionn� on retourne vra				return true;
+				// On ajoute ce nouveau menu � la liste des menus
+				// L'ajout a fonctionn� on retourne vrai
+				return true;
+				this.lesMenus.add(new Menu(libelle, prix, description));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,22 +90,20 @@ public class GestionRestaurant {
 		Connection.execSQL("DELETE FROM menu WHERE id = " + menu.getId());
 	}
 	
-	public boolean ajouterReservationRestaurant(int nbCouverts, ServiceTable service) {		
-		this.lesReservationsRestau.add(new ReservationRestaurant(nbCouverts, null, null, nbCouverts, service, null, null));
-		try {
-			if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id = " + libelle)) {
-				Connection.execSQL("INSERT INTO Menu VALUES ('" + libelle + "', " + prix + ", '" + description + "')");
-				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = " + libelle).getInt("id");
-				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public boolean ajouterReservationRestaurant(Client client, Date startDate, int nbCouverts, ServiceTable service) {	
+		ReservationRestaurant rr = new ReservationRestaurant(client, startDate, nbCouverts, service);
+		if (!Connection.existSQL("SELECT id FROM reservationtableset WHERE id_Reservation = " + rr.getId() 
+				+ " AND id_ServiceTable = " + service.getId()
+				+ " AND nbTableSet = " + nbCouverts)) {
+			Connection.execSQL("INSERT INTO reservationtableset VALUES ('" + rr.getId() + "', " + service.getId() + ", '" + nbCouverts + "')");
+			this.lesReservationsRestau.add(rr);
+			return true;
 		}
-return false;
+		else 
+			return false;
 	}
 	
-public void modifierMenu(Menu menu, String libelle, double prix, String description) {
+	public void modifierMenu(Menu menu, String libelle, double prix, String description) {
 		
 	}
 	

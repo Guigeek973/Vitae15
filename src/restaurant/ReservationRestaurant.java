@@ -67,10 +67,10 @@ public class ReservationRestaurant extends Reservation {
 	public void setService(ServiceTable service) {
 		if (this.service != service) {
 			this.service = service;
-			// TODO : Requête fuckd up
-			//Connection.execSQL("UPDATE reservationtableset SET id_ServiceTable = " + this.service);
+			Connection.execSQL("UPDATE reservationtableset SET id_ServiceTable = " + this.service.getId());
 		}
 	}
+	
 	// ----- GESTION DE LA LISTE -----
 		//PLATS
 		// AJOUT

@@ -1,5 +1,7 @@
 package direction;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import hotel.Reservation;
@@ -29,7 +31,10 @@ public class Facture {
 		this.status = status;
 	}
 	public int getId() {
-		return id;
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getLibelle() {
 		return libelle;

@@ -7,12 +7,12 @@ import java.util.Date;
 import main.Connection;
 
 public abstract class Reservation {
-	private int id;
-	private Client client;
-	private Date created_at;
-	private Date modified_at;
-	private Date startDate;
-	private STATUT_RESERVATION statut;
+	protected int id;
+	protected Client client;
+	protected Date created_at;
+	protected Date modified_at;
+	protected Date startDate;
+	protected STATUT_RESERVATION statut;
 	public enum STATUT_RESERVATION {
 		EN_COURS,
 		VALIDE
@@ -24,20 +24,21 @@ public abstract class Reservation {
 		this.statut = STATUT_RESERVATION.EN_COURS;
 	}
 	public int getId() {
-		ResultSet rs = Connection.getResultSetSQL(
-				"SELECT id FROM reservation "
-				+ "WHERE reservation.id_Client = " + this.client 
-				+ " AND startDate = " + this.startDate + " AND created_at = " 
-				+ this.created_at + " AND updated_at = " + this.modified_at
-				+ " AND status = " + this.statut);
+		int id = 0;
 		try {
-			rs.getInt(1);
+			id = Connection.getResultSetSQL(
+					"SELECT id FROM reservation "
+					+ "WHERE reservation.id_Client = " + this.client 
+					+ " AND startDate = " + this.startDate + " AND created_at = " 
+					+ this.created_at + " AND updated_at = " + this.modified_at
+					+ " AND status = " + this.statut).getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		this.setId(id);
-		return id;
+		return this.id;
 	}
 	public void setId(int id) {
 		this.id = id;

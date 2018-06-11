@@ -1,5 +1,7 @@
 package stock;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import main.Connection;
 
@@ -11,26 +13,40 @@ public class Menu {
 	private List<ArticleRestaurant> lesArticles;
 
 	// CONSTRUCTEUR
-	public Menu(int id, String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
+	public Menu(String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.description = description;
 		this.lesArticles = lesArticles;
 	}
 
-	public Menu(int id, String libelle, double prix, String description) {
+	public Menu(String libelle, double prix, String description) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
 		this.description = description;
 	}
 
-	// ----- GETTERS ------
 	public int getId() {
-		return id;
+		int id = 0;
+		try {
+			ResultSet rs = Connection.getResultSetSQL(
+					"SELECT id FROM article "
+					+ "WHERE label = " + this.libelle
+					+ " AND description = " + this.description
+					+ " AND price = " + this.prix);
+			id = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setId(id);
+		return this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getLibelle() {
