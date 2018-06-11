@@ -78,7 +78,7 @@ public class GestionRestaurant {
 				// On récupère l'id de ce menu tout juste inséré
 				int idNewMenu = Connection.getResultSetSQL("SELECT id FROM menu WHERE label = '" + libelle + "'").getInt("id");
 				// On ajoute ce nouveau menu à la liste des menus
-				this.lesMenus.add(new Menu(idNewMenu, libelle, prix, description));
+				this.lesMenus.add(new Menu(libelle, prix, description));
 				// L'ajout a fonctionné on retourne vrai
 				return true;
 			}
