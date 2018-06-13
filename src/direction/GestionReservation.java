@@ -122,14 +122,11 @@ public class GestionReservation {
 	//TODO : verif ces fonctions
 	public void modifierReservation(Client client, Date startDate, Date endDate) {
 		Connection.execSQL("INSERT INTO reservationroom VALUES(" + client + "," + startDate + "," + endDate +")" );
-		
 	}
 	public void modifierReservation(Client client, Date startDate, int nbCouverts, ServiceTable service) {
 		Connection.execSQL("INSERT INTO reservationtableset VALUES(" + client + "," + startDate + "," + nbCouverts + "," + service.getId() + ")" );
-
 	}
 	public void modifierReservation(Client client, Date startDate, PrestationSpa prestation) {
 		Connection.execSQL("INSERT INTO reservationspa VALUES(" + client + "," + startDate + "," + prestation.getId() + ")" );
-
 	}
 }
