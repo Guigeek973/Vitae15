@@ -6,6 +6,7 @@ import hotel.Job;
 import hotel.Permission;
 import hotel.Personnel;
 import hotel.Service;
+import main.Connection;
 
 public class GestionPersonnel {
 	private List<Personnel> lePersonnel;
@@ -39,13 +40,31 @@ public class GestionPersonnel {
 	public void addPersonnel(int id, String nom, String prenom, String login, String password) {
 		
 	}
-	public void modifierPersonnel(Personnel p, String nom, String prenom, String login) {
+	public void modifierPersonnel(Personnel personnel, String nom, String prenom, String login) {
+		boolean modif = false; // Sert à savoir si il y'a eu ou non une modification
+		
+		if (!personnel.getNom().equals(nom)) {
+			personnel.setNom(nom);
+			modif = true;
+		}
+		if (!personnel.getPrenom().equals(prenom)) {
+			personnel.setPrenom(prenom);
+			modif = true;
+		}
+		if (!personnel.getLogin().equals(login)) {
+			personnel.setLogin(login);
+			modif = true;
+		}
+		
+		if (modif = true) {
+			//Connection.execSQL("INSERT INTO ");
+		}
+			
+	}
+	public void modifierPersonnelPassword(Personnel personnel, String password) {
 		
 	}
-	public void modifierPersonnelPassword(Personnel p, String password) {
-		
-	}
-	public void deletePersonnel(Personnel p) {
+	public void deletePersonnel(Personnel personnel) {
 	
 	}
 	public void modifierDroits(Job job, List<Permission> permissions) {
@@ -54,7 +73,7 @@ public class GestionPersonnel {
 	public void affecterService(Service service, Job job) {
 		
 	}
-	public void ajouterPersonnel(Personnel p) {
+	public void ajouterPersonnel(Personnel personnel) {
 		
 	}
 	public Job getJob(int id) {
