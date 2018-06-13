@@ -12,7 +12,6 @@ public final class Connection {
 		
 		String uaM = "jdbc:mariadb://mysql-tomkhakhai.alwaysdata.net/"+ nomBase + "_db";
 
-		
 		String driverSQL = "com.mysql.cj.jdbc.Driver";
 		String driverMaria = "org.mariadb.jdbc.Driver";
 		            

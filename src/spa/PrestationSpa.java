@@ -2,6 +2,8 @@ package spa;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import main.Connection;
@@ -46,6 +48,8 @@ public class PrestationSpa {
 		return prix;
 	}
 	public Date getDuree() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("k:m");
+		String parsedDate = dateFormat.format(this.getDuree());
 		return duree;
 	}
 	

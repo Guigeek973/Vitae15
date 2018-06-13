@@ -168,4 +168,83 @@ public class ReceptionDashboardController {
 		}
 		return okClicked;
     }
+    
+    /**
+     * Called when the user clicks Restaurant.
+     * @return 
+     * @throws IOException 
+     */
+    @FXML
+    private boolean goToPriseReservation() throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/ReceptionFReservation.fxml"));
+		Pane rootLayout;
+		try {
+			rootLayout = (Pane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			RestaurantDashboardController controller = loader.getController();
+	        loader.setController(controller);
+	        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        primaryStage.setScene(scene);
+	        controller.setStage(primaryStage);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return okClicked;
+    }
+    
+    /**
+     * Called when the user clicks Restaurant.
+     * @return 
+     * @throws IOException 
+     */
+    @FXML
+    private boolean goToTicketsFactures() throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/ReceptionFactures.fxml"));
+		Pane rootLayout;
+		try {
+			rootLayout = (Pane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			RestaurantDashboardController controller = loader.getController();
+	        loader.setController(controller);
+	        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        primaryStage.setScene(scene);
+	        controller.setStage(primaryStage);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return okClicked;
+    }
+    
+    /**
+     * Called when the user clicks Restaurant.
+     * @return 
+     * @throws IOException 
+     */
+    @FXML
+    private boolean goToRoomService() throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/views/ReceptionRoomServ.fxml"));
+		Pane rootLayout;
+		try {
+			rootLayout = (Pane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			RestaurantDashboardController controller = loader.getController();
+	        loader.setController(controller);
+	        //primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        primaryStage.setScene(scene);
+	        controller.setStage(primaryStage);
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return okClicked;
+    }
+    
 }

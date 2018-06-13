@@ -18,6 +18,7 @@ public class HebergementDashboardController {
      */
     @FXML
     private void initialize() {
+    	
     }
 
     /**
