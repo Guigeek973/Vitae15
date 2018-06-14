@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<!--<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="views.ReceptionDashboardReservationChambreController">-->
+ <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ReceptionDashboardReservationChambreController"> 
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="102.0" layoutX="250.0" layoutY="635.0" stroke="WHITE" strokeType="INSIDE" width="761.0">
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0" />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="232.0" layoutY="55.0" stroke="WHITE" strokeType="INSIDE" width="233.0">
+         <effect>
+            <DropShadow color="#292f36" height="17.89" offsetX="2.0" offsetY="2.0" radius="8.445" width="17.89" />
+         </effect>
+      </Rectangle>
+      <Text fill="#292f36" layoutX="259.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chambre n°">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Text>
+      <AnchorPane prefHeight="768.0" prefWidth="233.0" style="-fx-background-color: #292f36;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="28.0" layoutX="14.0" layoutY="352.0" stroke="WHITE" strokeType="INSIDE" width="202.0" />
+            <Line endX="100.0" fill="WHITE" layoutX="117.0" layoutY="175.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
+            <Text fill="WHITE" layoutX="24.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hébergement">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="23.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#292f36" layoutX="23.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réception">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+            <ImageView layoutX="72.0" layoutY="15.0">
+               <image>
+                  <Image url="@../../../Documents/Logo-Tom-Kha-Kai-White.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="24.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Text>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <ImageView fitHeight="28.0" fitWidth="33.0" layoutX="425.0" layoutY="66.0" preserveRatio="true">
+         <image>
+            <Image url="@../../../Documents/Chambre_black.png" />
+         </image>
+      </ImageView>
+      	
+      <VBox layoutX="249.0" layoutY="173.0" maxHeight="600" maxWidth="761.0" prefHeight="435.0" prefWidth="761.0" spacing="10">
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="705.0">
+                <Label styleClass="title-label">Les reservations de chambres</Label>
+                <Label fx:id="reservationChambreTableCount" minWidth="80" styleClass="title-label" />
+                <Button fx:id="reservationChambreTableAdd" text="+" />
+                <Button fx:id="reservationChambreTableRemove" text="-" />
+                <StackPane HBox.hgrow="ALWAYS">
+                    <StackPane maxWidth="200" StackPane.alignment="CENTER_RIGHT">
+                        <JFXTextField fx:id="searchField" promptText="Search..." />
+                    </StackPane>
+                </StackPane>
+            </HBox>
+   	      <JFXTreeTableView fx:id="reservationChambreTable" currentItemsCount="4" editable="true" prefHeight="400.0" prefWidth="705.0">
+   	      	 <columns>
+   	             <JFXTreeTableColumn fx:id="id_ReservationColumn" minWidth="100.0" prefWidth="100.0" text="id_Reservation">
+   	             	 <cellValueFactory>
+        				<PropertyValueFactory property="id_Reservation" />
+      				 </cellValueFactory>   	             
+   	             </JFXTreeTableColumn>
+   	             <JFXTreeTableColumn fx:id="firstNameColumn" minWidth="100.0" prefWidth="100.0" text="FirstName">
+   	             	 <cellValueFactory>
+        				<PropertyValueFactory property="firstName" />
+      				 </cellValueFactory>   	             
+   	             </JFXTreeTableColumn>
+   	             <JFXTreeTableColumn fx:id="lastNameColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="LastName">
+   	             	 <cellValueFactory>
+        				<PropertyValueFactory property="lastName" />
+      				 </cellValueFactory>
+   	             </JFXTreeTableColumn>
+   	             <JFXTreeTableColumn fx:id="startDateColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="startDate">
+   	             	 <cellValueFactory>
+        				<PropertyValueFactory property="startDate" />
+      				 </cellValueFactory>
+   	             </JFXTreeTableColumn>
+   	             <JFXTreeTableColumn fx:id="endDateColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="endDate">
+   	         	 	 <cellValueFactory>
+        				<PropertyValueFactory property="endDate" />
+      				 </cellValueFactory>
+   	         	 </JFXTreeTableColumn>
+   	         </columns>
+   	      </JFXTreeTableView>
+      </VBox>
+      <Button layoutX="918.0" layoutY="673.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="71.0" style="-fx-background-color: #292f36;" text="Ajouter" textFill="WHITE" />
+      <JFXTextField labelFloat="true" layoutX="734.0" layoutY="669.0" prefHeight="31.0" prefWidth="146.0" promptText="Nombre d'occupants" />
+      <JFXDatePicker defaultColor="#292f36" layoutX="279.0" layoutY="671.0" overLay="true" promptText="Date arrivée" />
+      <JFXDatePicker defaultColor="#292f36" layoutX="509.0" layoutY="671.0" overLay="true" promptText="Date départ" />
+   </children>
+</Pane>
