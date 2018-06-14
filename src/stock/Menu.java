@@ -14,7 +14,6 @@ public class Menu {
 
 	// CONSTRUCTEUR
 	public Menu(String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
-		super();
 		this.libelle = libelle;
 		this.prix = prix;
 		this.description = description;
@@ -22,7 +21,6 @@ public class Menu {
 	}
 
 	public Menu(String libelle, double prix, String description) {
-		super();
 		this.libelle = libelle;
 		this.prix = prix;
 		this.description = description;
