@@ -22,7 +22,7 @@ public class GestionTicket {
 		this.lesTickets = lesTickets;
 	}
 	
-	public boolean addTicket(String titre, String description, STATUT_TICKET statut, Service service) {
+	public boolean creerTicket(String titre, String description, STATUT_TICKET statut, Service service) {
 		if (!Connection.existSQL("SELECT id FROM ticket WHERE title = '" + titre + "'")) {
 			Connection.execSQL("INSERT INTO ticket(details, status, title, id_serviceJob) VALUES ('" + description + "', '" + statut + "', '" + titre + "', " + service.getId() + ")");
 			this.lesTickets.add(new Ticket(titre, description, statut, service));
