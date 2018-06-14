@@ -14,31 +14,22 @@ public class PrestationSpa {
 	private double prix;
 	private Date duree;
 	
-	
 	public PrestationSpa(String libelle, double prix, Date duree) {
-		super();
 		this.libelle = libelle;
 		this.prix = prix;
 		this.duree = duree;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
-	}
 	//GETTER
 	public int getId() {
 		int id = 0;
 		try {
-			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM prestation"
-					+ " WHERE label = " + this.libelle
-					+ " AND price = " + this.prix
-					+ " AND duration = " + this.duree);
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM prestation WHERE label = '" + this.libelle + "'");
 			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
 	}
 	public String getLibelle() {
@@ -56,20 +47,22 @@ public class PrestationSpa {
 	//SETTER
 	public void setLibelle(String libelle) {
 		if (this.libelle != libelle) {
+			if (!Connection.existSQL("SELECT id FROM prestation WHERE label = '" + libelle + "'")) {
 			this.libelle = libelle;
-			Connection.execSQL("UPDATE prestation SET label = '" + this.libelle + "'");
+			Connection.execSQL("UPDATE prestation SET label = '" + libelle + "'");
+			}
 		}
 	}
 	public void setPrix(double prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE prestation SET price = '" + this.prix + "'");
+			Connection.execSQL("UPDATE prestation SET price = " + prix);
 		}
 	}
 	public void setDuree(Date duree) {
 		if (this.duree != duree) {
 			this.duree = duree;
-			Connection.execSQL("UPDATE prestation SET duration = '" + this.duree + "'");
+			Connection.execSQL("UPDATE prestation SET duration = '" + duree + "'");
 		}
 	}
 }

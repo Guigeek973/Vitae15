@@ -29,23 +29,13 @@ public class Menu {
 	public int getId() {
 		int id = 0;
 		try {
-			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM article " + "WHERE label = " + this.libelle
-					+ " AND description = " + this.description + " AND price = " + this.prix);
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM article WHERE label = '" + this.libelle + "'");
 			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-		if (this.id != id) {
-			this.id = id;
-			Connection.execSQL("UPDATE menu SET id = " + this.id + " WHERE label = '" + this.getLibelle() + "'");
-		}
 	}
 
 	public String getLibelle() {
@@ -75,7 +65,7 @@ public class Menu {
 				// Si elle est differente on change la valeur de l'objet et on update dans la BDD avec la nouvelle valeur
 				this.libelle = libelle;
 				// On appelle la methode statique execSQL pour executer une requete SQL
-				Connection.execSQL("UPDATE menu SET label = '" + this.libelle + "' WHERE id = " + this.getId());
+				Connection.execSQL("UPDATE menu SET label = '" + libelle + "' WHERE id = " + this.getId());
 				retour = true;
 			}
 		}
@@ -85,14 +75,14 @@ public class Menu {
 	public void setPrix(double prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE menu SET price = " + this.prix + " WHERE id = " + this.getId());
+			Connection.execSQL("UPDATE menu SET price = " + prix + " WHERE id = " + this.getId());
 		}
 	}
 
 	public void setDescription(String description) {
 		if (!this.description.equals(description)) {
 			this.description = description;
-			Connection.execSQL("UPDATE menu SET description = '" + this.description + "' WHERE id = " + this.getId());
+			Connection.execSQL("UPDATE menu SET description = '" + description + "' WHERE id = " + this.getId());
 		}
 	}
 
@@ -101,12 +91,10 @@ public class Menu {
 	public void setLesArticles(List<ArticleRestaurant> lesArticles) {
 		// ON VIDE LA TABLE COMPOSER MENU DU MENU EN QUESTION
 		Connection.execSQL("DELETE FROM composermenu WHERE id_Menu = " + this.getId());
+		// On vide tout les articles du menu
+		this.lesArticles.clear();
 		// On ajoute tout les articles de la liste passée en parametre
-		for (ArticleRestaurant article : lesArticles) {
-			// Pour chaque article à rajouter on fait un insert dans la table composer menu
-			Connection.execSQL(
-					"INSERT INTO composermenu (id) VALUES (" + article.getId() + ") WHERE id_Menu = " + this.getId());
-		}
+		ajoutArticle(lesArticles);
 	}
 
 	// AJOUT
@@ -133,7 +121,6 @@ public class Menu {
 
 	public void supprimerArticle(ArticleRestaurant article) {
 		this.lesArticles.remove(article);
-		Connection.execSQL(
-				"DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
+		Connection.execSQL("DELETE FROM composermenu WHERE id_Article = " + article.getId() + " AND id_Menu = " + this.getId());
 	}
 }

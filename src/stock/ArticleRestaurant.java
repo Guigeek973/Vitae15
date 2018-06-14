@@ -31,7 +31,6 @@ public class ArticleRestaurant {
 	}
 	
 	public ArticleRestaurant(String libelle, String description, int quantite, double prix, TYPE_FOOD typeFood) {
-		super();
 		this.libelle = libelle;
 		this.description = description;
 		this.quantite = quantite;
@@ -44,24 +43,15 @@ public class ArticleRestaurant {
 		int id = 0;
 		try {
 			ResultSet rs = Connection.getResultSetSQL(
-					"SELECT id FROM article "
-					+ "WHERE label = " + this.libelle
-					+ " AND description = " + this.description
-					+ " AND quantity = " + this.quantite
-					+ " AND taxes = " + this.taxes
-					+ " AND typeFood = " + this.typeNourriture);
+					"SELECT id FROM article WHERE label = " + this.libelle);
 			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
-	}
 	public double getPrix() {
 		return prix;
 	}
@@ -86,37 +76,39 @@ public class ArticleRestaurant {
 	public void setQuantite(int quantite) {
 		if (this.quantite != quantite) {
 			this.quantite = quantite;
-			Connection.execSQL("UPDATE ArticleRestaurant SET quantity = " + this.quantite);
+			Connection.execSQL("UPDATE ArticleRestaurant SET quantity = " + quantite);
 		}
 	}
 	public void setPrix(double prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE ArticleRestaurant SET price = " + this.prix);
+			Connection.execSQL("UPDATE ArticleRestaurant SET price = " + prix);
 		}
 	}
 	public void setTaxes(double taxes) {
 		if (this.taxes != taxes) {
 			this.taxes = taxes;
-			Connection.execSQL("UPDATE ArticleRestaurant SET taxes = " + this.taxes);
+			Connection.execSQL("UPDATE ArticleRestaurant SET taxes = " + taxes);
 		}
 	}
 	public void setTypeNourriture(TYPE_FOOD typeNourriture) {
 		if (this.typeNourriture != typeNourriture) {
 			this.typeNourriture = typeNourriture;
-			Connection.execSQL("UPDATE ArticleRestaurant SET typeFood = '" + this.typeNourriture + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET typeFood = '" + typeNourriture + "'");
 		}
 	}
 	public void setLibelle(String libelle) {
 		if (this.libelle != libelle) {
+			if (!Connection.existSQL("SELECT id FROM ArticleRestaurant WHERE label = '" + libelle + "'")) {
 			this.libelle = libelle;
-			Connection.execSQL("UPDATE ArticleRestaurant SET label = '" + this.libelle + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET label = '" + libelle + "'");
+			}
 		}
 	}
 	public void setDescription(String description) {
 		if (this.description != description) {
 			this.description = description;
-			Connection.execSQL("UPDATE ArticleRestaurant SET description = '" + this.description + "'");
+			Connection.execSQL("UPDATE ArticleRestaurant SET description = '" + description + "'");
 		}
 	}
 }
