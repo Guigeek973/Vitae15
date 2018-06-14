@@ -12,7 +12,6 @@ public class Job {
 	private Permission permission;
 	
 	public Job(String libelle, Service service, Permission permission) {
-		super();
 		this.libelle = libelle;
 		this.service = service;
 		this.permission = permission;
@@ -32,12 +31,9 @@ public class Job {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getLibelle() {
 		return libelle;
 	}
@@ -51,20 +47,22 @@ public class Job {
 
 	public void setLibelle(String libelle) {
 		if (this.libelle != libelle) {
+			if (!Connection.existSQL("SELECT id FROM job WHERE label = '" + libelle + "'")) {
 			this.libelle = libelle;
-			Connection.execSQL("UPDATE job SET label = '" + this.libelle + "'");
+			Connection.execSQL("UPDATE job SET label = '" + libelle + "'");
+			}
 		}
 	}
 	public void setService(Service service) {
 		if (this.service != service) {
 			this.service = service;
-			Connection.execSQL("UPDATE job SET id_ServiceJob = '" + this.service + "'");
+			Connection.execSQL("UPDATE job SET id_ServiceJob = '" + service + "'");
 		}
 	}
 	public void setPermission(Permission permission) {
 		if (this.permission != permission) {
 			this.permission = permission;
-			Connection.execSQL("UPDATE job SET id_TypePermission = '" + this.permission + "'");
+			Connection.execSQL("UPDATE job SET id_TypePermission = '" + permission + "'");
 		}
 	}
 	

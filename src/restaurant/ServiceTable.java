@@ -13,7 +13,6 @@ public class ServiceTable {
 	private Date date;
 	
 	public ServiceTable(int nbCouvertsRestant, int numero, Date date) {
-		super();
 		this.nbCouvertsRestant = nbCouvertsRestant;
 		this.numero = numero;
 		this.date = date;
@@ -31,11 +30,7 @@ public class ServiceTable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public Date getEndDate() {
@@ -57,21 +52,21 @@ public class ServiceTable {
 		
 		if (this.nbCouvertsRestant != nbCouvertsRestant) {
 			this.nbCouvertsRestant = nbCouvertsRestant;
-			Connection.execSQL("UPDATE servicetable SET nbRestant = " + this.nbCouvertsRestant);
+			Connection.execSQL("UPDATE servicetable SET nbRestant = " +nbCouvertsRestant);
 		}
 	}
 	public void setNumero(int numero) {
 		
 		if (this.numero != numero) {
 			this.numero = numero;
-			Connection.execSQL("UPDATE servicetable SET num_service = " + this.numero);
+			Connection.execSQL("UPDATE servicetable SET num_service = " +numero);
 		}
 	}
 	public void setDate(Date date) {
 		
 		if (this.date != date) {
 			this.date = date;
-			Connection.execSQL("UPDATE servicetable SET dateTime = '" + this.date + "'");
+			Connection.execSQL("UPDATE servicetable SET dateTime = '" + date + "'");
 		}
 	}
 	

@@ -21,7 +21,6 @@ public class Ticket {
 	}
 
 	public Ticket(String titre, String description, STATUT_TICKET statut, Service service) {
-		super();
 		this.titre = titre;
 		this.description = description;
 		this.statut = statut;
@@ -30,9 +29,7 @@ public class Ticket {
 
 	public int getId() {
 		int id = 0;
-		ResultSet rs = Connection.getResultSetSQL("SELECT id FROM ticket" + " WHERE details = " + this.description
-				+ " AND status = " + this.statut + " AND title = " + this.titre + " AND id_ServiceJob = "
-				+ this.service.getId() + " AND created_at  = " + this.created_at);
+		ResultSet rs = Connection.getResultSetSQL("SELECT id FROM ticket WHERE title = '" + this.titre + "'");
 
 		try {
 			id = rs.getInt(1);
@@ -40,12 +37,7 @@ public class Ticket {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getTitre() {
@@ -77,51 +69,53 @@ public class Ticket {
 	}
 
 	public void setTitre(String titre) {
-		if (this.titre != titre) {
+		if (!this.titre.equals(titre)) {
+			if (!Connection.existSQL("SELECT id FROM ticket WHERE title = '" + titre + "'")) {
 			this.titre = titre;
-			Connection.execSQL("UPDATE ticket SET title = '" + this.titre + "'");
+			Connection.execSQL("UPDATE ticket SET title = '" + titre + "' WHERE id = " + this.getId());
+			}
 		}
 	}
 
 	public void setDescription(String description) {
-		if (this.description != description) {
+		if (!this.description.equals(description)) {
 			this.description = description;
-			Connection.execSQL("UPDATE ticket SET details = '" + this.description + "'");
+			Connection.execSQL("UPDATE ticket SET details = '" + description + "' WHERE id = " + this.getId());
 		}
 	}
 
 	public void setStatut(STATUT_TICKET statut) {
-		if (this.statut != statut) {
+		if (!this.statut.equals(statut)) {
 			this.statut = statut;
-			Connection.execSQL("UPDATE ticket SET statut = '" + this.statut + "'");
+			Connection.execSQL("UPDATE ticket SET statut = '" + statut + "' WHERE id = " + this.getId());
 		}
 	}
 
 	public void setCreated_at(Date created_at) {
-		if (this.created_at != created_at) {
+		if (!this.created_at.equals(created_at)) {
 			this.created_at = created_at;
-			Connection.execSQL("UPDATE ticket SET created_at = '" + this.created_at + "'");
+			Connection.execSQL("UPDATE ticket SET created_at = '" + created_at + "' WHERE id = " + this.getId());
 		}
 	}
 
 	public void setModified_at(Date modified_at) {
-		if (this.modified_at != modified_at) {
+		if (!this.modified_at.equals(modified_at)) {
 			this.modified_at = modified_at;
-			Connection.execSQL("UPDATE ticket SET modified_at = '" + this.modified_at + "'");
+			Connection.execSQL("UPDATE ticket SET modified_at = '" + modified_at + "' WHERE id = " + this.getId());
 		}
 	}
 
 	public void setPersonnelAffecte(Personnel personnelAffecte) {
-		if (this.personnelAffecte != personnelAffecte) {
+		if (!this.personnelAffecte.equals(personnelAffecte)) {
 			this.personnelAffecte = personnelAffecte;
-			Connection.execSQL("UPDATE ticket SET id_Staff = '" + this.personnelAffecte + "'");
+			Connection.execSQL("UPDATE ticket SET id_Staff = '" + personnelAffecte + "' WHERE id = " + this.getId());
 		}
 	}
 
 	public void setService(Service service) {
-		if (this.service != service) {
+		if (!this.service.equals(service)) {
 			this.service = service;
-			Connection.execSQL("UPDATE ticket SET id_ServiceJob = '" + this.service + "'");
+			Connection.execSQL("UPDATE ticket SET id_ServiceJob = '" + service + "' WHERE id = " + this.getId());
 		}
 	}
 

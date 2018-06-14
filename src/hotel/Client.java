@@ -49,12 +49,9 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -78,37 +75,37 @@ public class Client {
 	public void setNom(String nom) {
 		if (this.nom != nom) {
 			this.nom = nom;
-			Connection.execSQL("UPDATE client SET lastname = '" + this.nom + "'");
+			Connection.execSQL("UPDATE client SET lastname = '" + nom + "'");
 		}
 	}
 	public void setPrenom(String prenom) {
 		if (this.prenom != prenom) {
 			this.prenom = prenom;
-			Connection.execSQL("UPDATE client SET firstname = '" + this.prenom + "'");
+			Connection.execSQL("UPDATE client SET firstname = '" + prenom + "'");
 		}
 	}
 	public void setAdresse(String adresse) {
 		if (this.adresse != adresse) {
 			this.adresse = adresse;
-			Connection.execSQL("UPDATE client SET adress = '" + this.adresse + "'");
+			Connection.execSQL("UPDATE client SET adress = '" + adresse + "'");
 		}
 	}
 	public void setCP(String CP) {
 		if (this.CP != CP) {
 			this.CP = CP;
-			Connection.execSQL("UPDATE client SET postal_code = '" + this.CP + "'");
+			Connection.execSQL("UPDATE client SET postal_code = '" + CP + "'");
 		}
 	}
 	public void setTel(String tel) {
 		if (this.tel != tel) {
 			this.tel = tel;
-			Connection.execSQL("UPDATE client SET tel = '" + this.tel + "'");
+			Connection.execSQL("UPDATE client SET tel = '" + tel + "'");
 		}
 	}
 	public void setIsExternal(Boolean isExternal) {
 		if (this.isExternal != isExternal) {
 			this.isExternal = isExternal;
-			Connection.execSQL("UPDATE client SET isExternal = " + this.isExternal);
+			Connection.execSQL("UPDATE client SET isExternal = " + isExternal);
 		}
 	}
 }

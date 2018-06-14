@@ -29,12 +29,10 @@ public class ReservationChambre extends Reservation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
+
 		return this.id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 
 	public List<Chambre> getLesChambres() {
 		return lesChambres;
@@ -55,12 +53,13 @@ public class ReservationChambre extends Reservation {
 	public void setEndDate(Date endDate) {
 		if (this.endDate != endDate) {
 			this.endDate = endDate;
-			Connection.execSQL("UPDATE reservationroom SET endDate = '" + this.endDate + "'");
+			Connection.execSQL("UPDATE reservationroom SET endDate = '" + endDate + "'");
 		}
 	}
 	
 	public void setLesChambres(List<Chambre> lesChambres) {
 		Connection.execSQL("DELETE FROM avoirchambresdansreservation WHERE id = " + this.getId());
+		this.lesChambres.clear();
 		ajoutChambre(lesChambres);
 	}
 	

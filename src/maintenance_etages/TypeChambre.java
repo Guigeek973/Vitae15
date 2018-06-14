@@ -28,7 +28,6 @@ public class TypeChambre {
 	}
 
 	public TypeChambre(String libelle, float prix, TAXES tax, int places) {
-		super();
 		this.libelle = libelle;
 		this.prix = prix;
 		this.taxes = tax.getTaxe();
@@ -48,12 +47,9 @@ public class TypeChambre {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getLibelle() {
 		return libelle;
 	}
@@ -71,26 +67,28 @@ public class TypeChambre {
 	
 	public void setLibelle(String libelle) {
 		if (this.libelle != libelle) {
+			if (!Connection.existSQL("SELECT id FROM roomtype WHERE label = '" + libelle + "'")) {
 			this.libelle = libelle;
-			Connection.execSQL("UPDATE roomtype SET label = '" + this.libelle + "'");
+			Connection.execSQL("UPDATE roomtype SET label = '" + libelle + "'");
+			}
 		}
 	}
 	public void setPrix(float prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE roomtype SET price = " + this.prix);
+			Connection.execSQL("UPDATE roomtype SET price = " + prix);
 		}
 	}
 	public void setTaxes(double taxes) {
 		if (this.taxes != taxes) {
 			this.taxes = taxes;
-			Connection.execSQL("UPDATE roomtype SET taxes = " + this.taxes);
+			Connection.execSQL("UPDATE roomtype SET taxes = " + taxes);
 		}
 	}
 	public void setPlaces(int places) {
 		if (this.places != places) {
 			this.places = places;
-			Connection.execSQL("UPDATE roomtype SET nbPlaces = " + this.places);
+			Connection.execSQL("UPDATE roomtype SET nbPlaces = " + places);
 		}
 	}
 	

@@ -14,7 +14,6 @@ public class Menu {
 
 	// CONSTRUCTEUR
 	public Menu(String libelle, double prix, String description, List<ArticleRestaurant> lesArticles) {
-		super();
 		this.libelle = libelle;
 		this.prix = prix;
 		this.description = description;
@@ -22,7 +21,6 @@ public class Menu {
 	}
 
 	public Menu(String libelle, double prix, String description) {
-		super();
 		this.libelle = libelle;
 		this.prix = prix;
 		this.description = description;
@@ -31,22 +29,13 @@ public class Menu {
 	public int getId() {
 		int id = 0;
 		try {
-			ResultSet rs = Connection.getResultSetSQL(
-					"SELECT id FROM article "
-					+ "WHERE label = " + this.libelle
-					+ " AND description = " + this.description
-					+ " AND price = " + this.prix);
+			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM article WHERE label = '" + this.libelle + "'");
 			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getLibelle() {
@@ -67,27 +56,33 @@ public class Menu {
 
 	// ----- SETTERS ------
 
-	public void setLibelle(String libelle) {
-		// On vï¿½rifie si la valeur passï¿½e en paramï¿½tre est diffï¿½rente de la valeur actuelle
-		if (this.libelle != libelle) {
-			// Si elle est diffï¿½rente on change la valeur de l'objet et on update dans la BDD avec la nouvelle valeur
-			this.libelle = libelle;
-			// On appelle la mï¿½thode statique execSQL pour ï¿½xecuter une requï¿½te SQL
-			Connection.execSQL("UPDATE Menu SET label = '" + this.libelle + "'");
+	public boolean setLibelle(String libelle) {
+		boolean retour = false;
+		// On vï¿½rifie si la valeur passee en parametre est differente de la valeur actuelle
+		if (!this.libelle.equals(libelle)) {
+			// On vérifie que ce libelle n'est pas déjà pris
+			if (!Connection.existSQL("SELECT id FROM menu WHERE label = '" + libelle + "'")) {
+				// Si elle est differente on change la valeur de l'objet et on update dans la BDD avec la nouvelle valeur
+				this.libelle = libelle;
+				// On appelle la methode statique execSQL pour executer une requete SQL
+				Connection.execSQL("UPDATE menu SET label = '" + libelle + "' WHERE id = " + this.getId());
+				retour = true;
+			}
 		}
+		return retour;
 	}
 
 	public void setPrix(double prix) {
 		if (this.prix != prix) {
 			this.prix = prix;
-			Connection.execSQL("UPDATE Menu SET price = " + this.prix);
+			Connection.execSQL("UPDATE menu SET price = " + prix + " WHERE id = " + this.getId());
 		}
 	}
 
 	public void setDescription(String description) {
-		if (this.description != description) {
+		if (!this.description.equals(description)) {
 			this.description = description;
-			Connection.execSQL("UPDATE Menu SET description = '" + this.description + "'");
+			Connection.execSQL("UPDATE menu SET description = '" + description + "' WHERE id = " + this.getId());
 		}
 	}
 
@@ -96,18 +91,22 @@ public class Menu {
 	public void setLesArticles(List<ArticleRestaurant> lesArticles) {
 		// ON VIDE LA TABLE COMPOSER MENU DU MENU EN QUESTION
 		Connection.execSQL("DELETE FROM composermenu WHERE id_Menu = " + this.getId());
-		// On utilise la fonction ajoutArticle pour ajouter la liste passï¿½e en paramï¿½tre d'article au m		ajoutArticle(lesArticles);
+		// On vide tout les articles du menu
+		this.lesArticles.clear();
+		// On ajoute tout les articles de la liste passée en parametre
+		ajoutArticle(lesArticles);
 	}
 
 	// AJOUT
 	public void ajoutArticle(List<ArticleRestaurant> lesArticles) {
-		// Pour chaque article dans la liste on va faire une requï¿½te SQL pour l'inserer
+		// Pour chaque article dans la liste on va faire une requete SQL pour l'inserer
 		for (ArticleRestaurant article : lesArticles) {
 			ajoutArticle(article);
 		}
 	}
 
-	// SURCHARGE de ajoutArticle qui prend une liste d'articles en paramï¿½tre, ici on ne prend qu'un article
+	// SURCHARGE de ajoutArticle qui prend une liste d'articles en parametre, ici
+	// on ne prend qu'un article
 	public void ajoutArticle(ArticleRestaurant article) {
 		this.lesArticles.add(article);
 		Connection.execSQL("INSERT INTO composermenu VALUES (" + article.getId() + ", " + this.getId() + ")");

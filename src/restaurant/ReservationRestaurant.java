@@ -38,11 +38,7 @@ public class ReservationRestaurant extends Reservation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getNbCouverts() {
@@ -61,13 +57,13 @@ public class ReservationRestaurant extends Reservation {
 	public void setNbCouverts(int nbCouverts) {
 		if (this.nbCouverts != nbCouverts) {
 			this.nbCouverts = nbCouverts;
-			Connection.execSQL("UPDATE reservationtableset SET nbTableSet = " + this.nbCouverts);
+			Connection.execSQL("UPDATE reservationtableset SET nbTableSet = " + nbCouverts);
 		}
 	}
 	public void setService(ServiceTable service) {
 		if (this.service != service) {
 			this.service = service;
-			Connection.execSQL("UPDATE reservationtableset SET id_ServiceTable = " + this.service.getId());
+			Connection.execSQL("UPDATE reservationtableset SET id_ServiceTable = " + service.getId());
 		}
 	}
 	
@@ -75,28 +71,26 @@ public class ReservationRestaurant extends Reservation {
 		//PLATS
 		// AJOUT
 		public void ajoutPlat(List<ArticleRestaurant> lesPlats) {
-			// Pour chaque article dans la liste on va faire une requ�te SQL pour l'ins�rer
-			this.lesPlats = lesPlats;
 			for(ArticleRestaurant article : lesPlats) {
-				Connection.execSQL("INSERT INTO commanderplat VALUES (" + this.getId() + ", " + article.getId() + ")");
+				ajoutPlat(article);
 			}
 		}
 		
 		// SURCHARGE de ajoutArticle qui prend une liste d'articles en param�tre, ici on ne prend qu'un article
-		public void ajoutPlat(Article article) {
+		public void ajoutPlat(ArticleRestaurant article) {
 			Connection.execSQL("INSERT INTO commanderplat VALUES (" + this.getId() + ", " + article.getId() + ")");
 		}
 		
 		// SUPPRESSION
 		public void supprimerPlat(List<ArticleRestaurant> lesPlats) {
-			this.lesPlats = lesPlats;
 			for(ArticleRestaurant article : lesPlats) {
-				Connection.execSQL("DELETE FROM commanderplat WHERE id_Reservation = " + this.getId() + " AND id_ArticleRestaurant = " + article.getId());
+				supprimerPlat(article);
 			}
 		}
 		
-		public void supprimerPlat(ArticleRestaurant article) {
-			Connection.execSQL("DELETE FROM commanderplat WHERE id_Reservation = " + this.getId() + " AND id_ArticleRestaurant = " + article.getId());
+		public void supprimerPlat(ArticleRestaurant plat) {
+			lesPlats.remove(plat);
+			Connection.execSQL("DELETE FROM commanderplat WHERE id_Reservation = " + this.getId() + " AND id_ArticleRestaurant = " + plat.getId());
 		}
 		
 		//MENU
@@ -116,15 +110,14 @@ public class ReservationRestaurant extends Reservation {
 		
 		// SUPPRESSION
 		public void supprimerMenu(List<Menu> lesMenus) {
-			this.lesMenus = lesMenus;
-			for(Menu article : lesMenus) {
-				Connection.execSQL("DELETE FROM commandermenu WHERE id_Reservation = " + this.getId() + " AND id_Menu = " + article.getId());
+			for(Menu menu : lesMenus) {
+				supprimerMenu(menu);
 			}
 		}
 		
 		public void supprimerMenu(Menu menu) {
 			this.lesMenus.remove(menu);
-			Connection.execSQL("DELETE FROM commandermenu WHERE id_Menu = " + menu.getId());
+			Connection.execSQL("DELETE FROM commandermenu WHERE id_Reservation = " + this.getId());
 		}
 	
 	

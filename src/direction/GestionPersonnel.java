@@ -6,6 +6,7 @@ import hotel.Job;
 import hotel.Permission;
 import hotel.Personnel;
 import hotel.Service;
+import main.Connection;
 
 public class GestionPersonnel {
 	private List<Personnel> lePersonnel;
@@ -36,34 +37,55 @@ public class GestionPersonnel {
 		this.lesServices = lesServices;
 	}
 	
-	public void addPersonnel(int id, String nom, String prenom, String login, String password) {
-		
+	public void createPersonnel(String nom, String prenom, String login, String password) {
+		if (!nom.isEmpty() && !prenom.isEmpty() && !login.isEmpty() && !password.isEmpty()) {
+			Personnel personnel = new Personnel(nom, prenom, login, password);
+			Connection.execSQL("INSERT INTO staff(lastname, firstname, login, password) VALUES ('"+nom+"','"+prenom+"','"+login+"','"+password+"')");
+			this.ajouterPersonnel(personnel);
+		}
 	}
-	public void modifierPersonnel(Personnel p, String nom, String prenom, String login) {
-		
-	}
-	public void modifierPersonnelPassword(Personnel p, String password) {
-		
-	}
-	public void deletePersonnel(Personnel p) {
 	
+	public void modifierPersonnel(Personnel personnel, String nom, String prenom, String login) {
+		boolean isModified = false; // Sert à savoir si il y'a eu ou non une modification
+		
+		if (!personnel.getNom().equals(nom) && !nom.isEmpty()) {
+			personnel.setNom(nom);
+			isModified = true;
+		}
+		if (!personnel.getPrenom().equals(prenom) && !prenom.isEmpty()) {
+			personnel.setPrenom(prenom);
+			isModified = true;
+		}
+		if (!personnel.getLogin().equals(login) && !login.isEmpty()) {
+			personnel.setLogin(login);
+			isModified = true;
+		}
+		
+		if (isModified) {
+			Connection.execSQL("UPDATE staff SET lastname = '"+nom+"', firstname = '"+prenom+"', login = '"+login+"' "
+							 + "WHERE id = "+personnel.getId());
+		}
+			
+	}
+	public void modifierPersonnelPassword(Personnel personnel, String password) {
+		if (!password.isEmpty()) {
+			personnel.setPassword(password);
+		}
+	}
+	public void deletePersonnel(Personnel personnel) {
+		this.lePersonnel.remove(personnel);
+		Connection.execSQL("DELETE FROM staff WHERE id = " + personnel.getId());		
 	}
 	public void modifierDroits(Job job, List<Permission> permissions) {
-		
+//		for (Permission permission : permissions) {
+//			job.setPermission(permission);
+//		}
 	}
 	public void affecterService(Service service, Job job) {
-		
+		job.setService(service);
+		Connection.execSQL("UPDATE job SET id_ServiceJob = "+service.getId()+" WHERE id = " + job.getId());
 	}
-	public void ajouterPersonnel(Personnel p) {
-		
-	}
-	public Job getJob(int id) {
-		return null;
-	}
-	public Service getService(int id) {
-		return null;
-	}
-	public Personnel getPersonnel(int id) {
-		return null;
+	public void ajouterPersonnel(Personnel personnel) {
+		this.lePersonnel.add(personnel);
 	}
 }

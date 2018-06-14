@@ -36,12 +36,9 @@ public abstract class Reservation {
 			e.printStackTrace();
 		}
 		
-		this.setId(id);
 		return this.id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public Client getClient() {
 		return client;
 	}
@@ -63,31 +60,31 @@ public abstract class Reservation {
 	public void setClient(Client client) {
 		if (this.client != client) {
 			this.client = client;
-			Connection.execSQL("UPDATE reservation SET id_Client = " + this.client.getId());
+			Connection.execSQL("UPDATE reservation SET id_Client = " + client.getId());
 		}
 	}
 	public void setCreated_at(Date created_at) {
 		if (this.created_at != created_at) {
 			this.created_at = created_at;
-			Connection.execSQL("UPDATE reservation SET created_at = '" + this.created_at + "'");
+			Connection.execSQL("UPDATE reservation SET created_at = '" + created_at + "'");
 		}
 	}
 	public void setModified_at(Date modified_at) {
 		if (this.modified_at != modified_at) {
 			this.modified_at = modified_at;
-			Connection.execSQL("UPDATE reservation SET modified_at = '" + this.modified_at + "'");
+			Connection.execSQL("UPDATE reservation SET modified_at = '" + modified_at + "'");
 		}
 	}
 	public void setStartDate(Date startDate) {
 		if (this.startDate != startDate) {
 			this.startDate = startDate;
-			Connection.execSQL("UPDATE reservation SET startDate = '" + this.startDate + "'");
+			Connection.execSQL("UPDATE reservation SET startDate = '" + startDate + "'");
 		}
 	}
 	public void setStatut(STATUT_RESERVATION statut) {
 		if (this.statut != statut) {
 			this.statut = statut;
-			Connection.execSQL("UPDATE reservation SET status = '" + this.statut + "'");
+			Connection.execSQL("UPDATE reservation SET status = '" + statut + "'");
 		}
 	}
 	
