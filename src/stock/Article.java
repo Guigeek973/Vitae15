@@ -19,7 +19,6 @@ public class Article {
 	}
 	
 	public Article(String libelle, String description, TYPE_ARTICLE typeArticle, int quantite) {
-		super();
 		this.libelle = libelle;
 		this.description = description;
 		this.typeArticle = typeArticle;
@@ -31,20 +30,13 @@ public class Article {
 		try {
 			ResultSet rs = Connection.getResultSetSQL(
 					"SELECT id FROM article "
-					+ "WHERE label = " + this.libelle
-					+ " AND description = " + this.description
-					+ " AND quantity = " + this.quantite
-					+ " AND type = " + this.typeArticle);
+					+ "WHERE label = '" + this.libelle + "'");
 			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getLibelle() {
 		return libelle;
@@ -62,26 +54,28 @@ public class Article {
 	//SETTERS
 	public void setLibelle(String libelle) {
 		if (this.libelle != libelle) {
+			if (!Connection.existSQL("SELECT id FROM article WHERE label = '" + libelle + "'")) {
 			this.libelle = libelle;
-			Connection.execSQL("UPDATE Article SET label = '" + this.libelle + "'");
+			Connection.execSQL("UPDATE Article SET label = '" + libelle + "'");
+			}
 		}
 	}
 	public void setDescription(String description) {
 		if (this.description != description) {
 			this.description = description;
-			Connection.execSQL("UPDATE Article SET description = '" + this.description + "'");
+			Connection.execSQL("UPDATE Article SET description = '" + description + "'");
 		}
 	}
 	public void setTypeArticle(TYPE_ARTICLE typeArticle) {
 		if (this.typeArticle != typeArticle) {
 			this.typeArticle = typeArticle;
-			Connection.execSQL("UPDATE Article SET type = '" + this.typeArticle + "'");
+			Connection.execSQL("UPDATE Article SET type = '" + typeArticle + "'");
 		}
 	}
 	public void setQuantite(int quantite) {
 		if (this.quantite != quantite) {
 			this.quantite = quantite;
-			Connection.execSQL("UPDATE Article SET quantity = " + this.quantite);
+			Connection.execSQL("UPDATE Article SET quantity = " + quantite);
 		}
 	}
 }

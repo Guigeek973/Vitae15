@@ -35,12 +35,9 @@ public class TicketRoomService extends Ticket {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 
 	//GETTERS
 	public List<ArticleRestaurant> getLesArticles() {

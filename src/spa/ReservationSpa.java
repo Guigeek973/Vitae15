@@ -27,11 +27,7 @@ public class ReservationSpa extends Reservation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setId(id);
 		return this.id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public PrestationSpa getPrestation() {
@@ -40,7 +36,7 @@ public class ReservationSpa extends Reservation {
 	public void setPrestation(PrestationSpa prestation) {
 		if (this.prestation != prestation) {
 			this.prestation = prestation;
-			Connection.execSQL("UPDATE reservationspa SET id_Prestation = " + this.prestation.getId() + " WHERE id = " + this.getId());
+			Connection.execSQL("UPDATE reservationspa SET id_Prestation = " + prestation.getId() + " WHERE id = " + this.getId());
 		}
 	}
 }
