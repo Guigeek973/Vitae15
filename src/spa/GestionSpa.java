@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import hotel.Client;
+import hotel.Reservation;
 import main.Connection;
 import spa.ReservationSpa;
 import spa.PrestationSpa;
@@ -14,7 +15,6 @@ public class GestionSpa {
 	
 	// CONSTRUCTEUR
 	public GestionSpa(List<PrestationSpa> lesPrestationsSpa, List<ReservationSpa> lesReservationsSpa) {
-		super();
 		// On peut utiliser les setters car il n'ya pas de requête SQL dans les setters de gestion
 		setLesPrestations(lesPrestationsSpa);
 		setLesReservationsSpa(lesReservationsSpa);
@@ -24,32 +24,9 @@ public class GestionSpa {
 	public List<PrestationSpa> getLesPrestationsSpa() {
 		return this.lesPrestationsSpa;
 	}
-
-	public PrestationSpa getPrestationSpa(int id) {
-		PrestationSpa prestationReturn = null;
-		// On boucle sur les prestations pour trouver la prestation avec l'id passé en paramètre
-		for (PrestationSpa prestationspa : this.lesPrestationsSpa) {
-			if (prestationspa.getId() == id) {
-				// On a trouvé le menu
-				prestationReturn = this.lesPrestationsSpa.get(prestationspa.getId());
-			}
-		}
-		// On retourne le menu trouvé par la boucle
-		return prestationReturn;
-	}
 	
 	public List<ReservationSpa> getLesReservationSpa() {
-		return lesReservationsSpa;
-	}
-	
-	public ReservationSpa getReservationSpa(int id) {
-		ReservationSpa reservationSpa = null;
-		for (ReservationSpa reservation : this.lesReservationsSpa) {
-			if (reservation.getId() == id) {
-				reservationSpa = this.lesReservationsSpa.get(reservation.getId());
-			}
-		}
-		return reservationSpa;
+		return this.lesReservationsSpa;
 	}
 
 	// SETTERS GLOBAUX
@@ -76,23 +53,37 @@ public class GestionSpa {
 		return false;
 	}
 	
-	public void deletePrestationSpa(PrestationSpa prestationSpa) {
-		this.lesPrestationsSpa.remove(prestationSpa);
-		Connection.execSQL("DELETE FROM prestation WHERE id = " + prestationSpa.getId());
-	}
+
 	
 	public boolean addReservationSpa(Client client, Date startDate, PrestationSpa prestationSpa) {
-
+//		if (!Connection.existSQL("SELECT id FROM reservationspa WHERE id_ = '" + libelle + "'")) {
+//		}
 		return false;
 
 	}
 	
-	public void modifierPrestation(PrestationSpa p, String libelle, double prix, Date duree) {
-		
+	public void modifierReservation(ReservationSpa reservation, Client client, Date created_at, Date modified_at, PrestationSpa prestation, Date startDate, Reservation.STATUT_RESERVATION statut) {
+		reservation.setClient(client);
+		reservation.setCreated_at(created_at);
+		reservation.setModified_at(modified_at);
+		reservation.setPrestation(prestation);
+		reservation.setStartDate(startDate);
+		reservation.setStatut(statut);
 	}
 	
-	public void supprimerReservationSpa(ReservationSpa reservationSpa) {
+	public void modifierPrestation(PrestationSpa prestation, String libelle, double prix, Date duree) {
+		prestation.setLibelle(libelle);
+		prestation.setPrix(prix);
+		prestation.setDuree(duree);
+	}
+	
+	public void supprimerReservation(ReservationSpa reservationSpa) {
 		this.lesReservationsSpa.remove(reservationSpa);
 		Connection.execSQL("DELETE FROM reservationspa WHERE id = " + reservationSpa.getId());
+	}
+	
+	public void supprimerPrestation(PrestationSpa prestationSpa) {
+		this.lesPrestationsSpa.remove(prestationSpa);
+		Connection.execSQL("DELETE FROM prestation WHERE id = " + prestationSpa.getId());
 	}
 }
