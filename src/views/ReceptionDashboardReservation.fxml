@@ -66,22 +66,17 @@
             <Image url="@../../Documents/reservation.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="274.0" layoutY="284.0" stroke="WHITE" strokeType="INSIDE" width="200.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="328.0" layoutY="284.0" onMouseClicked="#goToReservationSpa" stroke="WHITE" strokeType="INSIDE" width="200.0">
          <effect>
             <DropShadow offsetX="3.0" offsetY="3.0" />
          </effect>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="200.0" layoutX="527.0" layoutY="284.0" stroke="#292f36" strokeType="INSIDE" width="200.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292f36" height="200.0" layoutX="749.0" layoutY="284.0" onMouseClicked="#goToReservationChambre" stroke="#292f36" strokeType="INSIDE" width="200.0">
          <effect>
             <DropShadow offsetX="3.0" offsetY="3.0" />
          </effect>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="779.0" layoutY="284.0" stroke="WHITE" strokeType="INSIDE" width="200.0">
-         <effect>
-            <DropShadow offsetX="3.0" offsetY="3.0" />
-         </effect>
-      </Rectangle>
-      <ImageView fitHeight="117.0" fitWidth="129.0" layoutX="312.0" layoutY="346.0" preserveRatio="true">
+      <ImageView fitHeight="117.0" fitWidth="129.0" layoutX="352.0" layoutY="346.0" preserveRatio="true">
          <image>
             <Image url="@../../Documents/SPA.png" />
          </image>
@@ -91,24 +86,14 @@
             <Font name="Calibri" size="24.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="583.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chambre">
+      <Text fill="WHITE" layoutX="805.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chambre">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
       </Text>
-      <ImageView fitHeight="125.0" fitWidth="129.0" layoutX="563.0" layoutY="344.0" preserveRatio="true">
+      <ImageView fitHeight="125.0" fitWidth="129.0" layoutX="798.0" layoutY="342.0" preserveRatio="true">
          <image>
             <Image url="@../../Documents/Chambre.png" />
-         </image>
-      </ImageView>
-      <Text fill="#292f36" layoutX="825.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant">
-         <font>
-            <Font name="Calibri" size="24.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="112.0" fitWidth="141.0" layoutX="809.0" layoutY="341.0" preserveRatio="true">
-         <image>
-            <Image url="@../../Documents/Restaurant.png" />
          </image>
       </ImageView>
    </children>

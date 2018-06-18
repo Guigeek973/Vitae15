@@ -49,6 +49,18 @@ public final class Connection {
 		return rs;
 	}
 	
+	public static PreparedStatement getPreparedStatement(String req) {
+		PreparedStatement st = null;
+		try {
+			st = Connection.connection.prepareStatement(req);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return st;
+	}
+	
 	public static boolean existSQL(String requete) {
 		ResultSet rs = null;
 		Statement st = null;
