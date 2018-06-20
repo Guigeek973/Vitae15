@@ -38,13 +38,12 @@ public class Client {
 		int id= 0;
 		ResultSet rs = Connection.getResultSetSQL(
 				"SELECT id FROM client "
-				+ "WHERE nom = " + this.nom 
-				+ " AND prenom = " + this.prenom 
-				+ " AND tel = " + this.tel 
-				+ " AND postal_code = " + this.CP
-				+ " AND adress = " + this.adresse);
+				+ "WHERE firstname = " + this.nom 
+				+ " AND lastname = " + this.prenom 
+				+ " AND tel = " + this.tel);
 		try {
-			id = rs.getInt(1);
+			id = rs.getInt("id");
+			this.id = id;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

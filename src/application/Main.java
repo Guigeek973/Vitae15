@@ -7,11 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import models.ReservationChambre;
-import models.ReservationSpa;
+import models.Model_ReservationChambre;
+import models.Model_ReservationSpa;
 import views.AccueilController;
 import views.ReceptionDashboardController;
-import views.ReceptionDashboardReservationChambreController;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
@@ -56,8 +55,6 @@ public class Main extends Application {
 			
 	    }
 	    
-	  
-
 	    /**
 	     * Returns the main stage.
 	     * @return

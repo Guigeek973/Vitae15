@@ -11,38 +11,46 @@ import maintenance_etages.ReservationChambre;
 import maintenance_etages.TypeChambre;
 
 public class Hotel {
-	private List<Chambre> lesChambres;
-	private List<ReservationChambre> lesReservationsChambre;
-	private List<Client> lesClients;
+	private static List<Chambre> lesChambres;
+	private static List<ReservationChambre> lesReservationsChambre;
+	private static List<Client> lesClients;
+	private static Hotel instance;
 
 	// CONSTRUCTEUR
-	public Hotel(List<Chambre> lesChambres, List<ReservationChambre> lesReservationsChambre, List<Client> clients) {
+	private Hotel(List<Chambre> lesChambres, List<ReservationChambre> lesReservationsChambre, List<Client> clients) {
 		super();
-		this.lesChambres = lesChambres;
-		this.lesReservationsChambre = lesReservationsChambre;
-		this.lesClients = clients;
+		Hotel.lesChambres = lesChambres;
+		Hotel.lesReservationsChambre = lesReservationsChambre;
+		Hotel.lesClients = clients;
+	}
+	
+	public static Hotel getInstance(List<Chambre> lesChambres, List<ReservationChambre> lesReservationsChambre, List<Client> lesClients) {
+		if (Hotel.instance == null) {
+			Hotel.instance = new Hotel(lesChambres, lesReservationsChambre, lesClients);
+		}
+		return Hotel.instance;
 	}
 	
 	// GETTERS
-	public List<Chambre> getLesChambres() {
+	public static List<Chambre> getLesChambres() {
 		return lesChambres;
 	}
-	public List<ReservationChambre> getLesReservationsChambre() {
+	public static List<ReservationChambre> getLesReservationsChambre() {
 		return lesReservationsChambre;
 	}
-	public List<Client> getLesClients() {
+	public static List<Client> getLesClients() {
 		return lesClients;
 	}
 	
 	// SETTERS
-	public void setLesClients(List<Client> lesClients) {
-		this.lesClients = lesClients;
+	public static void setLesClients(List<Client> lesClients) {
+		Hotel.lesClients = lesClients;
 	}
-	public void setLesChambres(List<Chambre> lesChambres) {
-		this.lesChambres = lesChambres;
+	public static void setLesChambres(List<Chambre> lesChambres) {
+		Hotel.lesChambres = lesChambres;
 	}
-	public void setLesReservationsChambre(List<ReservationChambre> lesReservationsChambre) {
-		this.lesReservationsChambre = lesReservationsChambre;
+	public static void setLesReservationsChambre(List<ReservationChambre> lesReservationsChambre) {
+		Hotel.lesReservationsChambre = lesReservationsChambre;
 	}
 	
 	// AJOUT - SUPRESSION

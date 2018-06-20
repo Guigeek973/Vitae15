@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 import com.jfoenix.controls.JFXTextField;
@@ -42,12 +43,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import main.Connection;
-import models.ReservationChambre;
+import main.Initialisation;
+import maintenance_etages.ReservationChambre;
 
 import java.time.LocalDate;
 
@@ -62,17 +68,17 @@ import javafx.beans.property.StringProperty;
 public class ReceptionDashboardReservationChambreController {
 
 	@FXML
-	private JFXTreeTableView<ReservationChambre> reservationChambreTable;
+	private JFXTreeTableView<Model_ReservationChambre> reservationChambreTable;
 	@FXML
-	private JFXTreeTableColumn<ReservationChambre, String> id_ReservationColumn;
+	private JFXTreeTableColumn<Model_ReservationChambre, String> id_ReservationColumn;
 	@FXML
-	private JFXTreeTableColumn<ReservationChambre, String> firstNameColumn;
+	private JFXTreeTableColumn<Model_ReservationChambre, String> firstNameColumn;
 	@FXML
-	private JFXTreeTableColumn<ReservationChambre, String> lastNameColumn;
+	private JFXTreeTableColumn<Model_ReservationChambre, String> lastNameColumn;
 	@FXML
-	private JFXTreeTableColumn<ReservationChambre, Date> startDateColumn;
+	private JFXTreeTableColumn<Model_ReservationChambre, Date> startDateColumn;
 	@FXML
-	private JFXTreeTableColumn<ReservationChambre, Date> endDateColumn;
+	private JFXTreeTableColumn<Model_ReservationChambre, Date> endDateColumn;
 	
 	@FXML
 	private Label id_Reservation;
@@ -100,7 +106,7 @@ public class ReceptionDashboardReservationChambreController {
     private static final String PREFIX = "( ";
     private static final String POSTFIX = " )";
     
-    private ObservableList<ReservationChambre> data;
+    private ObservableList<Model_ReservationChambre> data;
 
 	/**
      * Initializes the controller class. This method is automatically called
@@ -112,49 +118,9 @@ public class ReceptionDashboardReservationChambreController {
     	setupTableView();
     }
     
-    public void showReservationChambreOverview(ReservationChambre rc) {
-    	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-    	if (rc != null) {
-    		firstName.setText(rc.getFirstName());
-    		lastName.setText(rc.getLastName());
-    		startDate.setText(formatter.format(rc.getStartDate()));
-    		endDate.setText(formatter.format(rc.getEndDate()));
-    	} else {
-    		firstName.setText("");
-    		lastName.setText("");
-    		startDate.setText("");
-    		endDate.setText("");
-    	}
-    }
     
-    private void updateDataClient(String column, String newValue, String id) {
-        String req = "UPDATE client SET "+column+" = ? WHERE id IN(SELECT id_Client FROM reservationroom WHERE id_Reservation = ? )";
-    	PreparedStatement stmt = Connection.getPreparedStatement(req);
-        try {
-			stmt.setString(1, newValue);
-			stmt.setString(2, id);
-            stmt.execute();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    private void updateDataReservation(String column, String newValue, String id) {
-        String req = "UPDATE reservationroom SET "+column+" = ? WHERE id_Reservation = ? ";
-    	PreparedStatement stmt = Connection.getPreparedStatement(req);
-        try {
-			stmt.setString(1, newValue);
-			stmt.setString(2, id);
-            stmt.execute();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
-    
-    private <T> void setupCellValueFactory(JFXTreeTableColumn<ReservationChambre, T> column, Function<ReservationChambre, ObservableValue<T>> mapper) {
-        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<ReservationChambre, T> param) -> {
+    private <T> void setupCellValueFactory(JFXTreeTableColumn<Model_ReservationChambre, T> column, Function<Model_ReservationChambre, ObservableValue<T>> mapper) {
+        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<Model_ReservationChambre, T> param) -> {
             if (column.validateValue(param)) {
                 return mapper.apply(param.getValue().getValue());
             } else {
@@ -164,57 +130,72 @@ public class ReceptionDashboardReservationChambreController {
     }
     
 	private void setupTableView() {
-		setupCellValueFactory(id_ReservationColumn, ReservationChambre::id_ReservationProperty);
-        setupCellValueFactory(firstNameColumn, ReservationChambre::firstNameProperty);
-        setupCellValueFactory(lastNameColumn, ReservationChambre::lastNameProperty);
-        setupCellValueFactory(startDateColumn, ReservationChambre::startDateProperty);
-        setupCellValueFactory(endDateColumn, ReservationChambre::endDateProperty);
+		setupCellValueFactory(id_ReservationColumn, Model_ReservationChambre::id_ReservationProperty);
+        setupCellValueFactory(firstNameColumn, Model_ReservationChambre::firstNameProperty);
+        setupCellValueFactory(lastNameColumn, Model_ReservationChambre::lastNameProperty);
+        setupCellValueFactory(startDateColumn, Model_ReservationChambre::startDateProperty);
+        setupCellValueFactory(endDateColumn, Model_ReservationChambre::endDateProperty);
 
         // add editors
-        id_ReservationColumn.setCellFactory((TreeTableColumn<ReservationChambre, String> param) -> {
+        id_ReservationColumn.setCellFactory((TreeTableColumn<Model_ReservationChambre, String> param) -> {
             return new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder());
         });
-        id_ReservationColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<ReservationChambre, String> t) -> {
-            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().id_Reservation.set(t.getNewValue());
+//        Callback<TreeTableColumn<Object, String>, TreeTableCell<Object, String>> defaultCellFactory = TextFieldTreeTableCell.forTreeTableColumn() ;
+//        id_ReservationColumn.setCellFactory(c -> {
+//            TreeTableCell<Object, String> cell = defaultCellFactory.;
+//            cell.indexProperty().addListener((obs, oldIndex, newIndex) -> {
+//                if (newIndex.intValue() >= 0) {
+//                    TreeItem<Object> item = cell.getTreeTableView().getTreeItem(newIndex.intValue());
+//                    boolean canEdit = item != null && item.getValue() instanceof Model_ReservationChambre ;
+//                    cell.setEditable(canEdit);
+//                } else {
+//                    cell.setEditable(false);
+//                }
+//            });
+//            return cell ;
+//        });
+        firstNameColumn.setCellFactory((TreeTableColumn<Model_ReservationChambre, String> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                new TextFieldEditorBuilder());
+        });
+        lastNameColumn.setCellFactory((TreeTableColumn<Model_ReservationChambre, String> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                new TextFieldEditorBuilder());
+        });
+        lastNameColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<Model_ReservationChambre, String> t) -> {
+            ((Model_ReservationChambre) t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue()).lastName.set(t.getNewValue());
+//            //TODO : modification BD
+//            String id = t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().id_Reservation.getValue();
+//            String req = "SELECT id_Client FROM reservationroom WHERE id_Reservation='"+ id + "'";
+//            ResultSet rs = Connection.getResultSetSQL(req);
+//            int idClient = 0;
+//            try {
+//				idClient = rs.getInt("id_Client");
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//            String req1 = "UPDATE client SET lastname='" + t.getNewValue() + "' WHERE id='"+ idClient + "'";
+//            Connection.execSQL(req1);
             
         });
-        firstNameColumn.setCellFactory((TreeTableColumn<ReservationChambre, String> param) -> {
+        startDateColumn.setCellFactory((TreeTableColumn<Model_ReservationChambre, Date> param) -> {
             return new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder());
         });
-        firstNameColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<ReservationChambre, String> t) -> {
-            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().firstName.set(t.getNewValue());
-            
-        });
-        lastNameColumn.setCellFactory((TreeTableColumn<ReservationChambre, String> param) -> {
-            return new GenericEditableTreeTableCell<>(
-                new TextFieldEditorBuilder());
-        });
-        lastNameColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<ReservationChambre, String> t) -> {
-            ((ReservationChambre) t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue()).lastName.set(t.getNewValue());
-            //TODO : modification BD
-//            ReservationChambre rc = t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue();
-//            rc.setLastName(t.getNewValue());
-//            updateDataClient("lastname", t.getNewValue(), rc.id_Reservation.getValue());
-            
-        });
-        startDateColumn.setCellFactory((TreeTableColumn<ReservationChambre, Date> param) -> {
-            return new GenericEditableTreeTableCell<>(
-                new TextFieldEditorBuilder());
-        });
-        startDateColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<ReservationChambre, Date> t) -> {
+        startDateColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<Model_ReservationChambre, Date> t) -> {
         	 t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().startDate.set(t.getNewValue());
         });
-        endDateColumn.setCellFactory((TreeTableColumn<ReservationChambre, Date> param) -> {
+        endDateColumn.setCellFactory((TreeTableColumn<Model_ReservationChambre, Date> param) -> {
             return new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder());
         });
-        endDateColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<ReservationChambre, Date> t) -> {
+        endDateColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<Model_ReservationChambre, Date> t) -> {
         	t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().endDate.set(t.getNewValue());
         });
         
-        final ObservableList<ReservationChambre> dummyData = generateDummyData(200);
+        final ObservableList<Model_ReservationChambre> dummyData = generateDummyData(200);
         reservationChambreTable.setRoot(new RecursiveTreeItem<>(dummyData, RecursiveTreeObject::getChildren));
         reservationChambreTable.setShowRoot(false);
         reservationChambreTable.setEditable(true);
@@ -225,11 +206,11 @@ public class ReceptionDashboardReservationChambreController {
                     .addListener(setupSearchField(reservationChambreTable));
     }
     
-    private ChangeListener<String> setupSearchField(final JFXTreeTableView<ReservationChambre> tableView) {
+    private ChangeListener<String> setupSearchField(final JFXTreeTableView<Model_ReservationChambre> tableView) {
     	DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         return (o, oldVal, newVal) ->
             tableView.setPredicate(reservationChambreProp -> {
-                final ReservationChambre reservationChambre = reservationChambreProp.getValue();
+                final Model_ReservationChambre reservationChambre = reservationChambreProp.getValue();
                 return reservationChambre.getFirstName().contains(newVal)
                     || reservationChambre.getLastName().contains(newVal)
                     || formatter.format(reservationChambre.getStartDate()).contains(newVal)
@@ -238,36 +219,50 @@ public class ReceptionDashboardReservationChambreController {
             
     }
 
-    private ObservableList<ReservationChambre> generateDummyData(final int numberOfEntries) {
-        final ObservableList<ReservationChambre> dummyData = FXCollections.observableArrayList();
-        	for(ReservationChambre current : buildData()){
+    private ObservableList<Model_ReservationChambre> generateDummyData(final int numberOfEntries) {
+        final ObservableList<Model_ReservationChambre> dummyData = FXCollections.observableArrayList();
+        	for(Model_ReservationChambre current : buildData()){
         		dummyData.add(current);
         	}
         return dummyData;
     }
     
-    public ObservableList<ReservationChambre> buildData(){        
+    public ObservableList<Model_ReservationChambre> buildData(){        
         data = FXCollections.observableArrayList();
-        try{      
-            String SQL = "SELECT * FROM reservationroom JOIN reservation ON reservationroom.id_Reservation = reservation.id"
-            		+ " JOIN client ON reservation.id_Client = client.id"
-            		+ " ORDER BY startDate DESC";            
-            ResultSet rs = Connection.getResultSetSQL(SQL); 
-            while(rs.next()){
-                ReservationChambre rc = new ReservationChambre(Integer.toString(rs.getInt("id_Reservation")), rs.getString("firstname"), rs.getString("lastname"), rs.getDate("startDate"), rs.getDate("endDate")); 
-                rc.id_Reservation.set(Integer.toString(rs.getInt("id_Reservation")));
-                rc.firstName.set(rs.getString("firstname"));
-                rc.lastName.set(rs.getString("lastname"));
-                rc.startDate.set(rs.getDate("startDate"));
-                rc.endDate.set(rs.getDate("endDate"));
-                data.add(rc);                  
-            }
-            //reservationChambreTable.setItems(data);
-        }
-        catch(Exception e){
-              e.printStackTrace();
-              System.out.println("Error on Building Data");            
-        }
+        //List<ReservationChambre> list = Initialisation.recupererReservationsChambres();
+        //GET FROM SQL
+        String query = "SELECT id_Reservation, firstname, lastname, startDate, endDate FROM reservationroom JOIN reservation ON id_Reservation = reservation.id JOIN client ON id_Client = client.id";
+        ResultSet rs = Connection.getResultSetSQL(query);
+        try {
+			while (rs.next()) {
+			    try {
+			    	Model_ReservationChambre rc = new Model_ReservationChambre(Integer.toString(rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5)); 
+			        rc.id_Reservation.set(Integer.toString(rs.getInt(1)));
+			        rc.firstName.set(rs.getString(2));
+					rc.lastName.set(rs.getString(3));
+					rc.startDate.set(rs.getDate(4));
+			        rc.endDate.set(rs.getDate(5));
+			        data.add(rc);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    
+			      
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//        for (ReservationChambre rs : listSQL) {
+//        	Model_ReservationChambre rc = new Model_ReservationChambre(Integer.toString(rs.getIdReservation()), rs.getClient().getPrenom(), rs.getClient().getNom(), rs.getStartDate(), rs.getEndDate()); 
+//            rc.id_Reservation.set(Integer.toString(rs.getIdReservation()));
+//            rc.firstName.set(rs.getClient().getPrenom());
+//            rc.lastName.set(rs.getClient().getNom());
+//            rc.startDate.set(rs.getStartDate());
+//            rc.endDate.set(rs.getEndDate());
+//            data.add(rc);   
+//        }
 		return data;
     }
 
@@ -292,7 +287,7 @@ public class ReceptionDashboardReservationChambreController {
     
     
     
-    public class ReservationChambre extends RecursiveTreeObject<ReservationChambre>{
+    public class Model_ReservationChambre extends RecursiveTreeObject<Model_ReservationChambre>{
     	private StringProperty id_Reservation;
     	private StringProperty firstName;
         private StringProperty lastName;
@@ -300,7 +295,7 @@ public class ReceptionDashboardReservationChambreController {
         private ObjectProperty<Date> endDate;
         
     	
-    	public ReservationChambre(String id_Reservation, String firstName, String lastName, Date startDate, Date endDate) {
+    	public Model_ReservationChambre(String id_Reservation, String firstName, String lastName, Date startDate, Date endDate) {
     		this.id_Reservation = new SimpleStringProperty(id_Reservation);
     		this.firstName = new SimpleStringProperty(firstName);
     	    this.lastName = new SimpleStringProperty(lastName);

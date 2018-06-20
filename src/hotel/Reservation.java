@@ -16,6 +16,10 @@ public abstract class Reservation {
 		EN_COURS,
 		VALIDE
 	}
+	public Reservation(int id) {
+		super();
+	}
+	
 	public Reservation(Client client, Date startDate) {
 		super();
 		this.client = client;

@@ -13,7 +13,14 @@ public class Chambre {
 	private Boolean isOccuped;
 
 	public enum ETAT_CHAMBRE {
-		SALE, PROPRE
+		SALE("SALE"), PROPRE("PROPRE");
+		private String etat;
+		ETAT_CHAMBRE(String etat) {
+			this.etat = etat;
+		}
+		public String getString() {
+			return this.etat;
+		}
 	}
 
 	public Chambre(TypeChambre typeChambre, String libelle, ETAT_CHAMBRE etatChambre, Boolean isOccuped) {
@@ -28,7 +35,7 @@ public class Chambre {
 		try {
 			ResultSet rs = Connection.getResultSetSQL("SELECT id FROM room" + " WHERE label = " + this.libelle
 					+ " AND id_RoomType = " + this.typeChambre.getId() + " AND isAvailable = " + this.isOccuped
-					+ " AND status = " + this.etatChambre);
+					+ " AND status = " + this.etatChambre.getString());
 			id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

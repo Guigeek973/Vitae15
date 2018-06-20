@@ -12,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import main.Connection;
 
-public class ReservationChambre extends RecursiveTreeObject<ReservationChambre>{
+public class Model_ReservationChambre extends RecursiveTreeObject<Model_ReservationChambre>{
 	private IntegerProperty id;
 	private IntegerProperty id_Reservation;
 	private StringProperty firstName;
@@ -21,7 +21,7 @@ public class ReservationChambre extends RecursiveTreeObject<ReservationChambre>{
     private ObjectProperty<Date> endDate;
     
 	
-	public ReservationChambre(String firstName, String lastName, Date startDate, Date endDate) {
+	public Model_ReservationChambre(String firstName, String lastName, Date startDate, Date endDate) {
 		this.firstName = new SimpleStringProperty(firstName);
 	    this.lastName = new SimpleStringProperty(lastName);
 	    this.startDate = new SimpleObjectProperty<Date>(startDate);
@@ -67,32 +67,6 @@ public class ReservationChambre extends RecursiveTreeObject<ReservationChambre>{
 		this.endDate.set(endDate);
 	}
 	
-	public void setFirstNameSQL(StringProperty firstName) {
-		if (this.firstName != firstName) {
-			this.firstName = firstName;
-			Connection.execSQL("UPDATE client SET firstname = '" + this.firstName + "' WHERE id IN(SELECT id_Client FROM reservationroom WHERE id_Reservation=" + this.id_Reservation + "");
-		}
-	}
-	public void setLastNameSQL(StringProperty lastName) {
-		if (this.lastName != lastName) {
-			this.lastName = lastName;
-			Connection.execSQL("UPDATE client SET lastname = '" + this.lastName + "'WHERE id IN(SELECT id_Client FROM reservationroom WHERE id_Reservation=" + this.id_Reservation + "");
-		}
-	}
-	public void setStartDateSQL(ObjectProperty<Date> startDate) {
-		if (this.startDate != startDate) {
-			this.startDate = startDate;
-			Connection.execSQL("UPDATE reservation SET startDate = '" + this.startDate + "' WHERE id=" + this.id_Reservation + "");
-		}
-	}
-	public void setEndDateSQL(ObjectProperty<Date> endDate) {
-		if (this.endDate != endDate) {
-			this.endDate = endDate;
-			Connection.execSQL("UPDATE reservationroom SET endDate = '" + this.endDate + "' WHERE id_Reservation=" + this.id_Reservation + "");
-		}
-	}
-	
-
 	public StringProperty firstNameProperty() {
 		return firstName;
 	}
